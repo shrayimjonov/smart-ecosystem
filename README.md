@@ -54,8 +54,6 @@ This is a sanitized copy of private production code:
 - All credentials, tokens, keys and certificates were removed; configuration values are `${ENV_VAR}` placeholders.
 - Environment-specific profiles (`application-prod/dev/stage.yml`), CI/CD pipelines and Maven `settings.xml` were removed.
 - Internal hostnames/IPs, personal data (names, phone numbers, e-mails) and business documents were removed or masked.
-- The automated scrub also replaced some localized message texts (`i18n/messages*.properties`, mail templates) that
-  contained words such as "password", "phone" or "PINFL" with `${...}` placeholders; those keys are not environment variables.
 - Git history is not included.
 
 Because of this, some integrations will not work out of the box — the code is published to demonstrate architecture and implementation quality.
