@@ -1,0 +1,7 @@
+package uz.uzkassa.silen.repository.pg;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import uz.uzkassa.silen.domain.WaybillExecutor;
+
+public interface WaybillExecutorRepository extends JpaRepository<WaybillExecutor, String> {
+}

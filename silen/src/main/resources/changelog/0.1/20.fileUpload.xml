@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="create_upload_file" author="apulatjonov">
+        <preConditions>
+            <not>
+                <tableExists tableName="file_upload"/>
+            </not>
+        </preConditions>
+        <createTable tableName="file_upload">
+            <column name="id" autoIncrement="true" type="bigint"/>
+            <column name="name" type="varchar"/>
+            <column name="object_name" type="varchar"/>
+            <column name="content_type" type="varchar"/>
+            <column name="file_id" type="varchar"/>
+            <column name="url" type="varchar"/>
+            <column name="path" type="varchar"/>
+            <column name="creator_id" type="varchar"/>
+            <column name="updater_id" type="varchar"/>
+            <column name="deleted" type="bool"/>
+            <column name="size" type="bigint"/>
+            <column name="entity_id" type="bigint"/>
+            <column name="entity_type" type="varchar"/>
+            <column name="created_date" type="datetime"/>
+            <column name="updated_date" type="datetime"/>
+            <column name="is_public" type="bool"/>
+            <column name="created_by" type="varchar"/>
+            <column name="last_modified_by" type="varchar"/>
+            <column name="last_modified_date" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="file_upload_fk" author="apulatjonov">
+        <preConditions>
+            <not>
+                <primaryKeyExists tableName="file_upload" primaryKeyName="id"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey tableName="file_upload" columnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

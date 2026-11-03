@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="change product color group pk" author="Sunnatillo Sharipov">
+        <dropPrimaryKey tableName="product_color_group"/>
+        <renameColumn tableName="product_color_group" oldColumnName="id" newColumnName="generic_id"/>
+        <addPrimaryKey tableName="product_color_group" columnNames="generic_id, product_id, branch_id"/>
+    </changeSet>
+    <changeSet id="change product color group composite pk" author="Sunnatillo Sharipov">
+        <dropPrimaryKey tableName="product_color_group"/>
+        <addPrimaryKey tableName="product_color_group" columnNames="generic_id, branch_id"/>
+    </changeSet>
+    <changeSet id="add deleted field to product color group" author="sunnatillo sharipov">
+        <addColumn tableName="product_color_group">
+            <column name="deleted" type="boolean" defaultValue="false"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

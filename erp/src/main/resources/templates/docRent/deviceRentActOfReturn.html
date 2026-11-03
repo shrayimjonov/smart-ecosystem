@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <title>CTS Operator</title>
+  <style>
+    body {
+      widows: 0;
+      orphans: 0;
+      font-family: 'Times New Roman';
+      font-size: 11pt;
+      margin: 0 30px;
+    }
+
+    h1, p {
+      margin: 0pt
+    }
+
+    table {
+      margin-top: 0pt;
+      margin-bottom: 0pt
+    }
+
+    h1 {
+      page-break-inside: auto;
+      page-break-after: auto;
+      widows: 0;
+      orphans: 0;
+      font-family: 'Times New Roman';
+      font-size: 14pt;
+      font-weight: bold;
+      color: #000000
+    }
+
+    .BodyText {
+      widows: 0;
+      orphans: 0;
+      font-family: 'Times New Roman';
+      font-size: 12pt
+    }
+
+    .Footer {
+      widows: 0;
+      orphans: 0;
+      font-family: 'Times New Roman';
+      font-size: 11pt
+    }
+
+    .Header {
+      widows: 0;
+      orphans: 0;
+      font-family: 'Times New Roman';
+      font-size: 11pt
+    }
+
+    .ListParagraph {
+      widows: 0;
+      orphans: 0;
+      font-family: 'Times New Roman';
+      font-size: 11pt
+    }
+
+    .TableParagraph {
+      widows: 0;
+      orphans: 0;
+      font-family: 'Times New Roman';
+      font-size: 11pt
+    }
+
+    span.a {
+      font-family: 'Times New Roman'
+    }
+
+    span.\31  {
+      font-family: 'Times New Roman';
+      font-size: 14pt;
+      font-weight: bold
+    }
+
+    span.a0 {
+      font-family: 'Times New Roman'
+    }
+
+    span.a1 {
+      font-family: 'Times New Roman';
+      font-size: 12pt
+    }
+    .signatures {
+      position: absolute;
+      top: -75px;
+      left: 100px;
+      font-size: 0;
+      display: flex;
+    }
+
+    .seal {
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+      width: 170px;
+    }
+
+    .sign {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 -90px 0 0;
+      width: 220px;
+    }
+    img {
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <p class="BodyText" style="margin-top:7.9pt; font-size:14pt">
+    &#xa0;
+  </p>
+  <h1 style="margin-right:5.8pt; text-align:right; line-height:93%">
+    &#xa0;
+  </h1>
+  <p style="margin-right:0.05pt; text-align:center; font-size:14pt">
+    <strong>АКТ </strong><strong><span style="letter-spacing:-0.1pt">ВОЗВРАТА</span></strong>
+  </p>
+  <h1 style="margin-right:5.8pt">
+    &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;
+    (публичная оферта «SMARTPOS | Trade»)
+  </h1>
+  <p class="BodyText" style="margin-top:14.3pt; margin-right:0.05pt; text-align:center">
+    <span style="letter-spacing:-0.25pt">г. Ташкент</span><u><span
+          style="width:127.43pt; font-family:'Lucida Console'; font-size:10pt; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</span></u><span
+          style="width:457.3pt; display:inline-block">&#xa0;</span><span style="letter-spacing:-0.5pt"></span><u></u>
+    <u th:text="${#temporals.format(deviceRentActOfReturn.createdDate, 'dd-MM-yyyy')}"></u>
+  </p>
+  <p class="BodyText" style="margin-top:13.2pt; margin-right:22.4pt">
+    АО «CENTER FOR DIGITAL TECHNOLOGY AND INNOVATION»,<span style="letter-spacing:-0.35pt"> </span>именуемое<span
+          style="letter-spacing:-0.35pt"> </span>в<span style="letter-spacing:-0.35pt"> </span>дальнейшем<span
+          style="letter-spacing:-0.35pt"> </span>«CDTI»,<span style="letter-spacing:-0.35pt"> </span>в<span
+          style="letter-spacing:-0.35pt"> </span>лице <span style="color:#ff0000">материально ответственного лица</span>___________________________,<span
+          style="letter-spacing:-0.35pt"> </span>действующего<span style="letter-spacing:-0.35pt"> </span>по доверенности
+    № 1 от 01.08.2024 года,<span style="letter-spacing:-0.35pt"> </span>с одной стороны и
+    <u th:text="${deviceRentActOfReturn.companyName}"> </u>, именуемое в дальнейшем «Заказчик», в лице <u th:text="${deviceRentActOfReturn.owner}"> </u>,
+    действующего на основании <u>              </u>, с другой стороны, совместно именуемые «Стороны», составили
+    настоящий Акт возврата Онлайн ККМ, предоставленного во временное пользование, о нижеследующем:
+  </p>
+
+  <p>
+    1.По настоящему Акту возврата Заказчик передал, а CDTI
+    приняло:
+  </p>
+
+  <tbody>
+  <table border="1" bordercolor="#000" width="100%"
+         style="border-collapse: collapse; text-align: center; margin-bottom: 30px;" cellpadding="5px">
+    <tr class="text-bold">
+      <td>#</td>
+      <td>Наименование и модель</td>
+      <td>Кол-во (шт)</td>
+      <td>Серийный, заводской номер</td>
+      <td>Стоимость, сум, с НДС.</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td th:text="'Терминал, ' + ${deviceRentActOfReturn.modelName}"></td>
+      <td th:text="1"></td>
+      <td th:text="${deviceRentActOfReturn.serialNumber}"></td>
+      <td><span th:text="${deviceRentActOfReturn.price}"></span> <br th:text="${deviceRentActOfReturn.decimalToWord(deviceRentActOfReturn.price)}"></td>
+    </tr>
+  </table>
+  <p class="BodyText" style="margin-top:8.4pt">
+    &#xa0;
+  </p>
+  <p class="BodyText">
+    2.<span style="letter-spacing:-0.6pt"> </span>Результат<span style="letter-spacing:-0.6pt"> </span>проверки<span
+          style="letter-spacing:-0.6pt"> </span><span style="letter-spacing:-0.1pt">Оборудования:</span>
+  </p>
+  <p class="BodyText" style="margin-top:1.65pt">
+    &#xa0;
+  </p>
+  <table style="width:785.9pt; margin-left:6.45pt; border:0.75pt solid #dee2e6; border-collapse:collapse">
+    <tr style="height:42.5pt">
+      <td
+              style="width:30.5pt; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:10.2pt; font-size:12pt">
+          &#xa0;
+        </p>
+        <p class="TableParagraph" style="margin-top:0.05pt; margin-right:5.15pt; text-align:center; font-size:12pt">
+          <strong><span style="letter-spacing:-0.5pt; color:#202529">№</span></strong>
+        </p>
+      </td>
+      <td
+              style="width:521.9pt; border-right:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:10.2pt; text-align:center; font-size:12pt">
+          &#xa0;
+        </p>
+        <p class="TableParagraph" style="margin-top:0.05pt; text-align:center; font-size:12pt">
+          <strong><span style="color:#202529">Внешний</span></strong><strong><span
+                style="letter-spacing:-0.15pt; color:#202529"> </span></strong><strong><span
+                style="color:#202529">осмотр</span></strong><strong><span
+                style="letter-spacing:-0.15pt; color:#202529"> </span></strong><strong><span
+                style="letter-spacing:-0.1pt; color:#202529">устройства</span></strong>
+        </p>
+      </td>
+      <td
+              style="width:126.8pt; border-right:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph"
+           style="margin-top:9.05pt; margin-right:22.95pt; margin-left:11.85pt; text-indent:-11.85pt; text-align:right; font-size:12pt">
+          <strong><span style="letter-spacing:-0.1pt; color:#202529">Комментарий </span></strong><strong>мат.
+          ответственного</strong>
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:21.85pt; text-align:center; font-size:12pt">
+          <strong><span
+                  style="letter-spacing:-0.1pt; color:#202529">Подпись</span></strong><br /><strong>Заказчика</strong>
+        </p>
+      </td>
+    </tr>
+    <tr style="height:29.2pt">
+      <td
+              style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.95pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.5pt; color:#202529">1</span>
+        </p>
+      </td>
+      <td style="width:521.9pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">Трещины,</span><span style="letter-spacing:-0.3pt; color:#202529"> </span><span
+                style="color:#202529">сколы</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">и</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">царапины</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">на</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">экране</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="letter-spacing:-0.1pt; color:#202529">отсутствуют</span>
+        </p>
+      </td>
+      <td style="width:126.8pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+    <tr style="height:29.2pt">
+      <td
+              style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.95pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.5pt; color:#202529">2</span>
+        </p>
+      </td>
+      <td style="width:521.9pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">Отсутствуют</span><span style="letter-spacing:-0.6pt; color:#202529"> </span><span
+                style="color:#202529">сколы</span><span style="letter-spacing:-0.5pt; color:#202529"> </span><span
+                style="color:#202529">и</span><span style="letter-spacing:-0.5pt; color:#202529"> </span><span
+                style="color:#202529">прочие</span><span style="letter-spacing:-0.5pt; color:#202529"> </span><span
+                style="color:#202529">повреждения</span><span style="letter-spacing:-0.5pt; color:#202529"> </span><span
+                style="color:#202529">пластикового</span><span style="letter-spacing:-0.5pt; color:#202529"> </span><span
+                style="color:#202529">корпуса</span><span style="letter-spacing:-0.45pt; color:#202529"> </span><span
+                style="letter-spacing:-0.1pt; color:#202529">оборудования</span>
+        </p>
+      </td>
+      <td style="width:126.8pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+    <tr style="height:24.05pt">
+      <td
+              style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.95pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.5pt; color:#202529">3</span>
+        </p>
+      </td>
+      <td style="width:521.9pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">Кнопки не </span><span
+                style="letter-spacing:-0.1pt; color:#202529">отломаны</span>
+        </p>
+      </td>
+      <td style="width:126.8pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+    <tr style="height:29.2pt">
+      <td
+              style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.95pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.5pt; color:#202529">4</span>
+        </p>
+      </td>
+      <td style="width:521.9pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">Крышка</span><span style="letter-spacing:-0.35pt; color:#202529"> </span><span
+                style="color:#202529">принтера</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">чеков</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">не</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">отломана</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">и</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">крепко</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">закрывается,</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">крепления</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">крышки</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">не</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="letter-spacing:-0.1pt; color:#202529">отломаны</span>
+        </p>
+      </td>
+      <td style="width:126.8pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+    <tr style="height:29.2pt">
+      <td
+              style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.95pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.5pt; color:#202529">5</span>
+        </p>
+      </td>
+      <td style="width:521.9pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">Прижимной</span><span style="letter-spacing:-0.1pt; color:#202529"> </span><span
+                style="color:#202529">валик</span><span style="letter-spacing:-0.05pt; color:#202529"> </span><span
+                style="color:#202529">и</span><span style="letter-spacing:-0.1pt; color:#202529"> </span><span
+                style="color:#202529">шестеренка</span><span style="letter-spacing:-0.05pt; color:#202529"> </span><span
+                style="color:#202529">на</span><span style="letter-spacing:-0.1pt; color:#202529"> </span><span
+                style="color:#202529">внутренней</span><span style="letter-spacing:-0.05pt; color:#202529"> </span><span
+                style="color:#202529">стороне</span><span style="letter-spacing:-0.1pt; color:#202529"> </span><span
+                style="color:#202529">крышки</span><span style="letter-spacing:-0.05pt; color:#202529"> </span><span
+                style="color:#202529">принтера</span><span style="letter-spacing:-0.1pt; color:#202529"> </span><span
+                style="color:#202529">чеков</span><span style="letter-spacing:-0.05pt; color:#202529"> </span><span
+                style="color:#202529">не</span><span style="letter-spacing:-0.05pt; color:#202529"> </span><span
+                style="letter-spacing:-0.1pt; color:#202529">отломаны</span>
+        </p>
+      </td>
+      <td style="width:126.8pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+    <tr style="height:29.2pt">
+      <td
+              style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.95pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.5pt; color:#202529">6</span>
+        </p>
+      </td>
+      <td style="width:521.9pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">Крышка</span><span style="letter-spacing:-0.35pt; color:#202529"> </span><span
+                style="color:#202529">доступа</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">к</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">аккумулятору</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">на</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">задней</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">части</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">устройства</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">не</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">отломана</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">и</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">плотно</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="letter-spacing:-0.1pt; color:#202529">закрывается</span>
+        </p>
+      </td>
+      <td style="width:126.8pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+    <tr style="height:29.2pt">
+      <td
+              style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.95pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.5pt; color:#202529">7</span>
+        </p>
+      </td>
+      <td style="width:521.9pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">Аккумулятор</span><span
+                style="letter-spacing:-0.35pt; color:#202529"> </span><span style="color:#202529">установлен</span><span
+                style="letter-spacing:-0.2pt; color:#202529"> </span><span style="color:#202529">в</span><span
+                style="letter-spacing:-0.2pt; color:#202529"> </span><span style="color:#202529">устройстве</span><span
+                style="letter-spacing:-0.2pt; color:#202529"> </span><span style="color:#202529">и</span><span
+                style="letter-spacing:-0.25pt; color:#202529"> </span><span style="color:#202529">не</span><span
+                style="letter-spacing:-0.2pt; color:#202529"> </span><span style="color:#202529">имеет</span><span
+                style="letter-spacing:-0.2pt; color:#202529"> </span><span style="color:#202529">внешних</span><span
+                style="letter-spacing:-0.2pt; color:#202529"> </span><span style="color:#202529">признаков</span><span
+                style="letter-spacing:-0.2pt; color:#202529"> </span><span style="letter-spacing:-0.1pt; color:#202529">повреждения</span>
+        </p>
+      </td>
+      <td style="width:126.8pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+    <tr style="height:29.2pt">
+      <td
+              style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.95pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.5pt; color:#202529">8</span>
+        </p>
+      </td>
+      <td style="width:521.9pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">Крепление для ФМ не </span><span style="letter-spacing:-0.1pt; color:#202529">отломано</span>
+        </p>
+      </td>
+      <td style="width:126.8pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+    <tr style="height:29.2pt">
+      <td
+              style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.95pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.5pt; color:#202529">9</span>
+        </p>
+      </td>
+      <td style="width:521.9pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">Стекло</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">сканера</span><span style="letter-spacing:-0.15pt; color:#202529"> </span><span
+                style="color:#202529">не</span><span style="letter-spacing:-0.15pt; color:#202529"> </span><span
+                style="color:#202529">имеет</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">трещин,</span><span style="letter-spacing:-0.15pt; color:#202529"> </span><span
+                style="color:#202529">сколов</span><span style="letter-spacing:-0.15pt; color:#202529"> </span><span
+                style="color:#202529">и</span><span style="letter-spacing:-0.15pt; color:#202529"> </span><span
+                style="letter-spacing:-0.1pt; color:#202529">царапин</span>
+        </p>
+      </td>
+      <td style="width:126.8pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+    <tr style="height:42.5pt">
+      <td
+              style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.15pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.25pt; color:#202529">10</span>
+        </p>
+      </td>
+      <td style="width:521.9pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">Гнездо</span><span style="letter-spacing:-0.35pt; color:#202529"> </span><span
+                style="color:#202529">подключения</span><span style="letter-spacing:-0.35pt; color:#202529"> </span><span
+                style="color:#202529">зарядного</span><span style="letter-spacing:-0.35pt; color:#202529"> </span><span
+                style="color:#202529">устройства</span><span style="letter-spacing:-0.35pt; color:#202529"> </span><span
+                style="color:#202529">целое,</span><span style="letter-spacing:-0.35pt; color:#202529"> </span><span
+                style="color:#202529">зарядное</span><span style="letter-spacing:-0.35pt; color:#202529"> </span><span
+                style="color:#202529">устройство</span><span style="letter-spacing:-0.35pt; color:#202529"> </span><span
+                style="color:#202529">вставляется</span><span style="letter-spacing:-0.35pt; color:#202529"> </span><span
+                style="color:#202529">в</span><span style="letter-spacing:-0.35pt; color:#202529"> </span><span
+                style="color:#202529">гнездо</span><span style="letter-spacing:-0.35pt; color:#202529"> </span><span
+                style="color:#202529">без затруднений, устройство заряжается при подключении к электропитанию</span>
+        </p>
+      </td>
+      <td style="width:126.8pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+    <tr style="height:29.2pt">
+      <td
+              style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.15pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.25pt; color:#202529">11</span>
+        </p>
+      </td>
+      <td style="width:521.9pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">Устройство</span><span style="letter-spacing:-0.55pt; color:#202529"> </span><span
+                style="color:#202529">включается</span><span style="letter-spacing:-0.45pt; color:#202529"> </span><span
+                style="color:#202529">и</span><span style="letter-spacing:-0.4pt; color:#202529"> </span><span
+                style="color:#202529">загружается</span><span style="letter-spacing:-0.45pt; color:#202529"> </span><span
+                style="color:#202529">операционная</span><span style="letter-spacing:-0.4pt; color:#202529"> </span><span
+                style="letter-spacing:-0.1pt; color:#202529">система</span>
+        </p>
+      </td>
+      <td style="width:126.8pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+    <tr style="height:29.2pt">
+      <td
+              style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.15pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.25pt; color:#202529">12</span>
+        </p>
+      </td>
+      <td style="width:521.9pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">При</span><span style="letter-spacing:-0.3pt; color:#202529"> </span><span
+                style="color:#202529">включенном</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">устройстве</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">на</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">экране</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">отсутствуют</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">полосы,</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">битые</span><span style="letter-spacing:-0.15pt; color:#202529"> </span><span
+                style="letter-spacing:-0.1pt; color:#202529">пиксели</span>
+        </p>
+      </td>
+      <td style="width:126.8pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+    <tr style="height:29.2pt">
+      <td
+              style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.15pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.25pt; color:#202529">13</span>
+        </p>
+      </td>
+      <td style="width:521.9pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">Корпус</span><span style="letter-spacing:-0.35pt; color:#202529"> </span><span
+                style="color:#202529">зарядного</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">устройства</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">целый,</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">не</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">имеет</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="color:#202529">сколов</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">и</span><span style="letter-spacing:-0.2pt; color:#202529"> </span><span
+                style="letter-spacing:-0.1pt; color:#202529">трещин</span>
+        </p>
+      </td>
+      <td style="width:126.8pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+    <tr style="height:29.2pt">
+      <td
+              style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.15pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.25pt; color:#202529">14</span>
+        </p>
+      </td>
+      <td style="width:521.9pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">Провод</span><span style="letter-spacing:-0.3pt; color:#202529"> </span><span
+                style="color:#202529">зарядного</span><span style="letter-spacing:-0.3pt; color:#202529"> </span><span
+                style="color:#202529">устройства</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">целый,</span><span style="letter-spacing:-0.3pt; color:#202529"> </span><span
+                style="color:#202529">не</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">пережат,</span><span style="letter-spacing:-0.3pt; color:#202529"> </span><span
+                style="color:#202529">не</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="color:#202529">переломан,</span><span style="letter-spacing:-0.3pt; color:#202529"> </span><span
+                style="color:#202529">не</span><span style="letter-spacing:-0.25pt; color:#202529"> </span><span
+                style="letter-spacing:-0.1pt; color:#202529">склеен</span>
+        </p>
+      </td>
+      <td style="width:126.8pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+    <tr style="height:29.2pt">
+      <td
+              style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.15pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.25pt; color:#202529">15</span>
+        </p>
+      </td>
+      <td style="width:521.9pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">Паспорт</span><span style="letter-spacing:-0.1pt; color:#202529"> </span><span
+                style="color:#202529">устройства</span><span style="letter-spacing:-0.1pt; color:#202529"> </span><span
+                style="color:#202529">в</span><span style="letter-spacing:-0.1pt; color:#202529"> комплекте</span>
+        </p>
+      </td>
+      <td style="width:126.8pt; border:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td
+              style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; border-bottom:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+    <tr style="height:29.2pt">
+      <td style="width:30.5pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; margin-right:5.15pt; text-align:center; font-size:12pt">
+          <span style="letter-spacing:-0.25pt; color:#202529">16</span>
+        </p>
+      </td>
+      <td
+              style="width:521.9pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="margin-top:9.05pt; font-size:12pt">
+          <span style="color:#202529">Упаковка</span><span style="letter-spacing:-0.7pt; color:#202529"> </span><span
+                style="color:#202529">устройства</span><span style="letter-spacing:-0.7pt; color:#202529"> </span><span
+                style="color:#202529">в</span><span style="letter-spacing:-0.65pt; color:#202529"> </span><span
+                style="letter-spacing:-0.1pt; color:#202529">комплекте</span>
+        </p>
+      </td>
+      <td
+              style="width:126.8pt; border-top:0.75pt solid #dee2e6; border-right:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+      <td style="width:102.95pt; border-top:0.75pt solid #dee2e6; border-left:0.75pt solid #dee2e6; vertical-align:top">
+        <p class="TableParagraph" style="font-size:12pt">
+          &#xa0;
+        </p>
+      </td>
+    </tr>
+  </table>
+  <p class="BodyText" style="margin-top:4pt; margin-right:22.4pt">
+    Настоящим<span style="letter-spacing:-0.35pt"> </span>Заказчик подтверждает,<span
+          style="letter-spacing:-0.35pt"> </span>что<span style="letter-spacing:-0.35pt"> </span>в<span
+          style="letter-spacing:-0.35pt"> </span>соответствии<span style="letter-spacing:-0.35pt"> </span>с<span
+          style="letter-spacing:-0.35pt"> </span>условиями<span style="letter-spacing:-0.35pt"> </span>Договора<span
+          style="letter-spacing:-0.35pt"> </span>возвращаемое<span style="letter-spacing:-0.35pt"> </span>Оборудование<span
+          style="letter-spacing:-0.35pt"> </span>снято<span style="letter-spacing:-0.35pt"> </span>с<span
+          style="letter-spacing:-0.35pt"> </span>учета<span style="letter-spacing:-0.35pt"> </span>в<span
+          style="letter-spacing:-0.35pt"> </span>налоговом<span style="letter-spacing:-0.35pt"> </span>органе<span
+          style="letter-spacing:-0.35pt"> </span>до подписания настоящего Акта возврата. Настоящим CDTI подтверждает, что
+    внешний осмотр произведен, результат отражен в таблице.
+  </p>
+  <p class="BodyText">
+    <span style="letter-spacing:-0.1pt">Оборудование </span>CDTI<u><span
+          style="width:381.81pt; font-family:'Lucida Console'; font-size:10pt; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</span></u>(получены,<span
+          style="letter-spacing:-0.1pt"> </span>не<span style="letter-spacing:-0.1pt"> получены).</span>
+  </p>
+  <p class="BodyText" style="margin-top:13.2pt">
+    Иное: <u><span style="width:746.7pt; font-family:'Lucida Console'; font-size:10pt; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</span></u>
+  </p>
+  <p class="BodyText" style="margin-top:2pt">
+    <img src="1717501360_--smartposfulltariff-1-1/1717501360_--smartposfulltariff-1-1-2.png" width="1025" height="1"
+         alt="" /><br /><img src="1717501360_--smartposfulltariff-1-1/1717501360_--smartposfulltariff-1-1-2.png"
+                             width="1025" height="1" alt="" /><br /><img
+          src="1717501360_--smartposfulltariff-1-1/1717501360_--smartposfulltariff-1-1-2.png" width="1025" height="1"
+          alt="" /><br /><img src="1717501360_--smartposfulltariff-1-1/1717501360_--smartposfulltariff-1-1-2.png" width="1025"
+                              height="1" alt="" /><br />
+  </p>
+</div>
+<br style="clear:both; mso-break-type:section-break" />
+<div>
+  <div style="display: flex;flex-direction: row;justify-content: space-between">
+    <div>
+      <h1 style="margin-top:4.4pt; font-size:12pt">
+        CDTI<span style="letter-spacing:-0.1pt">:</span>
+      </h1>
+      <p style="margin-top:13.55pt; font-size:12pt">
+        <strong><span style="letter-spacing:-0.1pt">Материально ответственное </span></strong>
+      </p>
+      <div style="position:relative;">
+        <p style="margin-top:13.55pt; font-size:12pt">
+          <strong><span style="letter-spacing:-0.1pt">Лицо________________________</span></strong>
+        </p>
+      </div>
+    </div>
+    <div>
+      <h1 style="margin-top:4.4pt; font-size:12pt">
+        <br style="clear:both; mso-column-break-before:always" />Заказчик<span style="letter-spacing:-0.1pt">:</span>
+      </h1>
+      <p style="margin-top:13.55pt; font-size:12pt">
+        <u th:text="${deviceRentActOfReturn.owner}">__________________________________</u>
+      </p>
+      <p style="margin-top:13.55pt; font-size:12pt">
+        <u>__________________________________</u>
+      </p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+    <changeSet author="xayrullayev" id="create_table_order_1c" failOnError="true">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+            <not>
+                <tableExists tableName="order_1c"/>
+            </not>
+        </preConditions>
+        <createTable tableName="order_1c">
+            <column name="id" autoIncrement="true" type="bigint"/>
+            <column name="customer_tin" type="varchar"/>
+            <column name="order_number" type="varchar"/>
+            <column name="order_date" type="datetime"/>
+            <column name="store_id" type="bigint"/>
+            <column name="contract_number" type="varchar"/>
+            <column name="contract_date" type="date"/>
+            <column name="description" type="varchar"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="created_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="xayrullayev" id="alter_order_1c_add_fk" failOnError="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="order_1c_store_id_fk"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseTableName="order_1c"
+                                 baseColumnNames="store_id"
+                                 constraintName="order_1c_store_id_fk"
+                                 referencedTableName="store"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet author="xayrullayev" id="order_1c_products" failOnError="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="order_1c_products"/>
+            </not>
+        </preConditions>
+        <createTable tableName="order_1c_products">
+            <column name="id" autoIncrement="true" type="bigint"/>
+            <column name="name" type="varchar"/>
+            <column name="barcode" type="varchar"/>
+            <column name="count" type="integer"/>
+            <column name="serial" type="varchar"/>
+            <column name="catalog_code" type="varchar"/>
+            <column name="catalog_name" type="date"/>
+            <column name="base_summa" type="numeric(25,2)"/>
+            <column name="expiry_date" type="numeric(25,2)"/>
+            <column name="summa" type="numeric(25,2)"/>
+            <column name="profit_rate" type="integer"/>
+            <column name="vat_rate" type="varchar"/>
+            <column name="vat_sum" type="numeric(25,2)"/>
+            <column name="committent_tin" type="varchar"/>
+            <column name="committent_name" type="varchar"/>
+            <column name="committent_vat_reg_code" type="varchar"/>
+            <column name="committent_vat_reg_status" type="varchar"/>
+            <column name="delivery_sum" type="numeric(25,2)"/>
+            <column name="delivery_sum_with_vat" type="numeric(25,2)"/>
+            <column name="lgota_id" type="numeric(25,2)"/>
+            <column name="lgota_name" type="varchar"/>
+            <column name="lgota_type" type="varchar"/>
+            <column name="lgota_vat_sum" type="numeric(25,2)"/>
+            <column name="package_code" type="varchar"/>
+            <column name="package_name" type="varchar"/>
+            <column name="order_id" type="bigint"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="created_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="xayrullayev" id="order_1c_pk" failOnError="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="order_1c" primaryKeyName="id"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey tableName="order_1c" columnNames="id"/>
+    </changeSet>
+    <changeSet author="xayrullayev" id="order_1c_products_pk" failOnError="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="order_1c_products" primaryKeyName="id"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey tableName="order_1c_products" columnNames="id"/>
+    </changeSet>
+    <changeSet author="xayrullayev" id="alter_order_1c_products_add_fk" failOnError="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="order_1c_products_order_id_fk"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseTableName="order_1c_products"
+                                 baseColumnNames="order_id"
+                                 constraintName="order_1c_products_order_id_fk"
+                                 referencedTableName="order_1c"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet author="xayrullayev" id="grant_to_order_1c" failOnError="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="order_1c"/>
+            </not>
+        </preConditions>
+        <sql>
+            grant select on order_1c to xbexzod;
+        </sql>
+    </changeSet>
+    <changeSet author="xayrullayev" id="grant_to_order_1c_products" failOnError="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="order_1c_products"/>
+            </not>
+        </preConditions>
+        <sql>
+            grant select on order_1c_products to xbexzod;
+        </sql>
+    </changeSet>
+    <changeSet author="xayrullayev" id="add_deleted_to_order_1c_and_products" failOnError="true">
+        <addColumn tableName="order_1c">
+            <column name="deleted" defaultValue="false" type="boolean"/>
+        </addColumn>
+        <addColumn tableName="order_1c_products">
+            <column name="deleted" defaultValue="false" type="boolean"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="xayrullayev" id="add_organization_to_order_1c" failOnError="true">
+        <addColumn tableName="order_1c">
+            <column name="organization_id" type="varchar(50)"/>
+        </addColumn>
+        <addForeignKeyConstraint baseTableName="order_1c" baseColumnNames="organization_id"
+                                 constraintName="order_1c_organization_id_fk"
+                                 referencedTableName="organization"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="alter_columns_order_1c" author="xayrullayev">
+        <modifyDataType tableName="order_1c_products" columnName="catalog_name" newDataType="varchar(255)"/>
+        <modifyDataType tableName="order_1c_products" columnName="expiry_date" newDataType="varchar"/>
+        <modifyDataType tableName="order_1c_products" columnName="expiry_date" newDataType="date"/>
+        <modifyDataType tableName="order_1c_products" columnName="lgota_id" newDataType="varchar(255)"/>
+    </changeSet>
+</databaseChangeLog>

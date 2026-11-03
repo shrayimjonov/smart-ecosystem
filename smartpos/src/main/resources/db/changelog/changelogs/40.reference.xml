@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="create reference table" author="Sunnatillo Sharipov">
+        <createTable tableName="reference">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValue="now()"/>
+            <column name="created_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="code" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name_ru" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name_uz" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name_cyrillic" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent_id" type="bigint"/>
+            <column name="value" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="create transit references" author="Sunnatillo Sharipov">
+        <insert tableName="reference">
+            <column name="id">1</column>
+            <column name="created_date">now()</column>
+            <column name="created_by">system</column>
+            <column name="last_modified_date">now()</column>
+            <column name="last_modified_by">system</column>
+            <column name="code">MAX_DETAIL_SIZE</column>
+            <column name="name_ru">Максимальное количество товаров</column>
+            <column name="name_uz">Mahsulotlarning maksimal soni</column>
+            <column name="name_cyrillic">Маҳсулотларнинг максимал сони</column>
+            <column name="value">15</column>
+        </insert>
+        <insert tableName="reference">
+            <column name="id">2</column>
+            <column name="created_date">now()</column>
+            <column name="created_by">system</column>
+            <column name="last_modified_date">now()</column>
+            <column name="last_modified_by">system</column>
+            <column name="code">MAX_MARKINGS_SIZE</column>
+            <column name="name_ru">Максимальное количество маркировок</column>
+            <column name="name_uz">Markirovkalarning maksimal soni</column>
+            <column name="name_cyrillic">Маркировкаларнинг максимал сони</column>
+            <column name="value">27</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

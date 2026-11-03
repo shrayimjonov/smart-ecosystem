@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>7. Изменение юр данных</title>
+</head>
+<body style="padding: 5rem;">
+<div>
+  <div style=" display: flex; justify-content: end">
+    <p style="max-width: 30%">
+      OOO “Special Texno Soft”
+      Директору Усмонов Д. Ф.
+        <label th:text="${legalDataChangeStatement.companyName}"></label>
+      от <label th:text="${legalDataChangeStatement.director}"></label>
+
+    </p>
+  </div>
+  <div style="margin-top: 5rem;text-align: center">
+    <p>
+      Заявление
+    </p>
+  </div>
+  <div style="margin-top: 5rem">
+    <p>
+        <label th:text="${legalDataChangeStatement.businessType}"></label> <label th:text="${legalDataChangeStatement.companyName}"></label> ИНН <label th:text="${legalDataChangeStatement.tin}"></label> Просим вас внести следующие изменения
+    </p>
+      <div th:if = "${legalDataChangeStatement.newName != null}">
+    <p>- Название организации: С <label th:text="${legalDataChangeStatement.name}"></label> На <label th:text="${legalDataChangeStatement.newName}"></label></p>
+      </div>
+      <div th:if = "${legalDataChangeStatement.newCompanyName != null}">
+    <p>- Название торговой марки: С <label th:text="${legalDataChangeStatement.companyName}"></label> На <label th:text="${legalDataChangeStatement.newCompanyName}"></label></p>
+      </div>
+      <div th:if = "${legalDataChangeStatement.newBusinessType != null}">
+    <p>- Форма собственности: С <label th:text="${legalDataChangeStatement.businessType}"></label> На <label th:text="${legalDataChangeStatement.newBusinessType}"></label></p>
+      </div>
+    <p>- Ставка НДС: С <label th:text="${legalDataChangeStatement.vat}"></label> На <label th:text="${legalDataChangeStatement.newVAT}"></label></p>
+      <div th:if = "${legalDataChangeStatement.newActivityType != null}">
+    <p>- Изменение сфера деятельности юридического фирмы: С <label th:text="${legalDataChangeStatement.activityType}"></label> На <label th:text="${legalDataChangeStatement.newActivityType}"></label></p>
+      </div>
+      <div th:if = "${legalDataChangeStatement.newAddress != null}">
+    <p>- Юридический адрес: С <label th:text="${legalDataChangeStatement.address}"></label> На <label th:text="${legalDataChangeStatement.newAddress}"></label>, <label th:text="${legalDataChangeStatement?.neighborhoodName}"></label></p>
+      </div>
+    <p style="margin-top: 2rem">Прилагается соответствующие документы.
+    </p>
+  </div>
+  <div style="margin-top: 5rem;display: flex;justify-content: space-between">
+    <div>
+      <p>
+        Директор <label th:text="${legalDataChangeStatement.director}"></label>
+      </p>
+      <p>
+        Дата <label th:text="${#temporals.format(legalDataChangeStatement.date, 'dd.MM.yyyy')}"></label>
+      </p>
+    </div>
+    <div>
+      <p>
+        Подпись:_____________
+      </p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

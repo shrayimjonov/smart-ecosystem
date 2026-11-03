@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="product_item_image" author="azazello">
+        <createTable tableName="product_item_image">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="product_item_id" type="bigint">
+                <constraints referencedTableName="product_item"/>
+            </column>
+            <column name="file_id" type="bigint">
+                <constraints referencedTableName="file_upload"/>
+            </column>
+            <column name="main" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <dropColumn tableName="file_upload" columnName="product_item_id"/>
+    </changeSet>
+    <changeSet id="product_item_image_drop" author="azazello">
+        <dropTable tableName="product_item_image"/>
+    </changeSet>
+
+
+<!--    recreate-->
+    <changeSet id="product_color_group" author="azazello">
+        <createTable tableName="product_color_group">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="color_code" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="color_name" type="varchar(50)"/>
+        </createTable>
+        <createIndex tableName="product_color_group" indexName="color_group_idx" unique="true">
+            <column name="product_id"/>
+            <column name="color_code"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="color_group_add_fields" author="azazello">
+        <addColumn tableName="product_color_group">
+            <column name="branch_id" type="bigint"/>
+            <column name="city_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="color_group_add_price" author="azazello">
+        <addColumn tableName="product_color_group">
+            <column name="sales_price" type="decimal(25,4)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="product_item_color_group" author="azazello">
+        <addColumn tableName="product_item">
+            <column name="color_group_id" type="bigint">
+                <constraints referencedTableName="product_color_group"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="color_group_image" author="azazello">
+        <createTable tableName="color_group_image">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="color_group_id" type="bigint">
+                <constraints referencedTableName="product_color_group"/>
+            </column>
+            <column name="file_id" type="bigint">
+                <constraints referencedTableName="file_upload"/>
+            </column>
+            <column name="main" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="color_group_print_name" author="azazello">
+        <addColumn tableName="product_color_group">
+            <column name="print_name" type="varchar(100)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="color_group_size_key" author="azazello">
+        <addColumn tableName="product_color_group">
+            <column name="size_key" type="varchar(100)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="expand color group color code size" author="Sunnatillo Sharipov">
+        <modifyDataType tableName="product_color_group" columnName="color_code" newDataType="varchar(50)"/>
+    </changeSet>
+</databaseChangeLog>

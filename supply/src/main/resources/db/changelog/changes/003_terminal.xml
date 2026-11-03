@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+
+    <!--<changeSet id="add new columns to the terminals table" author="Bahodir">
+        <sql>
+            ALTER TABLE terminal
+            ADD COLUMN permission_id BIGINT,
+            ADD COLUMN start_time TIMESTAMP,
+            ADD COLUMN end_time TIMESTAMP;
+
+            ALTER TABLE terminal
+                ADD CONSTRAINT fk_permission
+                    FOREIGN KEY (permission_id) REFERENCES company_permissions (id);
+        </sql>
+    </changeSet>-->
+</databaseChangeLog>

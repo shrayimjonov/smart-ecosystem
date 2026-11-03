@@ -1,0 +1,20 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+    <changeSet author="xayrullayev" id="customer_add_columns" failOnError="true">
+        <sql splitStatements="true">
+            alter table customer
+                add column if not exists account varchar (255),
+                add column if not exists address varchar (255),
+                add column if not exists mobile varchar (255),
+                add column if not exists work_phone varchar (255),
+                add column if not exists oked varchar (255),
+                add column if not exists address varchar (255),
+                add column if not exists director varchar (255),
+                add column if not exists accountant varchar (255),
+                add column if not exists bank_id varchar (255),
+                add column if not exists district_id varchar (255);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

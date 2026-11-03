@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="fashion balance history table" author="Sunnatillo Sharipov">
+        <createTable tableName="fashion_balance_history">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="balance_start" type="numeric(25, 4)"/>
+            <column name="income" type="numeric(25, 4)"/>
+            <column name="sale" type="numeric(25, 4)"/>
+            <column name="back" type="numeric(25, 4)"/>
+            <column name="transfer_in" type="numeric(25, 4)"/>
+            <column name="transfer_out" type="numeric(25, 4)"/>
+            <column name="stock_adjustment" type="numeric(25, 4)"/>
+            <column name="balance_end" type="numeric(25, 4)"/>
+            <column name="balance_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="branch_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_item_id" type="bigint"/>
+        </createTable>
+        <createIndex tableName="fashion_balance_history" indexName="fashion_balance_history_idx">
+            <column name="product_id"/>
+            <column name="branch_id"/>
+            <column name="balance_date"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="balance history companyId column" author="Sunnatillo Sharipov">
+        <addColumn tableName="fashion_balance_history">
+            <column name="company_id" type="bigint"/>
+        </addColumn>
+        <sql>
+            UPDATE fashion_balance_history
+            SET company_id = (SELECT company_id FROM branch WHERE id = branch_id);
+        </sql>
+        <addNotNullConstraint tableName="fashion_balance_history" columnName="company_id"/>
+    </changeSet>
+</databaseChangeLog>

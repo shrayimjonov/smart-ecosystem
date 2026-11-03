@@ -1,0 +1,12 @@
+package uz.uzkassa.silen.repository.pg;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import uz.uzkassa.silen.domain.WaybillRoute;
+
+import java.util.List;
+
+@Repository
+public interface WaybillRouteRepository extends JpaRepository<WaybillRoute, String> {
+    List<WaybillRoute> findAllByTin(String tin);
+}

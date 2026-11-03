@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="drop column warehouse_enabled and auto_print_enabled" author="sharipov sunnatillo">
+        <dropColumn tableName="company" columnName="warehouse_enabled"/>
+        <dropColumn tableName="company" columnName="auto_print_enabled"/>
+    </changeSet>
+    <changeSet id="drop column bank id" author="sharipov sunnatillo">
+        <dropColumn tableName="company" columnName="bank_id"/>
+    </changeSet>
+    <changeSet id="drop pay nds column from company" author="Sunnatillo Sharipov">
+        <dropColumn tableName="company" columnName="pays_nds"/>
+    </changeSet>
+    <changeSet id="create table company permissions" author="Sunnatillo Sharipov">
+        <createTable tableName="company_permission">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="service_type" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="xizmat_type" type="varchar(50)" defaultValue="GROUPED"/>
+            <column name="company_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addUniqueConstraint tableName="company_permission" columnNames="company_id, service_type" constraintName="company_permission_uk"/>
+    </changeSet>
+    <changeSet id="insert all existing permissions to new table" author="Sunnatillo Sharipov">
+        <sql>
+            insert into company_permission(service_type, company_id, end_date)
+            select permissions_key, company_id,  expire_date from company_permissions;
+        </sql>
+    </changeSet>
+    <changeSet id="drop unique constraint company permission" author="Sunnatillo Sharipov">
+        <dropUniqueConstraint tableName="company_permission" constraintName="company_permission_uk"/>
+    </changeSet>
+</databaseChangeLog>

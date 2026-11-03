@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="branch join branch_group" author="Nayimov Og'abek">
+        <createTable tableName="groups">
+            <column name="branch_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="group_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="added primary key in groups table" author="Nayimov Og'abek">
+        <addPrimaryKey tableName="groups" columnNames="branch_id,group_id"/>
+    </changeSet>
+    <changeSet id="insert table groups" author="Nayimov Og'abek">
+        <sql>
+            insert into groups (branch_id, group_id)
+            select id, group_id
+            from branch
+            where group_id is not null;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

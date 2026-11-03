@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Orders</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px 5px;
+      font-family: sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table td, .table th {
+      padding: 5px 3px;
+      border: 1px solid #ddd;
+      text-align: center;
+      font-size: 80%;
+    }
+
+    .table th {
+      background-color: #747475;
+      color: #ffffff;
+    }
+
+    .table tbody tr:nth-child(even) {
+      background-color: #f5f5f5;
+    }
+
+  </style>
+</head>
+<body>
+<div>
+  <header>
+    <div>
+      <table style="border: 0; width: 100%">
+        <tr>
+          <td th:text="${companyName}" style="text-align: left"></td>
+          <td th:text="${heading}"></td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <h4 th:text="${filterText}"></h4>
+    </div>
+  </header>
+  <main>
+    <div>
+      <div>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Номер заказа</th>
+
+            <th>Клиент</th>
+
+            <th>Клиент ИНН</th>
+
+            <th>Номер договор</th>
+
+            <th>Дата договор</th>
+
+            <th>Дата заказа</th>
+
+            <th>Номер отгрузки</th>
+
+            <th>Дата отгрузки</th>
+
+            <th>Филиал</th>
+
+            <th>Статус</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each=" order : ${orders}">
+            <td th:text="${order.orderNumber}"></td>
+
+            <td th:if="${order.getCustomerId()!=null}" th:text="${order.customer.name}"></td>
+            <td th:if="${order.getCustomerId()==null}"></td>
+
+            <td th:if="${order.getCustomerId()!=null}" th:text="${order.customer.tin}"></td>
+            <td th:if="${order.getCustomerId()==null}"></td>
+
+            <td th:if="${order.getContractId()!=null}" th:text="${order.contract.contractNumber}"></td>
+            <td th:if="${order.getCustomerId()==null}"></td>
+
+            <td th:if="${order.getContractId()!=null}" th:text="${order.contract.contractDate}"></td>
+            <td th:if="${order.getCustomerId()==null}"></td>
+
+            <td th:text="${order.getOrderDate().toLocalDate()}"></td>
+
+            <td th:if="${order.getStockOut()!=null}" th:text="${order.stockOut.getStockNumber()}"></td>
+            <td th:if="${order.getStockOut()==null}"></td>
+
+            <td th:if="${order.getStockOut()!=null}" th:text="${order.stockOut.transferDate.toLocalDate()}"></td>
+            <td th:if="${order.getStockOut()==null}"></td>
+
+            <td th:if="${order.getBranchId()!=null}" th:text="${order.getBranch().name}"></td>
+            <td th:if="${order.getBranchId()==null}"></td>
+            <td th:text="${order.getStatus().getName()}"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="create receipt_limit table" author="Nayimov Og'abek">
+        <createTable tableName="receipt_limit">
+            <column name="code" type="varchar">
+                <constraints unique="true"/>
+            </column>
+            <column name="price" type="numeric(25,4)"/>
+            <column name="name_ru" type="varchar"/>
+            <column name="name_uz_cyrillic" type="varchar"/>
+            <column name="name_uz_latin" type="varchar"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

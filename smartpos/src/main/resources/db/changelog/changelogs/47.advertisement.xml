@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="create advertisement" author="Sunnatillo Sharipov">
+        <createTable tableName="advertisement">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="created_by_id" type="bigint"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by_id" type="bigint"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="type" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="device_sn" type="varchar(50)"/>
+            <column name="company_id" type="bigint"/>
+            <column name="video_url" type="varchar(1000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="advertisement make types and serial numbers array" author="Sunnatillo Sharipov">
+        <sql>
+            alter table advertisement add column device_types varchar(50)[];
+            alter table advertisement add column serial_numbers varchar(50)[];
+            update advertisement set serial_numbers = array[device_sn] where device_sn is not null;
+            alter table advertisement drop column device_sn;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

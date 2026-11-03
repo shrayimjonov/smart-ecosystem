@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+      .parent {
+          width: 100%;
+          position: relative;
+          flex: 1 1 auto;
+          text-align: center;
+      }
+      .label {
+          border-bottom: 1px solid black;
+          margin-bottom:0
+      }
+      .subLabel {
+          font-size: 0.75em;
+          font-style: italic;
+          position: absolute;
+          bottom: -18px;
+          margin-left: auto;
+          margin-right: auto;
+          left: 0;
+          right: 0;
+          text-align: center;
+      }
+  </style>
+</head>
+<body style="padding: 5rem;font-weight: bold">
+<div>
+  <div style=" display: flex; justify-content: space-between">
+    <div>
+      <p>Исх. №</p>
+      <p>От <label th:text="${#temporals.format(dto.date, 'dd.MM.yyyy')}"></label>.</p>
+    </div>
+<div>
+      <p>Управляющему филиала «Дархан»</p>
+      <p style="text-align: right">ЧАБ «Трастбанк»</p>
+    </div>
+
+  </div>
+  <div style="margin-top: 5rem;text-align: center">
+    <p>
+      ЗАЯВЛЕНИЕ
+    </p>
+  </div>
+  <div style="margin-top: 5rem">
+    <div class="parent">
+        <span th:text="${dto?.companyName}"></span>
+<!--      <p class="label">-->
+
+<!--      </p>-->
+<!--      <span class="subLabel">-->
+<!--        (наименование организации)-->
+<!--      </span>-->
+    </div>
+    <p>
+      ИНН <label th:text="${dto.tin}"></label> прошу вас подключить эквайринг
+      (терминал) HUMO для онлайн ККМ UZKASSA N5 серийный номер <label th:text="${dto.deviceSerialNumber}"></label>
+      .
+    </p>
+  </div>
+    <p>Банк: <label th:text="${dto.bankName}"></label></p>
+    <p>Р/с: <label th:text="${dto.accountNumber}"></label></p>
+    <p>МФО: <label th:text="${dto.mfo}"></label></p>
+    <p>Контактный номер: <label th:text="${dto.phone}"></label></p>
+  <div style="margin-top: 5rem;display: flex;gap: 1rem">
+      Директор: <label th:text="${dto.director}"></label>
+    <div class="parent" style="width: 50%">
+      <p class="label">
+
+      </p>
+      <span class="subLabel">
+        (подпись)
+      </span>
+    </div>
+    <div class="parent" >
+      <p class="label">
+
+      </p>
+      <span class="subLabel">
+        (Ф.И.О)
+      </span>
+    </div>
+  </div>
+  <div style="margin-top: 2rem;">
+    М.П.
+  </div>
+
+
+</div>
+</body>
+</html>

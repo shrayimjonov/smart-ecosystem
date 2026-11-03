@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+
+    <changeSet id="16062026_price_list_customer_group_id" author="Dilshod Madrahimov">
+        <sql>
+            ALTER TABLE price_list ADD COLUMN IF NOT EXISTS customer_group_id bigint
+        </sql>
+    </changeSet>
+</databaseChangeLog>

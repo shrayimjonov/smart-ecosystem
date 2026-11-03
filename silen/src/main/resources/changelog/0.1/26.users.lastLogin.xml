@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="users_last_login" author="xayrullayev">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+            <not>
+                <columnExists tableName="users" columnName="last_login"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="users">
+            <column name="last_login" type="timestamp" />
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,24 @@
+package uz.uzkassa.silen.dto.waybill;
+
+import lombok.*;
+import uz.uzkassa.silen.enumeration.WaybillStatus;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class WaybillExecutorDTO implements Serializable {
+
+    private WaybillStatus status;
+
+    private String operationNumber;
+
+    private String operationBy;
+
+    private LocalDateTime operationDate;
+}

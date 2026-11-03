@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="create_export_report" author="apulatjonov" failOnError="true">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+            <not>
+                <tableExists tableName="export_report"/>
+            </not>
+        </preConditions>
+        <createTable tableName="export_report">
+            <column name="id" autoIncrement="true" type="bigint"/>
+            <column name="entity_type" type="varchar"/>
+            <column name="file_type" type="varchar"/>
+            <column name="file_id" type="bigint"/>
+            <column name="status" type="varchar"/>
+            <column name="error_message" type="varchar"/>
+            <column name="expire_date" type="datetime"/>
+            <column name="created_by" type="varchar"/>
+            <column name="deleted" type="bool"/>
+            <column name="created_date" type="datetime"/>
+            <column name="last_modified_by" type="varchar"/>
+            <column name="last_modified_date" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="export_report_fk" author="apulatjonov">
+        <preConditions>
+            <not>
+                <primaryKeyExists tableName="export_report" primaryKeyName="id"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey tableName="export_report" columnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

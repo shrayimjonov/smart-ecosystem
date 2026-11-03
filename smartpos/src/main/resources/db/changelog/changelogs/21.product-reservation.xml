@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="product_reservation" author="azazello">
+        <createTable tableName="product_reservation">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="branch_id" type="bigint">
+                <constraints referencedTableName="branch" nullable="false"/>
+            </column>
+            <column name="product_item_id" type="bigint">
+                <constraints referencedTableName="product_item" nullable="false"/>
+            </column>
+            <column name="qty" type="numeric(25, 4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="varchar(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hour" type="int"/>
+            <column name="expire_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(50)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="branch_reservation" author="azazello">
+        <addColumn tableName="branch">
+            <column name="reservation_enabled" type="boolean" defaultValue="false"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="product_id added to product reservation" author="Sunnatillo Sharipov">
+        <addColumn tableName="product_reservation">
+            <column name="product_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="drop product id from product reservation" author="Sunnatillo Sharipov">
+        <dropColumn tableName="product_reservation" columnName="product_id"/>
+    </changeSet>
+    <changeSet id="productId added  in product_reservation" author="Nayimov Og'abek">
+        <addColumn tableName="product_reservation">
+            <column name="product_id" type="bigint">
+                <constraints nullable="false" referencedTableName="product_branch"/>
+            </column>
+            <column name="city_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="drop reservation enabled column from branch and add to company" author="Sunnatillo Sharipov">
+        <dropColumn tableName="branch" columnName="reservation_enabled"/>
+        <addColumn tableName="company">
+            <column name="reservation_enabled" type="boolean" defaultValue="false"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="add expired to product reservation" author="Sunnatillo Sharipov">
+        <addColumn tableName="product_reservation">
+            <column name="expired" type="boolean" defaultValue="false"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="add status to product reservation" author="Sunnatillo Sharipov">
+        <addColumn tableName="product_reservation">
+            <column name="status" type="varchar(50)"/>
+        </addColumn>
+        <sql>
+            UPDATE product_reservation
+            SET status = 'RESERVED';
+            UPDATE product_reservation
+            SET status = 'EXPIRED'
+            WHERE expired = true;
+        </sql>
+        <dropColumn tableName="product_reservation" columnName="expired"/>
+    </changeSet>
+    <changeSet id="add imageUrl to product reservation" author="Sunnatillo Sharipov">
+        <addColumn tableName="product_reservation">
+            <column name="image_url" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

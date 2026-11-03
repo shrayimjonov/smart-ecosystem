@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="bonus_invoice_date" author="azazello">
+        <addColumn tableName="employee_bonus">
+            <column name="invoice_date" type="timestamp"/>
+        </addColumn>
+        <addColumn tableName="usage_plan">
+            <column name="invoice_date" type="timestamp"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="branchGroupId added in users table" author="Nayimov Og'abek">
+        <addColumn tableName="users">
+            <column name="branch_group_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="1-add-fields-to-users-table" author="bahodir">
+        <addColumn tableName="users">
+            <column name="date_of_birth" type="DATE">
+            </column>
+            <column name="personal_number" type="VARCHAR(20)">
+            </column>
+            <column name="salary" type="DECIMAL">
+            </column>
+            <column name="card_number" type="VARCHAR(16)">
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="modify user salary type" author="Sunnatillo Sharipov">
+        <modifyDataType tableName="users" columnName="salary" newDataType="numeric(25,4)"/>
+    </changeSet>
+</databaseChangeLog>

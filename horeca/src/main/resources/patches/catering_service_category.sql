@@ -1,0 +1,2 @@
+insert into category(catalog_code, catalog_name, category_type, name, package_code, package_name, status)
+VALUES('10202002003000001','Прочие услуги сервисного обслуживания в заведении общественного питания','CATERING_SERVICE','Прочие услуги сервисного обслуживания в заведении общественного питания','1649645','комплект/набор=1 услуга (раз)','ACTIVE');

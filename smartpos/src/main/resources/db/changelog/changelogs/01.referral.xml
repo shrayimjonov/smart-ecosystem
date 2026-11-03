@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="referral_settings" author="sharipov sunnatillo">
+        <createTable tableName="referral_settings">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_by" type="varchar(50)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="range_from" type="timestamp"/>
+            <column name="range_to" type="timestamp"/>
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="promoted_receiver_count" type="int"/>
+            <column name="type_for_sender" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sender_discount_percent" type="numeric(25, 4)"/>
+            <column name="sender_discount_device_count" type="int"/>
+            <column name="type_for_receiver" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="receiver_discount_percent" type="numeric(25, 4)"/>
+            <column name="receiver_discount_device_count" type="int"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="referral" author="sharipov sunnatillo">
+        <createTable tableName="referral">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValue="now()"/>
+            <column name="settings_id" type="bigint">
+                <constraints nullable="false" referencedTableName="referral_settings"/>
+            </column>
+            <column name="sender_id" type="bigint">
+                <constraints nullable="false" referencedTableName="company"/>
+            </column>
+            <column name="link" type="varchar(500)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="promo_code" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="customer" author="sharipov sunnatillo">
+        <createTable tableName="customer">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tin" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="phone" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="promo_code" type="varchar(50)"/>
+            <column name="created_date" type="timestamp" defaultValue="now()"/>
+            <column name="referral_id" type="bigint">
+                <constraints nullable="false" referencedTableName="referral"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="remove referral" author="sharipov sunnatillo">
+        <dropTable tableName="customer"/>
+        <dropTable tableName="referral"/>
+        <dropTable tableName="referral_settings"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,274 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 12px;
+            line-height: 16px;
+            margin: 0;
+        }
+
+        .wrapper {
+            box-sizing: border-box;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .t-a-c {
+            text-align: center;
+        }
+
+        .company {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .company__name {
+            display: inline-block;
+            vertical-align: top;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .company__name .s1 {
+            display: block;
+            border-top: 1px solid #000;
+            min-width: 400px;
+            font-size: 11px;
+        }
+
+        .table1 {
+            border: 2px solid #000;
+            border-collapse: collapse;
+            padding: 0;
+            margin: 0 0 20px auto;
+            font-size: 12px;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .table1 td {
+            padding: 5px;
+            border-width: 2px;
+        }
+
+        .h1	{
+            font-size: 14px;
+            line-height: 18px;
+            margin: 0 0 5px;
+            text-align: center;
+        }
+
+        .description {
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 0 0 10px;
+        }
+
+        .line {
+            width: 80%;
+            padding: 3px 0 2px;
+            min-height: 16px;
+            border-bottom: 1px solid #000;
+        }
+
+        .table2 {
+            border: 2px solid #000;
+            border-collapse: collapse;
+            padding: 0;
+            margin: 0 0 20px auto;
+            font-size: 12px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .table2 td {
+            padding: 5px;
+            border-width: 2px;
+        }
+
+        .remont-head {
+            font-weight: bold;
+            margin: 0 0 10px;
+            font-size: 13px;
+        }
+
+        .remont-head2 {
+            margin: 0 0 30px;
+            font-size: 13px;
+        }
+
+        .remont-block {
+            display: flex;
+            /*margin: 0 0 20px;*/
+        }
+
+        .remont-title {
+            width: 230px;
+        }
+
+        .remont-block .remont-row {
+            position: relative;
+            width: 170px;
+            /*min-height: 40px;*/
+            margin: 0 20px 0 0;
+        }
+
+        .remont-block .remont-row .s1 {
+            font-size: 12px;
+        }
+
+        .remont-block .remont-row.second {
+            width: 200px;
+        }
+
+        .blank-line {
+            border-bottom: 1px solid #000000;
+        }
+
+        .blank-line.empty {
+            min-height: 17px;
+        }
+        .seal img, .sign img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div><span th:text="${address.region.nameRu}"></span> </div>
+
+    <div class="company">
+        <div class="company__name">
+            <span th:text="${fiscalization.customer.companyName}"></span>,
+            <span th:text="${fiscalization.customer.tin}"></span>
+            <span class="s1">наименование организации и ИНН</span>
+        </div>
+    </div>
+    <table class="table1" border="1">
+        <tbody>
+        <tr>
+            <td>Номер документа</td>
+            <td>Дата составления</td>
+        </tr>
+        <tr>
+            <td style="height:12px"></td>
+            <td style="height:12px"><span th:text="${#temporals.format(application.currentDate, 'dd-MM-yyyy')}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+    <h1 class="h1">
+        АКТ<br />
+        О СНЯТИИ ПОКАЗАНИЙ КОНТРОЛЬНЫХ И СУММИРУЮЩИХ ДЕНЕЖНЫХ СЧЕТЧИКОВ<br />
+        ПРИ СДАЧЕ (ОТПРАВКЕ) КОНТРОЛЬНО-КАССОВОЙ МАШИНЫ<br />
+        В РЕМОНТ И ПРИ ВОЗВРАЩЕНИИ ЕЕ В ОРГАНИЗАЦИЮ
+    </h1>
+    <div class="description">
+        Настоящий акт составлен комиссией, которая установила:<br />
+        Характер неисправности при отправке в ремонт и заключение специалиста центра<br />
+        технического обслуживания о состоянии блока фискальной памяти
+    </div>
+    <div class="line"><span th:text="${application.description}"></span></div>
+    <br />
+    <br />
+    <table class="table2" border="1">
+        <tbody>
+        <tr>
+            <td>Серийный номер Онлайн ККМ сдаваемого в ремонт</td>
+            <td>Серийный номер фискального модуля</td>
+            <td>Серийный номер Онлайн ККМ временно замененного</td>
+        </tr>
+        <tr>
+            <td><span th:text="${fiscalization.device.serialNumber}"></span></td>
+            <td><span th:text="${fiscalization.fiscalModule.serialNumber}"></span></td>
+            <td><span th:text="${application.newSerialNumber}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="remont-head t-a-c">При сдаче в ремонт:</div>
+    <div class="remont-head2">Члены комиссии:</div>
+    <div class="remont-block">
+        <div class="remont-title">Руководитель</div>
+        <div class="remont-row">
+            <div class="blank-line empty"></div>
+            <span class="s1">м.п</span>
+        </div>
+        <div class="remont-row second">
+            <div class="blank-line empty"></div>
+            <span class="s1">Ф.И.О</span>
+        </div>
+    </div>
+    <div class="remont-block">
+        <div class="remont-title">
+            Специалист центра техниче-<br />
+            ского обслуживания ККМ
+        </div>
+        <div class="remont-row">
+            <div class="blank-line empty"></div>
+            <span class="s1">Подпись</span>
+        </div>
+        <div class="remont-row second">
+            <div class="blank-line empty"><span th:text="${currentUser.getName()}"></span></div>
+            <span class="s1">Ф.И.О</span>
+        </div>
+    </div>
+    <br />
+    <table class="table2" border="1">
+        <tbody>
+        <tr>
+            <td>Серийный номер Онлайн ККМ принятого с ремонта</td>
+            <td>Серийный номер фискального модуля</td>
+            <td>Серийный номер Онлайн ККМ временно замененного</td>
+        </tr>
+        <tr>
+            <td><span th:text="${fiscalization.device.serialNumber}"></span></td>
+            <td><span th:text="${fiscalization.fiscalModule.serialNumber}"></span></td>
+            <td><span th:text="${application.newSerialNumber}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="remont-head t-a-c">При возвращении (приеме) из ремонта:</div>
+    <table class="table1" border="1">
+        <tbody>
+        <tr>
+            <td>Номер документа</td>
+            <td>Дата возврата</td>
+        </tr>
+        <tr>
+            <td style="height: 12px"></td>
+            <td style="height: 12px"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="remont-head">Притензий по состоянию ОНЛАЙН ККМ после замены заказчик и представитель ЦТО не имеют:</div>
+    <div class="remont-head2">Члены комиссии:</div>
+    <div class="remont-block">
+        <div class="remont-title">Руководитель</div>
+        <div class="remont-row">
+            <div class="blank-line empty"></div>
+            <span class="s1">м.п</span>
+        </div>
+        <div class="remont-row second">
+            <div class="blank-line empty"></div>
+            <span class="s1">Ф.И.О</span>
+        </div>
+    </div>
+    <div class="remont-block">
+        <div class="remont-title">
+            Специалист центра техниче-<br />
+            ского обслуживания ККМ
+        </div>
+        <div class="remont-row">
+            <div class="blank-line empty"></div>
+            <span class="s1">Подпись</span>
+        </div>
+        <div class="remont-row second">
+            <div class="blank-line empty"><span th:text="${currentUser.getName()}"></span></div>
+            <span class="s1">Ф.И.О</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

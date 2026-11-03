@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="create_store_in" author="apulatjonov">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+            <not>
+                <tableExists tableName="store_in_items"/>
+            </not>
+        </preConditions>
+        <createTable tableName="store_in_items">
+            <column name="id" type="bigint" autoIncrement="true"/>
+            <column name="product_id" type="varchar"/>
+            <column name="store_in_id" type="varchar"/>
+            <column name="store_in_number" type="bigint"/>
+            <column name="product_name" type="varchar"/>
+            <column name="barcode" type="varchar"/>
+            <column name="serial_number" type="varchar"/>
+            <column name="shipment_date" type="datetime"/>
+            <column name="shipment_id" type="varchar"/>
+            <column name="qty_box" type="bigint"/>
+            <column name="shipment_qty" type="java.math.BigDecimal"/>
+            <column name="qty" type="bigint"/>
+            <column name="status" type="varchar"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="store_in_item_pm" author="apulatjonov">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+            <not>
+                <primaryKeyExists tableName="store_in_items" primaryKeyName="id"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey tableName="store_in_items" columnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

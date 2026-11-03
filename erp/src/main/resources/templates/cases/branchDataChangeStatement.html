@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10. - Изменения данных ТТ</title>
+</head>
+<body style="padding: 5rem;">
+<div>
+    <div style=" display: flex; justify-content: end">
+        <p style="max-width: 30%">
+            OOO “Special Texno Soft”
+            Директору Усмонов Д. Ф.
+            <label th:text="${dto.companyName}"></label>
+            от <label th:text="${dto.director}"></label>
+
+        </p>
+    </div>
+    <div style="margin-top: 5rem;text-align: center">
+        <p>
+            Заявление
+        </p>
+    </div>
+    <div style="margin-top: 5rem">
+        <p>
+            <label th:text="${dto.businessType}"></label> <label th:text="${dto.companyName}"></label> ИНН <label
+                th:text="${dto.tin}"></label>
+            Просим вас внести изменения в данные Торговой точки (<label th:text="${dto.branchName}"></label>) ККМ
+            (<label th:text="${dto?.deviceNumber}"></label>)
+        </p>
+        <div th:if="${dto.newBranchName != null}">
+            <p>- Название торговой точки: С <label th:text="${dto.branchName}"></label> На <label
+                    th:text="${dto?.newBranchName}"></label></p>
+        </div>
+        <p>- Сфера деятельности торговой точки: С <label th:text="${dto.activityType}"></label> На <label
+                th:text="${dto?.newActivityType}"></label></p>
+    </div>
+    <div style="margin-top: 5rem;display: flex;justify-content: space-between">
+        <div>
+            <p>
+                Директор <label th:text="${dto.director}"></label>
+            </p>
+            <p>
+                Дата <label th:text="${#temporals.format(dto.date, 'dd.MM.yyyy')}"></label>
+            </p>
+        </div>
+        <div>
+            <p>
+                Подпись:_____________
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

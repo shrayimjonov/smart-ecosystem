@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="attribute" author="azazello">
+        <createTable tableName="attribute">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="key" type="varchar(50)"/>
+            <column name="code" type="varchar(50)"/>
+            <column name="name_ru" type="varchar(255)"/>
+            <column name="name_en" type="varchar(255)"/>
+            <column name="name_uz" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="product_item" author="azazello">
+        <createTable tableName="product_item">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_by" type="varchar(50)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="barcode" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="attributes" type="jsonb"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="product_attribute" author="azazello">
+        <addColumn tableName="product_branch">
+            <column name="attributes" type="jsonb"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="attribute_order" author="azazello">
+        <addColumn tableName="attribute">
+            <column name="s_order" type="int4" defaultValue="0"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="attribute_company" author="azazello">
+        <addColumn tableName="attribute">
+            <column name="company_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="product_item_file_upload" author="azazello">
+        <addColumn tableName="file_upload">
+            <column name="product_item_id" type="bigint">
+                <constraints referencedTableName="product_item"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="product_item_add_fields" author="azazello">
+        <addColumn tableName="product_item">
+            <column name="branch_id" type="bigint"/>
+            <column name="city_id" type="bigint"/>
+            <column name="sales_price" type="decimal(25,4)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="product_item_income" author="azazello">
+        <addColumn tableName="income_of_product_detail">
+            <column name="product_item_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="product_item_deleted_column" author="Sunnatillo Sharipov">
+        <addColumn tableName="product_item">
+            <column name="deleted" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="product_description" author="azazello">
+        <addColumn tableName="product_branch">
+            <column name="description" type="varchar(1000)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="drop product item id column from income of product detail" author="Sunnatillo Sharipov">
+        <dropColumn tableName="income_of_product_detail" columnName="product_item_id"/>
+    </changeSet>
+
+    <!--    DATA-->
+    <changeSet id="attributes_data" author="azazello">
+        <loadData file="data/attributes.csv"
+                  quotchar='"'
+                  schemaName="public"
+                  tableName="attribute">
+        </loadData>
+    </changeSet>
+    <changeSet id="add attribute without size" author="Sunnatillo Sharipov">
+        <insert tableName="attribute">
+            <column name="key" value="WITHOUT_SIZE"/>
+            <column name="code" value="WITHOUT_SIZE"/>
+            <column name="name_ru" value="Без размера"/>
+            <column name="name_en" value="Without size"/>
+            <column name="name_uz" value="O'lchami yo'q"/>
+            <column name="s_order" value="0"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

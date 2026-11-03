@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="remove file upload unnecessary columns" author="sunnatillo sharipov">
+        <dropColumn tableName="file_upload" columnName="content_type"/>
+        <dropColumn tableName="file_upload" columnName="size"/>
+        <dropColumn tableName="file_upload" columnName="entity_id"/>
+        <dropColumn tableName="file_upload" columnName="entity_type"/>
+        <dropColumn tableName="file_upload" columnName="document_type"/>
+    </changeSet>
+    <changeSet id="add_column_in_file_upload" author="nayimov">
+        <addColumn tableName="file_upload">
+            <column name="entity_id" type="bigint"/>
+            <column name="entity_type" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="update_file_upload" author="nayimov">
+        <sql>
+            update file_upload fu
+            set entity_type = 'COMPANY',
+                entity_id=c.id from company c
+            where c.logo_id = fu.id;
+
+            update file_upload fu
+            set entity_type = 'USER',
+                entity_id=u.id from users u
+            where u.image_id = fu.id;
+
+            update file_upload fu
+            set entity_type = 'TERMINAL_LOG',
+                entity_id=tl.id from terminal_log tl
+            where tl.db_file_id = fu.id;
+
+            update file_upload fu
+            set entity_type = 'OFD_APPLICATION',
+                entity_id=oa.id from ofd_application oa
+            where oa.file_id = fu.id;
+
+            update file_upload fu
+            set entity_type = 'COMPANY_AGREEMENT',
+                entity_id=ca.id from company_agreement ca
+            where ca.file_id = fu.id;
+
+            update file_upload fu
+            set entity_type = 'RECEIPT_TEMPLATE',
+                entity_id=rt.id from receipt_template rt
+            where rt.footer_id = fu.id;
+
+            update file_upload fu
+            set entity_type = 'RECEIPT_TEMPLATE',
+                entity_id=rt.id from receipt_template rt
+            where rt.header_id = fu.id;
+
+            update file_upload fu
+            set entity_type = 'TERMINAL_TRANSFER',
+                entity_id=tt.id from terminal_transfer tt
+            where tt.file_id = fu.id;
+
+            update file_upload fu
+            set entity_type='BILL_ACT',
+                entity_id=b.id from bill b
+            where fu.id = b.act_id;
+
+            update file_upload fu
+            set entity_type='BILL_AGREEMENT',
+                entity_id=b.id from bill b
+            where fu.id = b.agreement_id;
+
+            update file_upload fu
+            set entity_type='BILL_HUMO_REQUEST',
+                entity_id=b.id from bill b
+            where fu.id = b.humo_request_id;
+
+            update file_upload fu
+            set entity_type='BILL_HUMO_CONTRACT',
+                entity_id=b.id from bill b
+            where fu.id = b.humo_contract_id;
+        </sql>
+    </changeSet>
+    <changeSet id="update_file_upload_for_branch" author="nayimov">
+        <sql>
+            update file_upload fu
+            set entity_type = 'BRANCH',
+                entity_id=c.id from branch c
+            where c.rent_file_id = fu.id;
+
+            update file_upload fu
+            set entity_type = 'BRANCH',
+                entity_id=b.id from branch b
+            where b.cadastre_file_id = fu.id;
+        </sql>
+    </changeSet>
+    <changeSet id="update_file_upload_for_eps-services" author="nayimov">
+        <sql>
+            update file_upload fu
+            set entity_type='EPS_SERVICES'
+                from eps_services es
+            where fu.id = es.file_id
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,11 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+    <changeSet author="ahaqberdiev" id="product_origin_default_update" failOnError="true">
+        <sql splitStatements="true">
+            alter table invoice_item alter column origin set default 1;
+            alter table product alter column origin set default 1;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

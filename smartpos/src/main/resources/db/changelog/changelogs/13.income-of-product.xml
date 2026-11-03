@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="income of product status" author="sharipov sunnaatillo">
+        <addColumn tableName="income_of_product">
+            <column name="income_status" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="delete income of product status column" author="Sunnatillo Sharipov">
+        <sql>
+            delete
+            from income_of_product_detail
+            where
+                income_of_product_id in (select id from income_of_product where income_status in ('DRAFT', 'CANCELED'));
+            delete
+            from income_of_product
+            where income_status in ('DRAFT', 'CANCELED');
+        </sql>
+        <dropColumn tableName="income_of_product" columnName="income_status"/>
+    </changeSet>
+    <changeSet id="add income status to income of product" author="Sunnatillo Sharipov">
+        <addColumn tableName="income_of_product">
+            <column name="income_status" type="varchar(50)"/>
+        </addColumn>
+        <update tableName="income_of_product">
+            <column name="income_status">APPROVED</column>
+        </update>
+    </changeSet>
+    <changeSet id="stockOutId added in income_of_product" author="Nayimov Og'abek">
+        <addColumn tableName="income_of_product">
+            <column name="stock_out_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="change stockOutId type to String" author="Sunnatillo Sharipov">
+        <modifyDataType tableName="income_of_product" columnName="stock_out_id" newDataType="varchar(255)"/>
+    </changeSet>
+    <changeSet id="add marking codes jsonb column" author="Sunnatillo Sharipov">
+        <addColumn tableName="income_of_product_detail">
+            <column name="marking_codes" type="jsonb"/>
+        </addColumn>
+        <sql>
+            update income_of_product_detail
+            set marking_codes = to_jsonb(regexp_split_to_array(markings, '///(?=[0-9a-zA-Z(])'))
+            where length(markings) > 0;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

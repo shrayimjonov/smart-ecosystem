@@ -1,0 +1,11 @@
+
+
+██╗  ██╗ ██████╗ ██████╗ ███████╗ ██████╗ █████╗
+██║  ██║██╔═══██╗██╔══██╗██╔════╝██╔════╝██╔══██╗
+███████║██║   ██║██████╔╝█████╗  ██║     ███████║
+██╔══██║██║   ██║██╔══██╗██╔══╝  ██║     ██╔══██║
+██║  ██║╚██████╔╝██║  ██║███████╗╚██████╗██║  ██║
+╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝  ╚═╝
+
+${AnsiColor.BRIGHT_BLUE}:: Smartos Horeca App provided by Center for Digital Technologies and Innovation CDTI :: Running Spring Boot ${spring-boot.version} :: Startup profile(s) ${spring.profiles.active} ::
+:: http://internal.example.com ::${AnsiColor.DEFAULT}

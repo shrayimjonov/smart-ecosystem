@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+
+    <changeSet id="create sales table" author="Sunnatillo Sharipov">
+        <sql>
+            create table if not exists sales
+            (
+                id               Int64,
+                sign             Int8,
+                version          Int64,
+                createdDateTime  DateTime,
+                uid              String,
+                originUid        Nullable(String),
+                fiscalUrl        Nullable(String),
+                shiftNumber      Nullable(Int64),
+                costAmount       Decimal(25, 2),
+                totalCost        Decimal(25, 2),
+                type             LowCardinality(String),
+                status           LowCardinality(String),
+                source           LowCardinality(String),
+                payments         Map(String, Decimal(25, 2)),
+                branchId         Int64,
+                branchName       String,
+                branchActivityId Nullable(Int64),
+                branchRegionId   Nullable(Int64),
+                branchCityId     Nullable(Int64),
+                companyId        Int64,
+                companyName      String,
+                companyTin       String,
+                customer         Nullable(String),
+                createdById      Int64,
+                createdByName    String,
+                terminalSN       Nullable(String),
+                facturaId        Nullable(String),
+                searchField      String,
+                salesDetailIds   Array(Int64),
+                info             String
+                ) engine = VersionedCollapsingMergeTree(sign, version)
+                partition by toYYYYMM(createdDateTime)
+                order by (createdDateTime, companyId, branchId, uid);
+
+            create table if not exists sales_kafka
+            (
+                id               Int64,
+                sign             Int8,
+                version          Int64,
+                createdDateTime  DateTime,
+                uid              String,
+                originUid        Nullable(String),
+                fiscalUrl        Nullable(String),
+                shiftNumber      Nullable(Int64),
+                costAmount       Decimal(25, 2),
+                totalCost        Decimal(25, 2),
+                type             LowCardinality(String),
+                status           LowCardinality(String),
+                source           LowCardinality(String),
+                payments         Map(String, Decimal(25, 2)),
+                branchId         Int64,
+                branchName       String,
+                branchActivityId Nullable(Int64),
+                branchRegionId   Nullable(Int64),
+                branchCityId     Nullable(Int64),
+                companyId        Int64,
+                companyName      String,
+                companyTin       String,
+                customer         Nullable(String),
+                createdById      Int64,
+                createdByName    String,
+                terminalSN       Nullable(String),
+                facturaId        Nullable(String),
+                searchField      String,
+                salesDetailIds   Array(Int64),
+                info             String
+                ) engine Kafka('127.0.0.1:9092', 'sales', 'clickhouse-sales', 'JSONEachRow');
+
+            create materialized view if not exists sales_mv to sales as
+            select *
+            from sales_kafka;
+        </sql>
+        <rollback>
+            <dropTable tableName="sales"/>
+            <dropTable tableName="sales_kafka"/>
+            <dropTable tableName="sales_mv"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

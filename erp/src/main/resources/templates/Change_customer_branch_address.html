@@ -1,0 +1,142 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 12px;
+            line-height: 16px;
+            margin: 0;
+        }
+
+        .wrapper {
+            box-sizing: border-box;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .company {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .company__name {
+            display: inline-block;
+            vertical-align: top;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .company__name__title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .table1 td {
+            padding: 5px;
+            border-width: 2px;
+        }
+
+        .h1	{
+            font-size: 25px;
+            margin: 0 0 15px;
+            text-align: center;
+        }
+
+        .description {
+            text-align: center;
+            font-size: 16px;
+            margin: 0 0 40px;
+        }
+
+        .s1 {
+            font-weight: bold;
+        }
+
+        .text-block {
+            font-size: 14px;
+            line-height: 17px;
+        }
+
+        .footer-block {
+            padding-top: 150px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-block__right {
+            display: flex;
+        }
+
+        .footer-block__right .footer-block__item {
+            margin-left: 20px;
+        }
+
+        .footer-block__item-title {
+            padding-bottom: 3px;
+            margin-bottom: 5px;
+            min-height: 16px;
+            border-bottom: 1px solid #000;
+        }
+
+        .sign-item {
+            min-width: 80px;
+        }
+
+        .name-item {
+            min-width: 300px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="company">
+        <div class="company__name">
+            <div class="company__name__title" th:text="${newDistrict}"></div>
+            Давлат солиқ инспекциясига
+        </div>
+    </div>
+    <h1 class="h1">
+        АРИЗА
+    </h1>
+    <div class="description">
+        (Онлайн-НКМ ёки виртуал кассанинг турғун савдо, хизмат қўрсатиш шаҳобча жойлашган манзилни
+        ўзгартириш тўғрисида)
+    </div>
+    <div class="text-block">
+        Сиздан, <span class="s1" th:text="${fiscalization.customer.businessType.getName()}"></span> <span class="s1" th:text="${fiscalization.customer.companyName}"></span>
+        (СТИР: <span class="s1" th:text="${fiscalization.customer.tin}"></span>)га қарашли,
+        <span class="s1" th:text="${fiscalization.customerBranch.address.getFullAddressAddress()}"></span>
+        манзилида жойлашган савдо, хизмат кўрсатиш шаҳобчаси <span class="s1" th:text="${newAddress}"></span> манзилига ўзгарганлиги
+        сабабли, мавжуд онлайн-НКМ Завод рақами:<span class="s1" th:text="${fiscalization.device.serialNumber}"></span> ва Фискал модул:<span class="s1" th:text="${fiscalization.fiscalModule.serialNumber}"></span>,  <span class="s1" th:text="${newDistrict}"></span> Давлат
+        солиқ инспекциясида рўйхатга қўйишда амалий беришингизни сўрайман.
+        <div class="s1">Қуйидаги ҳужжатлар илова қилинади:</div>
+        1. Турғун, хизмат кўрсатиш шаҳобчаси мавжудлигини тасдиқлайдиган ҳужжатлар
+        нусхаси (биноиншоотнинг ёки унинг қисмининг ижара шартномаси ёки кадастр
+        ҳужжатлари).<br />
+        2. Турғун савдо (хизмат кўрсатиш) шаҳобчаси манзилининг харитадаги координатаси.<br />
+        3. Тадбиркорлик субъекти томонидан онлайн-НКМ ёки виртуал кассанинг турғун савдо,
+        хизмат қўрсатиш шаҳобчаси жойлашган манзилини ўзгартириш тўғрисидиги
+        (имзоланган, мухрланган) аризаси.
+    </div>
+    <div class="footer-block">
+        <div class="footer-block__left">
+            <div class="footer-block__item">
+                <div class="footer-block__item-title"><span th:text="${#temporals.format(application.currentDate, 'dd-MM-yyyy')}"></span></div>
+                <span class="s1">Сана</span>
+            </div>
+        </div>
+        <div class="footer-block__right">
+            <div class="footer-block__item name-item">
+                <div class="footer-block__item-title"><span th:text="${director}"></span></div>
+                <span class="s1">ФИШ</span>
+            </div>
+            <div class="footer-block__item sign-item">
+                <div class="footer-block__item-title"></div>
+                <span class="s1">Имзо</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

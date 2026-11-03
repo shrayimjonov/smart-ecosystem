@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="eps_services_localization" author="sharipov sunnatillo">
+        <addColumn tableName="eps_services">
+            <column name="name_ru" type="varchar(255)"/>
+        </addColumn>
+        <addColumn tableName="eps_services">
+            <column name="name_uz" type="varchar(255)"/>
+        </addColumn>
+        <addColumn tableName="eps_services">
+            <column name="name_cyrillic" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

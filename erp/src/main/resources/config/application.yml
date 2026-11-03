@@ -1,0 +1,174 @@
+spring:
+  threads:
+    virtual:
+      enabled: true
+  application:
+    name: cts
+  jmx:
+    enabled: false
+  jackson:
+    serialization:
+      indent-output: true
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+  datasource:
+    hikari:
+      poolName: Hikari
+      maximum-pool-size: 100    # Lower the maximum pool size to match actual demand
+      minimum-idle: 50          # Set to a smaller number to avoid holding too many idle connections
+      auto-commit: false
+      connection-timeout: 30000 # 30 seconds
+      idle-timeout: 600000      # 10 minutes
+      max-lifetime: 1800000     # 30 minutes, maximum lifetime of a connection
+  jpa:
+    #database: POSTGRESQL
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: Asia/Tashkent  # Keep timezone setting as is
+          batch_size: 500            # Increase batch size to improve insert performance
+        type.preferred_instant_jdbc_type: TIMESTAMP
+        id.new_generator_mappings: true
+        connection.provider_disables_autocommit: true
+        cache:
+          use_second_level_cache: true   # Enable second-level cache if you have a lot of read operations
+          use_query_cache: false         # Keep query cache disabled unless specifically needed
+        generate_statistics: false       # Keep disabled for production to avoid overhead
+        hbm2ddl.auto: update             # Automatically update the schema to match entity classes
+        order_inserts: true              # Helps with batching and performance
+        order_updates: true              # Same as above
+        query:
+          fail_on_pagination_over_collection_fetch: true  # Good practice to prevent performance issues
+          in_clause_parameter_padding: true               # Keep enabled for better SQL performance
+        enable_lazy_load_no_trans: true   # Allows lazy loading outside of transactions, useful in certain scenarios
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+  messages:
+    basename: i18n/messages
+    cache-duration: PT1S
+  thymeleaf:
+    cache: false
+    mode: HTML
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+  mvc:
+    problemdetails:
+      enabled: true
+  task:
+    execution:
+      thread-name-prefix: cts-task-
+      pool:
+        core-size: 2
+        max-size: 50
+        queue-capacity: 10000
+    scheduling:
+      thread-name-prefix: cts-scheduling-
+      pool:
+        size: 2
+  servlet:
+    multipart:
+      max-request-size: 50MB
+      max-file-size: 50MB
+  rabbitmq:
+    port: 5672
+    host: localhost
+    dynamic: true
+    password: ${SPRING_RABBITMQ_PASSWORD}
+    username: ${USERNAME}
+    cache:
+      connection:
+        size: 1
+        mode: channel
+      channel:
+        checkout-timeout: 0
+        size: 100
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never
+      schema: 'classpath:dbTables.sql'
+    wait-for-jobs-to-complete-on-shutdown: true
+    properties:
+      org:
+        quartz:
+          dataSource: quartzDataSource
+          threadPool:
+            threadCount: 10
+            threadPriority: 5
+          jobStore:
+            tablePrefix: qrtz_
+            dataSource: quartzDataSource
+
+server:
+  compression:
+    enabled: true
+    mime-types: text/html, text/xml, text/plain,text/css, application/javascript, application/json
+    min-response-size: 1024
+  error:
+    include-stacktrace: never
+  servlet:
+    session:
+      cookie:
+        http-only: true
+
+taxcredential:
+  url: ${TAXCREDENTIAL_URL}
+  username: ${USERNAME}#
+  password: ${TAXCREDENTIAL_PASSWORD}
+
+mysql:
+  url: ${MYSQL_URL}
+  username: ${USERNAME}
+  password: ${MYSQL_PASSWORD}
+
+application:
+  fileUploadProperty:
+    uploadFolder: /home/fileserver/
+    downloadUrl: ${APPLICATION_FILEUPLOADPROPERTY_DOWNLOADURL}
+  emailProperty:
+    host: 127.0.0.1
+    username: ${USERNAME}
+    password: ${APPLICATION_EMAILPROPERTY_PASSWORD}
+    from: user@example.com
+    checkEmail: ${APPLICATION_EMAILPROPERTY_CHECKEMAIL}
+  smsProperty:
+    host: ${APPLICATION_SMSPROPERTY_HOST}
+    username: ${USERNAME}
+    password: ${APPLICATION_SMSPROPERTY_PASSWORD}
+    checkPhone: ${APPLICATION_SMSPROPERTY_CHECKPHONE}
+  kapitalBankProperty:
+    createTransaction: https://api.kapitalbank.uz/api/v1/merchant/transaction/create
+    pay: https://api.kapitalbank.uz/api/v1/merchant/transaction/pay
+    check: https://api.kapitalbank.uz/api/v1/merchant/transaction/check
+    info: https://api.kapitalbank.uz/api/v1/merchant/card/info
+    cashId: 7045cc407fc24d04ac75e4a1a07de27e
+    username: ${USERNAME}
+    password: ${APPLICATION_KAPITALBANKPROPERTY_PASSWORD}
+  soliqProperty:
+    host: ${APPLICATION_SOLIQPROPERTY_HOST}
+    username: ${USERNAME}
+    password: ${APPLICATION_SOLIQPROPERTY_PASSWORD}
+  etcSmsProperty:
+    host: ${APPLICATION_ETCSMSPROPERTY_HOST}
+    authUserHost: 127.0.0.1
+    cgpn: SUPPORT24
+    cgpn1: 1490
+    username: ${USERNAME}
+    password: ${APPLICATION_ETCSMSPROPERTY_PASSWORD}
+  facturaProperty:
+    host: ${APPLICATION_FACTURAPROPERTY_HOST}
+    username: ${USERNAME}
+    password: ${APPLICATION_FACTURAPROPERTY_PASSWORD}
+  ctsProperty:
+    username: ${USERNAME}
+    password: ${APPLICATION_CTSPROPERTY_PASSWORD}
+    host: ${APPLICATION_CTSPROPERTY_HOST}
+  webSocketProperty:
+    host: ${APPLICATION_WEBSOCKETPROPERTY_HOST}

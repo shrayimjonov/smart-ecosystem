@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+
+    <changeSet id="create sales table" author="Sunnatillo Sharipov">
+        <sql>
+            create table if not exists sales_detail
+            (
+                id              Int64,
+                version         Int64,
+                productId       Int64,
+                productName     String,
+                vatBarcode      String,
+                productBarcode  String,
+                searchField     String,
+                unitId          Int64,
+                unitName        String,
+                categoryId      Int64,
+                categoryName    String,
+                qty             Decimal(25, 3),
+                costAmount      Decimal(25, 2),
+                amount          Decimal(25, 2),
+                vat             Nullable(Decimal(25, 2)),
+                vatPercent      Nullable(Decimal(25, 2)),
+                discount        Nullable(Decimal(25, 2)),
+                discountPercent Nullable(Decimal(25, 2)),
+                marks           Array(String),
+                createdDateTime DateTime,
+                salesId         Int64,
+                createdById     Int64,
+                status          LowCardinality(String),
+                type            LowCardinality(String),
+                companyId       Int64,
+                branchId        Int64,
+                branchName      String,
+                info            String
+                ) engine ReplacingMergeTree(version)
+                order by (createdDateTime, salesId, companyId, branchId, id) partition by toYYYYMM(createdDateTime);
+
+            create table if not exists sales_detail_kafka
+            (
+                id              Int64,
+                version         Int64,
+                productId       Int64,
+                productName     String,
+                vatBarcode      String,
+                productBarcode  String,
+                unitName        String,
+                searchField     String,
+                categoryId      Int64,
+                categoryName    String,
+                qty             Decimal(25, 3),
+                costAmount      Decimal(25, 2),
+                amount          Decimal(25, 2),
+                vat             Nullable(Decimal(25, 2)),
+                vatPercent      Nullable(Decimal(25, 2)),
+                discount        Nullable(Decimal(25, 2)),
+                discountPercent Nullable(Decimal(25, 2)),
+                marks           Array(String),
+                createdDateTime DateTime,
+                salesId         Int64,
+                createdById     Int64,
+                status          LowCardinality(String),
+                type            LowCardinality(String),
+                companyId       Int64,
+                branchId        Int64,
+                branchName      String,
+                info            String
+                ) engine Kafka('127.0.0.1:9092', 'sales-detail', 'clickhouse-sales-detail', 'JSONEachRow');
+
+            create materialized view if not exists sales_detail_mv to sales_detail as
+            select *
+            from sales_detail_kafka;
+        </sql>
+        <rollback>
+            <dropTable tableName="sales_detail"/>
+            <dropTable tableName="sales_detail_kafka"/>
+            <dropTable tableName="sales_detail_mv"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="promotion_id added to sale_details" author="Blessed1">
+        <sql>
+            ALTER TABLE sales_detail ADD COLUMN promotionId Int64;
+
+            DROP TABLE IF EXISTS sales_detail_kafka;
+
+            CREATE TABLE IF NOT EXISTS sales_detail_kafka
+            (
+                id              Int64,
+                version         Int64,
+                productId       Int64,
+                productName     String,
+                vatBarcode      String,
+                productBarcode  String,
+                unitName        String,
+                searchField     String,
+                categoryId      Int64,
+                categoryName    String,
+                qty             Decimal(25, 3),
+                costAmount      Decimal(25, 2),
+                amount          Decimal(25, 2),
+                vat             Nullable(Decimal(25, 2)),
+                vatPercent      Nullable(Decimal(25, 2)),
+                discount        Nullable(Decimal(25, 2)),
+                discountPercent Nullable(Decimal(25, 2)),
+                marks           Array(String),
+                createdDateTime DateTime,
+                salesId         Int64,
+                createdById     Int64,
+                status          LowCardinality(String),
+                type            LowCardinality(String),
+                companyId       Int64,
+                branchId        Int64,
+                branchName      String,
+                info            String,
+                promotionId     Int64
+                )engine Kafka('127.0.0.1:9092', 'sales-detail', 'clickhouse-sales-detail', 'JSONEachRow');
+
+            DROP VIEW IF EXISTS sales_detail_mv;
+
+            create
+            materialized view if not exists sales_detail_mv to sales_detail as
+            select *
+            from sales_detail_kafka;
+
+        </sql>
+    </changeSet>
+</databaseChangeLog>

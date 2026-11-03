@@ -1,0 +1,152 @@
+logging:
+  level:
+    root: ERROR
+    org.springframework.amqp: ERROR
+    org.hibernate.persister.entity: ERROR
+    org.hibernate.tool.schema.internal: ERROR
+    org.apache.kafka.clients: ERROR
+spring:
+  threads:
+    virtual:
+      enabled: true
+  application:
+    name: smartpossupply
+  config:
+    import:
+      - classpath:properties/application-springdoc.yml
+      - classpath:properties/application-db.yml
+      - classpath:properties/application-quartz.yml
+      - classpath:properties/application-liquibase.yml
+      - classpath:properties/application-kafka.yml
+      - classpath:properties/application-clickhouse.yml
+  jmx:
+    enabled: false
+  jackson:
+    serialization:
+      indent-output: true
+  messages:
+    basename: i18n/messages
+    cache-duration: PT1S
+  thymeleaf:
+    cache: false
+    mode: HTML
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+  mvc:
+    problemdetails:
+      enabled: false
+  task:
+    execution:
+      thread-name-prefix: supply-task-
+      pool:
+        core-size: 2
+        max-size: 50
+        queue-capacity: 10000
+    scheduling:
+      thread-name-prefix: supply-scheduling-
+      pool:
+        size: 2
+  output:
+    ansi:
+      enabled: always
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  cloud:
+    discovery:
+      client:
+        health-indicator:
+          enabled: false
+
+management:
+  server:
+    port: 9292
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-components: always
+      show-details: always
+      group:
+        liveness:
+          include: [ db, kafka, rabbit, livenessState ]
+          show-components: always
+          show-details: always
+        readiness:
+          include: [ db, kafka, rabbit, livenessState ]
+          show-components: always
+          show-details: always
+      probes:
+        enabled: true
+    prometheus:
+      enabled: true
+    #access: read_only
+
+server:
+  port: ${PORT:8099}
+  compression:
+    enabled: true
+    mime-types: text/html, text/xml, text/plain,text/css, application/javascript, application/json
+    min-response-size: 1024
+  error:
+    include-stacktrace: never
+  servlet:
+    session:
+      cookie:
+        http-only: true
+
+security:
+  authentication:
+    jwt:
+      secret-key: "${JWT_SECRET_KEY}"
+      token-validity-in-seconds: ${TOKEN_VALIDITY_IN_SECONDS:86400}
+      token-validity-in-seconds-for-remember-me: ${TOKEN_VALIDITY_REMEMBER_ME_IN_SECONDS:604800}
+      refresh-token-validity-in-hours: ${REFRESH-TOKEN-VALIDITY-IN-HOURS:720}
+application:
+  reportEngine:
+    maxCells: ${REPORT_MAX_CELLS:50000}
+    maxRows: ${REPORT_MAX_ROWS:100000}
+    maxPeriodDays: ${REPORT_MAX_PERIOD_DAYS:731}
+    statementTimeoutMs: ${REPORT_STATEMENT_TIMEOUT_MS:30000}
+    maxConcurrentPerCompany: ${REPORT_MAX_CONCURRENT_PER_COMPANY:2}
+  eimzoConfig:
+    host: ${APPLICATION_EIMZOCONFIG_HOST}
+  smsConfig:
+    host: ${APPLICATION_SMSCONFIG_HOST}
+    auth-user-host: 127.0.0.1
+    cgpn: Apay
+    username: ${USERNAME}
+    password: 123
+  ofdConfig:
+    token: ${APPLICATION_OFDCONFIG_TOKEN}
+    checkTinUrl: ${APPLICATION_OFDCONFIG_CHECKTINURL}
+    checkPinflUrl: ${APPLICATION_OFDCONFIG_CHECKPINFLURL}
+    productSearchUrl: ${APPLICATION_OFDCONFIG_PRODUCTSEARCHURL}
+    tinUzkassa: 306351564
+    authLoginUrl: ${APPLICATION_OFDCONFIG_AUTHLOGINURL}
+    username: ${USERNAME}
+    password: ${APPLICATION_OFDCONFIG_PASSWORD}
+  soliqConfig:
+    host: ${APPLICATION_SOLIQCONFIG_HOST}
+    username: ${USERNAME}
+    password: ${APPLICATION_SOLIQCONFIG_PASSWORD}
+  facturaConfig:
+    url: ${APPLICATION_FACTURACONFIG_URL}
+    url0: ${APPLICATION_FACTURACONFIG_URL0}
+    url1: ${APPLICATION_FACTURACONFIG_URL1}
+    url2: ${APPLICATION_FACTURACONFIG_URL2}
+    username: ${USERNAME}
+    password: ${APPLICATION_FACTURACONFIG_PASSWORD}
+  telegramBotApplicationLogConfig:
+    proxyUrl: ${APPLICATION_TELEGRAMBOTAPPLICATIONLOGCONFIG_PROXYURL}
+  telegramBotFacturaConfig:
+    proxyUrl: ${APPLICATION_TELEGRAMBOTFACTURACONFIG_PROXYURL}
+  telegramConnectTariffConfig:
+    proxyUrl: ${APPLICATION_TELEGRAMCONNECTTARIFFCONFIG_PROXYURL}
+  pushkassaConfig:
+    host: ${APPLICATION_PUSHKASSACONFIG_HOST}

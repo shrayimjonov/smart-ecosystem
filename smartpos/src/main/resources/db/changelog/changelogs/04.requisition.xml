@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="add column to requisition status, full_name, tin | drop column claim, claim_description"
+               author="sharipov sunnatillo">
+        <addColumn tableName="requisition">
+            <column name="created_at" type="timestamp" defaultValue="now()"/>
+            <column name="last_modified_at" type="timestamp" defaultValue="now()"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="full_name" type="varchar(255)"/>
+            <column name="tin" type="varchar(14)"/>
+            <column name="status" type="varchar(50)"/>
+            <column name="description" type="text"/>
+            <column name="region_id" type="bigint"/>
+        </addColumn>
+        <sql>
+            update requisition
+            set status           = case when accepted then 'ACCEPTED' else 'PENDING' end,
+                created_at       = order_date,
+                last_modified_at = accepted_date
+            where 1 = 1;
+        </sql>
+        <dropColumn tableName="requisition" columnName="order_date"/>
+        <dropColumn tableName="requisition" columnName="claim"/>
+        <dropColumn tableName="requisition" columnName="claim_description"/>
+        <dropColumn tableName="requisition" columnName="accepted"/>
+        <dropColumn tableName="requisition" columnName="accepted_date"/>
+    </changeSet>
+    <changeSet id="requisition add city" author="sharipov sunnatillo">
+        <addColumn tableName="requisition">
+            <column name="city_id" type="bigint">
+                <constraints referencedTableName="city"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseTableName="requisition" baseColumnNames="region_id"
+                                 constraintName="requisition_region_fk"
+                                 referencedTableName="region"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="requisition sources and target" author="Sunnatillo Sharipov">
+        <addColumn tableName="requisition">
+            <column name="source" type="varchar(50)"/>
+            <column name="target" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="change requisition type and statuses" author="Sunnatillo Sharipov">
+        <sql>
+            update requisition
+            set service_name = 'HELP'
+            where service_name != 'BUY_TERMINAL';
+            update requisition
+            set status = 'NEW'
+            where status = 'PENDING';
+            update requisition
+            set status = 'ACCEPTED'
+            where status = 'CONNECTED';
+            update requisition
+            set status = 'ARCHIVE'
+            where status = 'CANCELED';
+            update requisition
+            set status = 'ACCEPTED'
+            where status = 'PURCHASED';
+        </sql>
+    </changeSet>
+    <changeSet id="add utm fields to requisitions" author="Sunnatillo Sharipov">
+        <addColumn tableName="requisition">
+            <column name="utm_source" type="varchar(255)"/>
+            <column name="utm_medium" type="varchar(255)"/>
+            <column name="utm_content" type="varchar(255)"/>
+            <column name="utm_term" type="varchar(255)"/>
+            <column name="utm_campaing" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

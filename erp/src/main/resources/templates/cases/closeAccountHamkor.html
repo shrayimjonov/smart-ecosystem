@@ -1,0 +1,110 @@
+<!DOCTYPE>
+<html>
+<head>
+  <style>
+    table, td, th {
+      border: 1px solid;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-around;
+      border: 1px solid black;
+      border-top: none;
+    }
+
+    .flex-sp {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .col {
+      width: 100%;
+      align-items: center;
+
+    }
+
+    .borderLeft {
+      border-left: 1px solid black;
+    }
+
+    .borderBottom {
+      border-bottom: 1px solid black;
+    }
+
+    .borderTop {
+      border-top: 1px solid black;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+    .alignCenter {
+      height: 100%;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body style="padding: 2rem">
+<div>
+  <div style="display: flex;justify-content: end">
+    <p style="width: 400px">
+      CHEKI “Hamkorbank” ATB
+      _______________________	M/UBXOga
+      __________________________________	dan
+    </p>
+  </div>
+  <div style="display: flex;justify-content: center">
+    <h4>
+      A R I Z A
+    </h4>
+  </div>
+  <div>
+    <p>
+      Sizdan <span th:text="${dto?.companyName}"></span>  <span th:text="${dto?.tin}"></span> nomiga ochilgan onlayn NKM terminal(lar)iga
+      bogʻlangan quyidagi hisob raqam(lar)ni yopishingizni soʻrayman.
+    </p>
+  </div>
+  <table>
+    <thead>
+    <tr>
+      <th>№	</th>
+      <th>Modeli</th>
+      <th>Seriya raqami	</th>
+      <th>Hisob raqam      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="detail : ${dto.devices}">
+      <tr>
+        <td>1	</td>
+        <td><span th:text="${detail?.deviceModelName}"></span></td>
+        <td><span th:text="${detail?.deviceSerialNumber}"></span></td>
+        <td><span>23510%____________________</span></td>
+      </tr>
+    </th:block>
+    </tbody>
+  </table>
+  <div>
+    <p>
+      <span  th:text="${#temporals.format(dto.date, 'dd.MM.yyyy')}"></span>-y. (toʻldirilgan sana)
+    </p>
+    <p>
+      ________ (imzo)
+    </p>
+    <p>
+      <span th:text="${dto?.director}"></span> (rahbar FISH)
+    </p>
+    M.Oʻ.
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto
+        }
+
+        .text-center {
+            text-align: center
+        }
+
+        .text-right {
+            text-align: right
+        }
+
+        body {
+            line-height: 20px;
+            font-size: 16px
+        }
+
+
+        .d-flex {
+            display: flex !important
+        }
+
+
+
+        .w-100 {
+            width: 100% !important
+        }
+
+        .col-12 {
+            width: 100%
+        }
+
+        .row {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+
+    </style>
+    <title>Заявление Trade-in</title>
+</head>
+
+<body class="smartpos-offer">
+<div class="first-section">
+    <div class="container center-content">
+        <div class="row d-flex justify-content-end text-right">
+            <div class="col-12 text-right">
+                <h3>Директору</h3>
+                <h3>OOO "SPECIAL TEXNO SOFT"</h3>
+            </div>
+        </div>
+        <h3 class="text-center">ГАРАНТИЙНОЕ ПИСЬМО</h3>
+    </div>
+</div>
+<div class="container" style="margin-top:30px">
+    <div class="row">
+        <div class="col-12">
+            <p>
+                Я, <span th:text="${director}"></span> Директор
+                <span th:text="${letter.customer.businessType.getName() + ' ' + letter.customer.name}"></span> настоящим
+                подтверждаю,
+                что <span th:text="${letter.tradeInDevice.name }"></span> № <span
+                th:text="${letter.deviceSerialNumber }"></span> принадлежит на праве собственности нашему субъекту
+                предпринимательства.
+            </p>
+            <p>
+                Я гарантирую, что <span th:text="${letter.tradeInDevice.name }"></span> № <span
+                th:text="${letter.deviceSerialNumber }"></span> до настоящего времени никому не продана, не подарена, не обещана быть
+                подаренной, не заложена, не обременена правами третьих лиц, в споре и под запрещением (арестом) не
+                состоит, свободна от притязаний третьих лиц.
+            </p>
+            <p>
+                Я, являясь директором, гарантирую, что наша Компания добровольно, без чьего либо принуждения, приняла
+                решение о смене в своей
+                компании <span
+                th:text="${letter.customer.businessType.getName() + ' ' + letter.customer.name}"></span>
+                <span th:text="${letter.tradeInDevice.name }"></span> № <span
+                th:text="${letter.deviceSerialNumber }"></span> на Онлайн ККМ UZKASSA P100.
+            </p>
+            <p>
+                Настоящим подтверждаю, что <span
+                th:text="${letter.customer.businessType.getName() + ' ' + letter.customer.name}"></span> никаких
+                финансовых и иных претензий к ООО «SPECIAL TEXNO SOFT», не имеет, и в дальнейшем иметь не будет.
+            </p>
+            <div class="text-center" style="margin-top:30px;">
+                <div class="w-100" style="display: flex; justify-content: space-between;align-items: center;width:5%;">
+                    <div class="col">
+                        Директор
+                    </div>
+                    <div class="col" style="border-bottom:1px solid black;height:20px;width:92%;text-align: center;">
+                        <span th:text="${director}"></span>
+                    </div>
+                </div>
+                <div class="text-center" style="margin-top:10px">
+                    ( Ф.И.О., подпись, печать).
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+
+</html>

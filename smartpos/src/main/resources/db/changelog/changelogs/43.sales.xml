@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="create sales tables" author="Sunnatillo Sharipov">
+        <createTable tableName="sales">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="version" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date_time" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="receipt_date_time" type="timestamp"/>
+            <column name="uid" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="origin_uid" type="varchar(50)"/>
+            <column name="fiscal_sign" type="varchar(512)"/>
+            <column name="fiscal_url" type="varchar(512)"/>
+            <column name="shift_number" type="bigint"/>
+            <column name="lon" type="double"/>
+            <column name="lat" type="double"/>
+            <column name="total_cost" type="numeric(25, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_paid" type="numeric(25, 2)"/>
+            <column name="discount_percent" type="numeric(25, 2)"/>
+            <column name="type" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="source" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payments" type="jsonb"/>
+            <column name="branch_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="terminal_sn" type="varchar(50)"/>
+            <column name="additional" type="jsonb"/>
+            <column name="factura_id" type="varchar(256)"/>
+        </createTable>
+        <createIndex tableName="sales" indexName="sales_company_id_idx">
+            <column name="company_id"/>
+        </createIndex>
+        <createIndex tableName="sales" indexName="sales_branch_id_idx">
+            <column name="branch_id"/>
+        </createIndex>
+        <createIndex tableName="sales" indexName="sales_factura_id_idx">
+            <column name="factura_id"/>
+        </createIndex>
+        <createIndex tableName="sales" indexName="sales_type_idx">
+            <column name="type"/>
+        </createIndex>
+        <createIndex tableName="sales" indexName="sales_status_idx">
+            <column name="status"/>
+        </createIndex>
+        <sql>create index sales_created_date_time_idx on sales using brin(created_date_time)</sql>
+        <createTable tableName="sales_detail">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="version" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date_time" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sales_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="bigint"/>
+            <column name="product_barcode" type="varchar(50)"/>
+            <column name="product_name" type="varchar(1024)"/>
+            <column name="vat_barcode" type="varchar(50)"/>
+            <column name="committent_tin" type="varchar(14)"/>
+            <column name="unit_id" type="bigint"/>
+            <column name="unit_name" type="varchar(50)"/>
+            <column name="category_id" type="bigint"/>
+            <column name="category_name" type="varchar(50)"/>
+            <column name="price" type="numeric(25, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="qty" type="numeric(25, 3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="numeric(25, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="discount" type="numeric(25, 2)"/>
+            <column name="discount_percent" type="numeric(25, 2)"/>
+            <column name="vat" type="numeric(25, 2)"/>
+            <column name="vat_percent" type="numeric(25, 2)"/>
+            <column name="excise" type="numeric(25, 2)"/>
+            <column name="excise_rate" type="numeric(25, 2)"/>
+            <column name="marks" type="jsonb"/>
+            <column name="extra_detail" type="jsonb"/>
+        </createTable>
+        <createIndex tableName="sales_detail" indexName="sales_detail_sales_idx">
+            <column name="sales_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="promotion id added" author="Blessed1">
+        <addColumn tableName="sales">
+            <column name="promotion_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="promotion id added sales details" author="Blessed1">
+        <addColumn tableName="sales_detail">
+            <column name="promotion_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="sales detail categor name size expanded" author="Sunnatillo Sharipov">
+        <modifyDataType tableName="sales_detail" columnName="category_name" newDataType="varchar(1024)"/>
+    </changeSet>
+</databaseChangeLog>

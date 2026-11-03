@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <include file="db/changelog/0.1/1.customer.refactor.xml"/>
+    <include file="db/changelog/0.1/2.orderProduct.errorMessageColumn.xml"/>
+    <include file="db/changelog/0.1/3.party.newColumns.xml"/>
+    <include file="db/changelog/0.1/3.contract.add.customer_id.xml"/>
+    <include file="db/changelog/0.1/4.product.originColumn.xml"/>
+    <include file="db/changelog/0.1/5.invoice.buyerAccountColumn.xml"/>
+    <include file="db/changelog/0.1/6.product.originDefaultUpdate.xml"/>
+    <include file="db/changelog/0.1/7.listInvoice.indexes.xml"/>
+    <include file="db/changelog/0.1/8.invoiceItem.exchangeInfo.xml"/>
+    <include file="db/changelog/0.1/9.purchase.order.xml"/>
+<!--    <include file="db/changelog/0.1/10.shipment.uniqueIndex.xml"/>-->
+    <include file="db/changelog/0.1/11.purchaseOrderProduct.addColumns.xml"/>
+    <include file="db/changelog/0.1/12.customer.addColumns.xml"/>
+    <include file="db/changelog/0.1/13.customer.updateData.xml"/>
+    <include file="db/changelog/0.1/14.order1c.xml"/>
+    <include file="db/changelog/0.1/15.facturaHost.xml"/>
+    <include file="db/changelog/0.1/16.aggregation.utilisationId.xml"/>
+    <include file="db/changelog/0.1/17.drop.order1c.xml"/>
+    <include file="db/changelog/0.1/18.offline.inProgress.xml"/>
+    <include file="db/changelog/0.1/19.exportReport.xml"/>
+    <include file="db/changelog/0.1/20.fileUpload.xml"/>
+    <include file="db/changelog/0.1/21.exportReport.addExtensionColumn.xml"/>
+    <include file="db/changelog/0.1/22.storeInCreate.xml"/>
+    <include file="db/changelog/0.1/23.storeIn.uniqueIndex.xml"/>
+    <include file="db/changelog/0.1/24.storeInItem.createTable.xml"/>
+    <include file="db/changelog/0.1/25.storeIn.addColumn.xml"/>
+    <include file="db/changelog/0.1/26.users.lastLogin.xml"/>
+    <include file="db/changelog/0.1/27.create.permissions.xml"/>
+    <include file="db/changelog/0.1/28.create.rolePermissions.xml"/>
+    <include file="db/changelog/0.1/29.users.tokenExpiredAt.xml"/>
+    <include file="db/changelog/0.1/30.users.organizationTin.xml"/>
+    <include file="db/changelog/0.1/31.drop.agency.tables.xml"/>
+
+</databaseChangeLog>

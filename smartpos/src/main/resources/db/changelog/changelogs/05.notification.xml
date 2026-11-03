@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="notification" author="sharipov sunnatillo">
+        <createTable tableName="notification">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="timestamp"/>
+            <column name="created_by_id" type="bigint"/>
+            <column name="last_modified_at" type="timestamp"/>
+            <column name="last_modified_by_id" type="bigint"/>
+            <column name="title" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="message_uz" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="message_ru" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="message_cyrillic" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_id" type="bigint">
+                <constraints referencedTableName="company"/>
+            </column>
+            <column name="read" type="boolean" defaultValue="false"/>
+        </createTable>
+        <createIndex tableName="notification" indexName="notification_company_idx">
+            <column name="company_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="notification title localization and date of publication" author="Sunnatillo Sharipov">
+        <renameColumn tableName="notification" oldColumnName="title" newColumnName="title_ru"/>
+        <addColumn tableName="notification">
+            <column name="title_uz" type="varchar(255)"/>
+            <column name="title_cyrillic" type="varchar(255)"/>
+            <column name="date_of_publication" type="timestamp"/>
+        </addColumn>
+        <sql>
+            update notification
+            set title_uz       = title_ru,
+                title_cyrillic = title_ru;
+            update notification
+            set date_of_publication = now() - interval '1 week';
+        </sql>
+        <addNotNullConstraint tableName="notification" columnName="title_cyrillic"/>
+        <addNotNullConstraint tableName="notification" columnName="title_uz"/>
+        <addNotNullConstraint tableName="notification" columnName="date_of_publication"/>
+    </changeSet>
+    <changeSet id="add button to notification" author="Sunnatillo Sharipov">
+        <addColumn tableName="notification">
+            <column name="button_uz" type="varchar(255)"/>
+            <column name="button_ru" type="varchar(255)"/>
+            <column name="button_cyrillic" type="varchar(255)"/>
+            <column name="button_link" type="varchar"/>
+            <column name="target" type="varchar(100)"/>
+        </addColumn>
+        <update tableName="notification">
+            <column name="target">TERMINAL_AND_CABINET</column>
+        </update>
+    </changeSet>
+    <changeSet id="company read notification" author="Sunnatillo Sharipov">
+        <createTable tableName="company_read_notification">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="notification_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <sql>
+            insert into company_read_notification (notification_id, company_id)
+            select id, company_id
+            from notification
+            where read is true;
+        </sql>
+        <dropColumn tableName="notification" columnName="read"/>
+    </changeSet>
+    <changeSet id="add image to notification" author="Sunnatillo Sharipov">
+        <addColumn tableName="notification">
+            <column name="image_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="notification billing type" author="Sunnatillo Sharipov">
+        <addColumn tableName="notification">
+            <column name="billing_type" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

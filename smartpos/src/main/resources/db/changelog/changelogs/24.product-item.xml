@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="change product product item pk" author="Sunnatillo Sharipov">
+        <dropPrimaryKey tableName="product_item"/>
+        <renameColumn tableName="product_item" oldColumnName="id" newColumnName="generic_id"/>
+        <addPrimaryKey tableName="product_item" columnNames="generic_id, product_id, branch_id"/>
+    </changeSet>
+    <changeSet id="change product item composite pk" author="Sunnatillo Sharipov">
+        <dropPrimaryKey tableName="product_item"/>
+        <addPrimaryKey tableName="product_item" columnNames="generic_id, branch_id"/>
+    </changeSet>
+</databaseChangeLog>

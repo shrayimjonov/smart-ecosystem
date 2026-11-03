@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+
+    <changeSet id="clickhouse init sql" author="Sunnatillo Sharipov">
+        <sql>
+            create table if not exists fashion_report
+            (
+                dateTime      DateTime,
+                productId     Int64,
+                productName   String,
+                branchId      Int64,
+                branchName    String,
+                companyId     Int64,
+                companyName   String,
+                cityId        Int64,
+                colorGroupId  Int64,
+                colorCode     String,
+                colorName     String,
+                printName     String,
+                itemId        Int64,
+                sizeCode      String,
+                sizeValue     String,
+                categoryId    Int64,
+                categoryName  String,
+                unitId        Int64,
+                unitName      String,
+                salesPrice    Decimal(25, 4),
+                qty           Decimal(25, 4),
+                totalDiscount Decimal(25, 4),
+                totalVat      Decimal(25, 4),
+                totalSumma    Decimal(25, 4),
+                receiptId     Int64,
+                status        String,
+                userId        Int64,
+                userFullName  String
+                )
+                engine = ReplacingMergeTree PARTITION BY toYYYYMM(dateTime)
+                ORDER BY (dateTime, productId, companyId, branchId, itemId)
+                SETTINGS index_granularity = 8192;
+
+            create table if not exists fashion_report_kafka
+            (
+                dateTime      DateTime,
+                productId     Int64,
+                productName   String,
+                branchId      Int64,
+                branchName    String,
+                companyId     Int64,
+                companyName   String,
+                cityId        Int64,
+                colorGroupId  Int64,
+                colorCode     String,
+                colorName     String,
+                printName     String,
+                itemId        Int64,
+                sizeCode      String,
+                sizeValue     String,
+                categoryId    Int64,
+                categoryName  String,
+                unitId        Int64,
+                unitName      String,
+                salesPrice    Decimal(25, 4),
+                qty           Decimal(25, 4),
+                totalDiscount Decimal(25, 4),
+                totalVat      Decimal(25, 4),
+                totalSumma    Decimal(25, 4),
+                receiptId     Int64,
+                status        String,
+                userId        Int64,
+                userFullName  String
+                )
+                engine = Kafka('localhost:9092', 'fashion-report', 'clickhouse-fashion-report', 'JSONEachRow');
+
+            create table if not exists receipt
+            (
+                id                   Int64,
+                uid                  String,
+                originUid            String,
+                fiscalSign           String,
+                fiscalUrl            String,
+                lat                  Float64,
+                lon                  Float64,
+                receiptDateTime      DateTime,
+                totalCash            Decimal(25, 4),
+                totalCard            Decimal(25, 4),
+                totalLoyaltyCard     Decimal(19, 2),
+                totalCost            Decimal(25, 4),
+                totalPaid            Decimal(25, 4),
+                totalDiscount        Decimal(25, 4),
+                totalExcise          Decimal(25, 4),
+                discountPercent      Decimal(25, 2),
+                totalNds             Decimal(25, 4),
+                loyaltyCardId        Int64,
+                shiftNumber          Int64,
+                customerId           Int64,
+                customerName         String,
+                customerPhone        String,
+                readOnly             UInt8,
+                forceToPrint         UInt8,
+                status               String,
+                payments             Map(String, Decimal(25, 4)),
+                branchId             Int64,
+                branchName           String,
+                branchCompanyId      Int64,
+                branchActivityTypeId Int64,
+                branchRegionId       Int64,
+                branchCityId         Int64,
+                companyId            Int64,
+                companyInn           String,
+                companyName          String,
+                companyRegionId      Int64,
+                companyCityId        Int64,
+                createdById          Int64,
+                createdByFirstname   String,
+                createdByLastname    String,
+                terminalId           Int64,
+                terminalSerialNumber String,
+                createdDateTime      DateTime,
+                receiptDetailIds     Array(Int64),
+                isFiscal             Int8 materialized (NOT empty(fiscalUrl)) AND (NOT empty(fiscalSign)),
+                additional           String,
+                source               String
+                )
+                engine = MergeTree PARTITION BY toYYYYMM(receiptDateTime)
+                ORDER BY (receiptDateTime, companyId, branchId)
+                SETTINGS index_granularity = 8192;
+
+            create table if not exists receipt_detail
+            (
+                id              Int64,
+                productId       Int64,
+                productName     String,
+                productBarcode  String,
+                vatBarcode      String,
+                unitId          Int64,
+                unitName        String,
+                categoryId      Int64,
+                categoryName    String,
+                price           Decimal(25, 4),
+                qty             Decimal(25, 3),
+                amount          Decimal(25, 4),
+                nds             Decimal(25, 4),
+                ndsPercent      Decimal(25, 4),
+                discount        Decimal(25, 4),
+                discountPercent Decimal(25, 4),
+                exciseRate      Decimal(25, 4),
+                excise          Decimal(25, 4),
+                marks           Array(String),
+                receiptDateTime DateTime,
+                receiptId       Int64,
+                createdById     Int64,
+                status          String,
+                branchName      String,
+                branchId        Int64,
+                companyId       Int64,
+                committentTin   String,
+                extraDetail     String
+                )
+                engine = MergeTree PARTITION BY toYYYYMM(receiptDateTime)
+                ORDER BY (receiptDateTime, productId, categoryId)
+                SETTINGS index_granularity = 8192;
+
+            create table if not exists receipt_detail_kafka
+            (
+                id              Int64,
+                productId       Int64,
+                productName     String,
+                productBarcode  String,
+                vatBarcode      String,
+                unitId          Int64,
+                unitName        String,
+                categoryId      Int64,
+                categoryName    String,
+                price           Decimal(25, 4),
+                qty             Decimal(25, 3),
+                amount          Decimal(25, 4),
+                nds             Decimal(25, 4),
+                ndsPercent      Decimal(25, 4),
+                discount        Decimal(25, 4),
+                discountPercent Decimal(25, 4),
+                exciseRate      Decimal(25, 4),
+                excise          Decimal(25, 4),
+                marks           Array(String),
+                receiptDateTime DateTime,
+                receiptId       Int64,
+                status          String,
+                createdById     Int64,
+                companyId       Int64,
+                branchId        Int64,
+                branchName      String,
+                committentTin   String,
+                extraDetail     String
+                )
+                engine = Kafka('localhost:9092', 'receipt-detail-dev', 'clickhouse-receipt-detail-dev', 'JSONEachRow');
+
+            create table if not exists receipt_kafka
+            (
+                id                   Int64,
+                uid                  String,
+                originUid            String,
+                fiscalSign           String,
+                fiscalUrl            String,
+                lat                  Float64,
+                lon                  Float64,
+                receiptDateTime      DateTime,
+                totalCash            Decimal(25, 4),
+                totalCard            Decimal(25, 4),
+                totalLoyaltyCard     Decimal(19, 2),
+                totalCost            Decimal(25, 4),
+                totalPaid            Decimal(25, 4),
+                totalDiscount        Decimal(19, 2),
+                totalExcise          Decimal(25, 4),
+                discountPercent      Decimal(25, 2),
+                totalNds             Decimal(25, 4),
+                loyaltyCardId        Int64,
+                shiftNumber          Int64,
+                customerId           Int64,
+                customerName         String,
+                customerPhone        String,
+                readOnly             UInt8,
+                forceToPrint         UInt8,
+                status               String,
+                payments             Map(String, Decimal(25, 4)),
+                branchId             Int64,
+                branchName           String,
+                branchCompanyId      Int64,
+                branchActivityTypeId Int64,
+                branchRegionId       Int64,
+                branchCityId         Int64,
+                companyId            Int64,
+                companyInn           String,
+                companyName          String,
+                companyRegionId      Int64,
+                companyCityId        Int64,
+                createdById          Int64,
+                createdByFirstname   String,
+                createdByLastname    String,
+                terminalId           Int64,
+                terminalSerialNumber String,
+                createdDateTime      DateTime,
+                receiptDetailIds     Array(Int64),
+                additional           String,
+                source               String
+                )
+                engine = Kafka('localhost:9092', 'receipt-dev', 'clickhouse-receipt-dev', 'JSONEachRow');
+
+            CREATE MATERIALIZED VIEW if not exists fashion_report_mv TO fashion_report AS
+            SELECT *
+            FROM fashion_report_kafka;
+
+            CREATE MATERIALIZED VIEW if not exists receipt_detail_mv TO receipt_detail AS
+            SELECT *
+            FROM receipt_detail_kafka;
+
+            CREATE MATERIALIZED VIEW if not exists receipt_mv TO receipt AS
+            SELECT *
+            FROM receipt_kafka;
+
+
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2026_08_18_warehouse_address" author="Behzod Jaloliddinov">
+
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="warehouse" columnName="street"/>
+            </not>
+        </preConditions>
+
+        <comment>Встроенный адрес (Address) склада</comment>
+
+        <addColumn tableName="warehouse">
+            <column name="street" type="varchar(255)"/>
+            <column name="house" type="varchar(255)"/>
+            <column name="apartment" type="varchar(255)"/>
+            <column name="longitude" type="varchar(255)"/>
+            <column name="latitude" type="varchar(255)"/>
+            <column name="region_id" type="bigint"/>
+            <column name="district_id" type="bigint"/>
+        </addColumn>
+
+        <addForeignKeyConstraint
+                constraintName="fk_warehouse_region"
+                baseTableName="warehouse"
+                baseColumnNames="region_id"
+                referencedTableName="region"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                constraintName="fk_warehouse_district"
+                baseTableName="warehouse"
+                baseColumnNames="district_id"
+                referencedTableName="district"
+                referencedColumnNames="id"/>
+
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="warehouse" constraintName="fk_warehouse_district"/>
+            <dropForeignKeyConstraint baseTableName="warehouse" constraintName="fk_warehouse_region"/>
+            <dropColumn tableName="warehouse">
+                <column name="street"/>
+                <column name="house"/>
+                <column name="apartment"/>
+                <column name="longitude"/>
+                <column name="latitude"/>
+                <column name="region_id"/>
+                <column name="district_id"/>
+            </dropColumn>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

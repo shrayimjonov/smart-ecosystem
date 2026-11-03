@@ -1,0 +1,13 @@
+package uz.uzkassa.cts.dto.accessorymodel.request;
+
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+
+@Data
+public class AccessoryModelCreateRequestDto {
+    @NotNull
+    @NotEmpty
+    private String name;
+    private String description;
+}

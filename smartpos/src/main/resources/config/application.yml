@@ -1,0 +1,169 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+spring:
+  threads:
+    virtual:
+      enabled: false
+  profiles:
+    active: local
+  application:
+    name: smartpos
+  datasource:
+    hikari:
+      jdbc-url: ${SPRING_DATASOURCE_HIKARI_JDBC_URL}
+      username: ${USERNAME}
+      password: ${SPRING_DATASOURCE_HIKARI_PASSWORD}
+      maximum-pool-size: 10
+      minimum-idle: 5
+      auto-commit: false
+      connection-timeout: 30000
+      idle-timeout: 60000
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate.jdbc.time_zone: UTC
+      hibernate.cache.use_second_level_cache: true
+      hibernate.jdbc.batch_size: 50
+      hibernate.enable_lazy_load_no_trans: true
+      hibernate.connection.provider_disables_autocommit: true
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+    use-code-as-default-message: true
+  main:
+    allow-bean-definition-overriding: true
+  output:
+    ansi:
+      enabled: always
+  rabbitmq:
+    port: 5672
+    host: localhost
+    dynamic: true
+    password: ${SPRING_RABBITMQ_PASSWORD}
+    username: ${USERNAME}
+    cache:
+      connection:
+        size: 1
+        mode: channel
+      channel:
+        checkout-timeout: 0
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  kafka:
+    bootstrap-servers: localhost:9092
+    receipt-topic: receipt-dev
+    receipt-detail-topic: receipt-detail-dev
+    terminal-log-topic: terminal-log
+  clickhouse:
+    url: ${SPRING_CLICKHOUSE_URL}
+    username: ${USERNAME}
+    receipt: receipt
+    receipt-detail: receipt_detail
+  thymeleaf:
+    prefix: classpath:/templates
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: false
+    mapper:
+      accept-case-insensitive-properties: true
+server:
+  error:
+    include-stacktrace: never
+  servlet:
+    session:
+      cookie:
+        http-only: true
+
+application:
+  serverUrl: ${APPLICATION_SERVERURL}
+  trueApiUrl: ${APPLICATION_TRUEAPIURL}
+  logChannelId: -1001401478015
+  receiptChannelId: -4236875157
+  duplicateReceiptChannelId: -1002178980261
+  logBotToken: ${APPLICATION_LOGBOTTOKEN}
+  clientBotToken: ${APPLICATION_CLIENTBOTTOKEN}
+  adminName: ${ADMINNAME}
+  webSocketUrl: ${APPLICATION_WEBSOCKETURL}
+  providerTin: 306344019
+  tasnifApiUrl: ${APPLICATION_TASNIFAPIURL}
+  jwt-secret-key: ${APPLICATION_JWT_SECRET_KEY}
+  token-validity-in-seconds: 28800
+  token-validity-in-seconds-remember-me: 604800
+  refresh-token-validity-in-hours: 720
+  railways:
+    host: ${APPLICATION_RAILWAYS_HOST}
+    password: ${APPLICATION_RAILWAYS_PASSWORD}
+  cto:
+    host: ${APPLICATION_CTO_HOST}
+    username: ${USERNAME}
+    password: ${APPLICATION_CTO_PASSWORD}
+  apay:
+    host: ${APPLICATION_APAY_HOST}
+    username: ${USERNAME}
+    password: ${APPLICATION_APAY_PASSWORD}
+    deviceId: 01947405-460f-7a43-ba07-39c0aa908820
+    merchantId: ${APPLICATION_APAY_MERCHANTID}
+    checkServiceId: 0fdfa1ae-bcb1-484c-a4f2-dd4fce29aee4
+    payServiceId: 0fdfa1ae-bcb1-484c-a4f2-dd4fce29aee4
+  supply:
+    host: ${APPLICATION_SUPPLY_HOST}
+    username: ${USERNAME}
+    password: ${APPLICATION_SUPPLY_PASSWORD}
+  billing:
+    host: ${APPLICATION_BILLING_HOST}
+    username: ${USERNAME}
+    password: ${APPLICATION_BILLING_PASSWORD}
+  soliq:
+    host: ${APPLICATION_SOLIQ_HOST}
+    username: ${USERNAME}
+    password: ${APPLICATION_SOLIQ_PASSWORD}
+  eImzo:
+    host: ${APPLICATION_EIMZO_HOST}
+  factura:
+    host: ${APPLICATION_FACTURA_HOST}
+    username: ${USERNAME}
+    password: ${APPLICATION_FACTURA_PASSWORD}
+  launcher:
+    host: ${APPLICATION_LAUNCHER_HOST}
+    login: ${APPLICATION_LAUNCHER_LOGIN}
+    password: ${APPLICATION_LAUNCHER_PASSWORD}
+  EtcSms:
+    host: ${APPLICATION_ETCSMS_HOST}
+    cgpn: SMARTPOS
+    username: ${USERNAME}
+    password: ${APPLICATION_ETCSMS_PASSWORD}
+    smsForTelegram: 'Наш телеграм-бот: https://t.me/smartpostrade_bot'
+  ofd:
+    host: ${APPLICATION_OFD_HOST}
+    username: ${USERNAME}
+    password: ${APPLICATION_OFD_PASSWORD}
+  minio:
+    application: smartpos
+    host: ${APPLICATION_MINIO_HOST}
+    username: ${USERNAME}
+    password: ${APPLICATION_MINIO_PASSWORD}
+  meningUyim:
+    host: ${APPLICATION_MENINGUYIM_HOST}
+    username: ${USERNAME}
+    password: "${APPLICATION_MENINGUYIM_PASSWORD}"
+    secretKey: ${APPLICATION_MENINGUYIM_SECRETKEY}
+logging:
+  level:
+    org.springframework.amqp: WARN
+    org.hibernate.persister.entity: ERROR
+    org.apache.kafka.clients.admin: WARN

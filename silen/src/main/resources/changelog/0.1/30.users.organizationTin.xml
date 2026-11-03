@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="users_organization_tin" author="ahaqberdiev">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+            <not>
+                <columnExists tableName="users" columnName="organization_tin"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="users">
+            <column name="organization_tin" type="varchar(14)"/>
+        </addColumn>
+        <rollback changeSetId="users_organization_tin" changeSetAuthor="ahaqberdiev">
+            <dropColumn tableName="users" columnName="organization_tin"/>
+        </rollback>
+        <sql splitStatements="true">
+            update users u set organization_tin = (select tin from organization where id = u.organization_id);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

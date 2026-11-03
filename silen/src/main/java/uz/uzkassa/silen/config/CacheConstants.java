@@ -1,0 +1,8 @@
+package uz.uzkassa.silen.config;
+
+public interface CacheConstants {
+    String ORGANIZATION_CACHE = "ORGANIZATION_CACHE";
+
+    String COMPANY_BY_TIN_CACHE = "COMPANY_BY_TIN_CACHE";
+    String WAREHOUSE_BY_COMPANY_ID_AND_STATUS_CACHE = "WAREHOUSE_BY_COMPANY_ID_AND_STATUS_CACHE";
+}

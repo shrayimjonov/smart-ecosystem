@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="mxik label" author="Sunnatillo Sharipov">
+        <addColumn tableName="mxik">
+            <column name="label" type="int"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="mxik remove unnecessary columns" author="Sunnatillo Sharipov">
+        <dropColumn tableName="mxik" columnName="group_name"/>
+        <dropColumn tableName="mxik" columnName="class_name"/>
+        <dropColumn tableName="mxik" columnName="position"/>
+        <dropColumn tableName="mxik" columnName="sub_position"/>
+    </changeSet>
+    <changeSet id="mxik add default package" author="Sunnatillo Sharipov">
+        <addColumn tableName="mxik">
+            <column name="default_package" type="jsonb"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="remove mxik fk from excise" author="Sunnatillo Sharipov">
+        <dropForeignKeyConstraint baseTableName="excise" constraintName="excise_mxik_fk"/>
+    </changeSet>
+    <changeSet id="add id column to mxik" author="Sunnatillo Sharipov">
+        <dropPrimaryKey tableName="mxik"/>
+        <createSequence sequenceName="mxik_id_seq"/>
+        <addColumn tableName="mxik">
+            <column name="id" type="bigint"/>
+        </addColumn>
+        <update tableName="mxik">
+            <column name="id" valueComputed="nextval('mxik_id_seq')"/>
+        </update>
+        <addPrimaryKey tableName="mxik" columnNames="id"/>
+        <addUniqueConstraint tableName="mxik" columnNames="mxik"/>
+        <alterSequence sequenceName="mxik_id_seq" incrementBy="10"/>
+    </changeSet>
+</databaseChangeLog>

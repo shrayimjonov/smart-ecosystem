@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="create operator report table" author="Nayimov Og'abek">
+        <createTable tableName="operator_report">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="company_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="action" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comment" type="varchar"/>
+            <column name="count" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operator_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="report_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,29 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+    <changeSet author="xayrullayev" id="create_purchase_order" failOnError="true">
+        <sql splitStatements="true">
+            alter table if exists purchase_order add column contract_id varchar(255);
+            alter table if exists purchase_order add column customer_id int8;
+            alter table if exists purchase_order add column order_date date;
+            alter table if exists purchase_order add column status varchar(255);
+            alter table if exists purchase_order add column store_id int8;
+            alter table if exists purchase_order add column order_type varchar(255);
+
+            alter table if exists purchase_order add constraint FKcgc3f3ja7xm3jfx1d53cxfmmw foreign key (contract_id) references contract;
+            alter table if exists purchase_order add constraint FK158vbkwgyf5r6ogk9nkugqv2c foreign key (customer_id) references customer;
+            alter table if exists purchase_order add constraint FK79b9xtsj0bjyiq45dlsmpystl foreign key (store_id) references store;
+        </sql>
+    </changeSet>
+    <changeSet author="xayrullayev" id="create_purchase_order_product" failOnError="true">
+        <sql splitStatements="true">
+            alter table if exists purchase_order_product add column serial_id varchar(255);
+            create index purchase_order_product_order_id_product_id_idx on purchase_order_product (order_id, product_id);
+            alter table if exists purchase_order_product drop constraint if exists UKhva0o8r5f0qa6q3p1jcce60ok;
+            alter table purchase_order_product add constraint  UKhva0o8r5f0qa6q3p1jcce60ok unique (product_id, order_id);
+            alter table  purchase_order_product add constraint FK889ubw1t0walyty363ihoyxak foreign key (product_id) references product;
+            alter table purchase_order_product add constraint FKm2fa6h39ybbkbbtrici4yy9s4 foreign key (serial_id) references serial_number;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

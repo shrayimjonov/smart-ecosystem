@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 11px;
+            line-height: 15px;
+            margin: 0;
+        }
+
+        .t-a-c {
+            text-align: center;
+        }
+
+        .t-a-r {
+            text-align: right;
+        }
+
+        .wrapper {
+            box-sizing: border-box;
+            margin: 0 auto;
+            padding: 20px 40px;
+        }
+
+        .h1 {
+            text-align: center;
+            font-size: 16px;
+            margin: 20px 0;
+        }
+
+        .h1 div {
+            font-size: 15px;
+        }
+
+        .table0 {
+            display: flex;
+            width: 100%;
+
+            margin: 20px 0 0;
+        }
+
+        .table0-50 {
+            width: 50%;
+        }
+
+        .table0-50:first-child {
+            padding: 0 20px 0 0;
+        }
+
+        .table0-col1 {
+            float: left;
+            width: 77px;
+            text-align: right;
+            margin: 0 5px 0 0;
+        }
+
+        .table0-col2 {
+            overflow: hidden;
+        }
+
+        .table0-col2-bordered {
+            border-bottom: 1px solid #000;
+        }
+
+        .table0-row3 {
+            display: flex;
+            align-items: flex-end;
+            margin: 15px 0;
+        }
+
+        .table0-col3 {
+            width: 177px;
+            text-align: right;
+            margin: 0 5px 0 0;
+        }
+
+        .table0-col4 {
+            flex-grow: 1;
+        }
+
+        .table1 {
+            width: 100%;
+            border: 1px solid #000;
+            border-collapse: collapse;
+            margin: 20px 0 0;
+            padding: 0;
+        }
+
+        .table1 td {
+            text-align: center;
+            padding: 2px 5px;
+        }
+
+        .table1 .propuct-row td {
+            padding: 5px;
+        }
+
+        .table1 .t-a-l {
+            text-align: left;
+        }
+
+        .table1 .t-a-r {
+            text-align: right;
+        }
+
+        .table1 .nowrap {
+            white-space: nowrap;
+        }
+
+        .total-words {
+            margin: 10px 0 30px;
+        }
+
+        .table2 {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table2 td {
+            vertical-align: top;
+            padding: 0;
+        }
+
+        .table2-left-col {
+            width: 50%;
+        }
+
+        .table2-middle-col {
+            width: 15%;
+        }
+
+        .table2-right-col {
+            width: 35%;
+        }
+
+        .f-l {
+            float: left;
+        }
+
+        .f-r {
+            float: right;
+        }
+
+        .employee {
+            display: flex;
+            padding: 0 0 15px
+        }
+
+        .employee-boss {
+            padding: 0 0 110px;
+        }
+
+        .employee-l {
+            min-width: 90px;
+            max-width: 90px;
+        }
+
+        .employee-r {
+            flex-grow: 1;
+            display: flex;
+        }
+
+        .employee__sign {
+            position: relative;
+            flex-grow: 1;
+            margin: 0 5px 0 0;
+        }
+
+        .seal {
+            position: absolute;
+            left: 50%;
+            margin: 0 0 0 -70px;
+            top: -29px;
+            width: 150px;
+            font-size: 0;
+        }
+
+        .employee__sign img {
+            max-width: 100%;
+        }
+
+        .sign {
+            position: absolute;
+            left: 50%;
+            margin: 0 0 0 9px;
+            top: -36px;
+            width: 130px;
+            font-size: 0;
+        }
+
+        .employee__name {
+            width: 100px;
+        }
+
+        .table2-right-col .employee-l {
+            min-width: 56px;
+            max-width: 56px;
+        }
+
+        .mp {
+            padding: 0 0 0 25px;
+        }
+
+        .b-b {
+            border-bottom: 1px solid #000;
+        }
+
+        .clear {
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrapper">
+    <h1 class="h1">
+        СЧЕТ-ФАКТУРА № <span th:text="${invoice.invoiceNumber}"></span> от <span
+            th:text="${#temporals.format(invoice.invoiceDate, 'dd.MM.yyyy')}"></span>г.
+        <div>к товарно-отгрузочным документам Основной договор № <span th:text="${contract.contractNumber}"></span>
+            от
+            <span th:text="${#temporals.format(contract.startDate, 'dd.MM.yyyy')}"></span> г.
+        </div>
+    </h1>
+
+    <div class="table0">
+        <div class="table0-50">
+            <div>
+                <div class="table0-col1">Поставщик:</div>
+                <div class="table0-col2">
+                    <div class="table0-col2-bordered">
+                        <strong><span th:text="${invoice.purchaseOrder.supplier.businessType.nameRu}"></span>  <span th:text="${invoice.purchaseOrder.supplier.name}"></span></strong>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div>
+                <div class="table0-col1">Адрес:</div>
+                <div class="table0-col2">
+                    <div class="table0-col2-bordered">
+                        <span th:text="${invoice.purchaseOrder.supplier.address}"></span>
+                    </div>
+                    <div class="table0-col2-bordered">&nbsp;</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="table0-row3">
+                <div class="table0-col3">
+                    Идентификационный номер<br>налогоплательщика (ИНН)
+                </div>
+                <div class="table0-col4">
+                    <div class="table0-col2-bordered">
+                        <span th:text="${invoice.purchaseOrder.supplier.inn}"></span>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div>
+                <div class="">
+                    Регистрационный код плательщика
+                </div>
+            </div>
+            <div>
+                <div class="table0-col1">НДС:</div>
+                <div class="table0-col2">
+                    <div class="table0-col2-bordered" style="margin-top:15px"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="table0-50">
+            <div>
+                <div class="table0-col1">Покупатель:</div>
+                <div class="table0-col2">
+                    <div class="table0-col2-bordered">
+                        <strong><span th:text="${invoice.purchaseOrder.customer.name}"></span></strong>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div>
+                <div class="table0-col1">Адрес:</div>
+                <div class="table0-col2">
+                    <div class="table0-col2-bordered">
+                        <span th:text="${invoice.purchaseOrder.customer.address}"></span>
+                    </div>
+                    <div class="table0-col2-bordered">&nbsp;</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="table0-row3">
+                <div class="table0-col3">
+                    Идентификационный номер<br>налогоплательщика (ИНН)
+                </div>
+                <div class="table0-col4">
+                    <div class="table0-col2-bordered">
+                        <span th:text="${invoice.purchaseOrder.customer.inn}"></span>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div>
+                <div class="">
+                    Регистрационный код плательщика
+                </div>
+            </div>
+            <div>
+                <div class="table0-col1">НДС:</div>
+                <div class="table0-col2">
+                    <div class="table0-col2-bordered">&nbsp;</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table1" border="1">
+        <tr>
+            <td rowspan="3">№<br><span class="nowrap">п/п</span></td>
+            <td rowspan="2">Наименование товара</td>
+            <td rowspan="2">ИКПУ</td>
+            <td rowspan="2">Ед.изм.</td>
+            <td rowspan="2">Коли<br>чест<br>во</td>
+            <td rowspan="2">Цена за ед</td>
+            <td rowspan="2">Стоимость поставки</td>
+            <td colspan="2">НДС</td>
+            <td rowspan="2">Стоим. пост. c НДС</td>
+        </tr>
+        <tr>
+            <td>Ставка %</td>
+            <td>Сумма</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+        </tr>
+
+        <th:block th:each="order,itrStat : ${invoice.purchaseOrder.orders}">
+            <tr class="propuct-row">
+                <td th:text="${itrStat.index +1}">1</td>
+                <td class="t-a-l" th:text="${order.name}">...</td>
+                <td th:text="${order.branchProduct.vatBarcode}"></td>
+                <td th:text="${order.unit.description}">шт</td>
+                <td th:text="${order.qty}">1</td>
+                <td th:text="${#numbers.formatDecimal(order.getPriceWithoutVat1PC(), 1, 'COMMA', 2, 'POINT')}">...</td>
+                <td th:text="${#numbers.formatDecimal(order.getPriceWithoutVat(), 1, 'COMMA', 2, 'POINT')}">...</td>
+                <td th:text="${order.getVatRate()}">...</td>
+                <td th:text="${#numbers.formatDecimal(order.getVatFromCostPrice(), 1, 'COMMA', 2, 'POINT')}">...</td>
+                <td th:text="${#numbers.formatDecimal(order.costPrice, 1, 'COMMA', 2, 'POINT')}">...</td>
+            </tr>
+        </th:block>
+
+        <tr>
+            <td class="t-a-r" colspan="2"><strong>Итого:</strong></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="t-a-r"><strong th:text="${#numbers.formatDecimal(invoice.purchaseOrder.getTotalPriceWithoutVat1PC(), 1, 'COMMA', 2, 'POINT')}"></strong></td>
+            <td class="t-a-r"><strong th:text="${#numbers.formatDecimal(invoice.purchaseOrder.getPriceWithoutVatTotal(), 1, 'COMMA', 2, 'POINT')}"></strong></td>
+            <td colspan="2" class="t-a-r"><strong th:text="${#numbers.formatDecimal(invoice.purchaseOrder.getTotalVat(), 1, 'COMMA', 2, 'POINT')}"></strong></td>
+            <td class="t-a-r"><strong th:text="${#numbers.formatDecimal(invoice.purchaseOrder.getTotal(), 1, 'COMMA', 2, 'POINT')}"></strong></td>
+        </tr>
+    </table>
+
+    <h4 class="total-words"><span th:text="${invoice.purchaseOrder.totalInWord}"></span>, в.т.ч. НДС.</h4>
+    <table class="table2">
+        <tr>
+            <td class="table2-left-col">
+                <div class="employee employee-boss">
+                    <div class="employee-l">Руководитель:</div>
+                    <div class="employee-r">
+                        <div class="employee__sign">
+                            <div class="b-b">&nbsp;</div>
+                            <div class="seal"></div>
+                            <div class="sign"></div>
+                        </div>
+                        <div class="employee__name"></div>
+                    </div>
+                </div>
+            </td>
+            <td class="table2-middle-col"></td>
+            <td class="table2-right-col" rowspan=3>
+                <div class="employee">
+                    <div class="employee-l">Получил:</div>
+                    <div class="employee-r">
+                        <div class="employee__sign">
+                            <div class="b-b">&nbsp;</div>
+                            <div>
+                                (Подпись покупателя или уполномоченного представителя)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="table2-left-col">
+                <div class="employee">
+                    <div class="employee-l">Гл. бухгалтер:</div>
+                    <div class="employee-r">
+                        <div class="employee__sign">
+                            <div class="b-b">&nbsp;</div>
+                        </div>
+                        <div class="employee__name">не предусмотрен</div>
+                    </div>
+                </div>
+            </td>
+            <td class="table2-middle-col"></td>
+        </tr>
+        <tr>
+            <td class="table2-left-col">
+                <div class="employee">
+                    <div class="employee-l">Товар отпустил:</div>
+                    <div class="employee-r">
+                        <div class="employee__sign">
+                            <div class="b-b">&nbsp;</div>
+                        </div>
+                        <div class="employee__name"></div>
+                    </div>
+                </div>
+            </td>
+            <td class="table2-middle-col"></td>
+        </tr>
+    </table>
+
+    <div class="mp"></div>
+
+</div>
+
+
+</body>
+</html>

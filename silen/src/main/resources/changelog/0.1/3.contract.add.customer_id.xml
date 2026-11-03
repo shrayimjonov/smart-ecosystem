@@ -1,0 +1,12 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+    <changeSet author="xayrullayev" id="add_column_customer_id_to_contract" failOnError="true">
+        <sql splitStatements="true">
+            ALTER TABLE contract ADD COLUMN IF NOT EXISTS customer_id bigint;
+            UPDATE contract SET customer_id = (SELECT id FROM customer WHERE contract.organization_id=customer.organization_id AND contract.tin=customer.tin and customer.deleted is not true) where deleted is not true;
+            ALTER TABLE contract DROP COLUMN IF EXISTS tin, DROP COLUMN IF EXISTS name, DROP COLUMN IF EXISTS to_organization_id;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

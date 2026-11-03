@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <style>
+      body {
+          font-family: "Times New Roman", Times, serif;
+          line-height: 1.5;
+          /*font-size: 14px;*/
+          margin: 0;
+          box-sizing: border-box;
+      }
+
+      .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px;
+      }
+
+      .header {
+          text-align: right;
+          font-size: 14px;
+          margin-bottom: 10px;
+      }
+
+      .title {
+          text-align: end;
+          font-weight: 400;
+          margin-bottom: 10px;
+      }
+
+      .subtitle {
+          text-align: center;
+          font-weight: 400;
+          margin-bottom: 20px;
+          font-size: 14px;
+      }
+
+      .content {
+          text-align: justify;
+          margin-bottom: 20px;
+      }
+
+      .doc-type {
+          text-align: center;
+      }
+
+      .center {
+          text-align: center;
+      }
+
+      .line {
+          border-bottom: 1px solid #000;
+          height: 20px;
+          display: inline-block;
+          padding-bottom: 2px;
+      }
+
+      .row {
+          display: flex;
+      }
+
+      .paragraph {
+          padding-left: 25px;
+      }
+
+      .text-xs {
+          font-size: 12px;
+      }
+
+      .flex-1 {
+          flex-grow: 1;
+      }
+
+      .mt-10 {
+          margin-top: 10px;
+      }
+
+      .mt-20 {
+          margin-top: 20px;
+      }
+      .jcsb {
+          justify-content: space-between;
+      }
+
+      .w-full {
+          width: 100%;
+      }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    _____________________________________<br>
+    (техник хизмат кўрсатиш маркази номи)
+  </div>
+  <div class="title">
+    техник хизмат кўрсатиш марказига
+  </div>
+  <div class="doc-type">
+    АРИЗА
+  </div>
+  <div class="subtitle">
+    (Техник хизмат кўрсатиш марказини ўзгартириш тўғрисида)
+  </div>
+  <div class="content">
+    <div class="row paragraph">
+      <span>Сиздан,</span>
+      <div class="flex-1">
+        <span class="line center w-full"><label th:text="${dto.customerBranchName}"></label> <label th:text="${dto.customerBranchAddress}"></label></span>
+        <div class="center text-xs">(шахобча (кўчма савдо объекти) манзили)</div>
+      </div>
+    </div>
+    <div class="row mt-10">
+      <span>манзилида жойлашган,</span>
+      <div class="flex-1">
+        <span class="line center w-full"><label th:text="${dto.companyName}"></label></span>
+        <div class="center text-xs">(тадбиркорлик субъектининг номи)</div>
+      </div>
+    </div>
+    <div class="mt-10">
+      (СТИР:<span class="line center" style="width: 150px"><label th:text="${dto.tin}"></label></span>) га қарашли, савдо (хизмат кўрсатиш) шаҳобчасида
+      фойдаланиш учун, <span class="line center" style="width: 200px"><label th:text="${dto.fiscalModuleSerialNumber}"></label></span> серия рақамли фискал модул билан
+      созланган, завод рақами (версияси) <span class="line center" style="width: 200px"><label th:text="${dto.deviceSerialNumber}"></label></span> бўлган онлайн-НКМ
+      (виртуал касса) га техник хизмат кўрсатиш марказини ўзгартириб давлат солиқ
+      хизмати органларидан рўйхатга қўйишда амалий ёрдам беришингизни сўраймиз.
+    </div>
+    <div class="paragraph mt-20">
+      <div>Қуйидаги ҳужжатлар илова қилинади:</div>
+      <div>
+        1.Дастурий таъминот ўрнатилган фискал модулни ТХКМ томонидан
+        берилганлиги бўйича имзоланган қабул қилиш ва топшириш далолатномаси.
+      </div>
+      <div>
+        2.Жорий ТХКМ билан имзоланган шартнома нусхаси.
+      </div>
+    </div>
+    <div class="mt-20 row jcsb">
+      <div style="width: 40%;">
+        <span class="line center w-full"><label th:text="${dto.director}"></label></span>
+        <div class="center text-xs">(Тадбиркорлик субъекти раҳбарининг Ф.И.Ш.) </div>
+      </div>
+      <div>
+        <div class="center text-xs">(м.ў.)</div>
+      </div>
+      <div style="width: 120px;">
+        <span class="line center w-full"></span>
+        <div class="center text-xs">(имзо)</div>
+      </div>
+      <div style="width: 120px;">
+        <span class="line center w-full"><label th:text="${#temporals.format(dto.date, 'dd.MM.yyyy')}"></label></span>
+        <div class="center text-xs">(сана)</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

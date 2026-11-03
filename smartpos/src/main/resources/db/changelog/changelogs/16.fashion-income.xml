@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="fashion income of product" author="Sunnatillo Sharipov">
+        <createTable tableName="fashion_income_of_product">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_by_id" type="bigint"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by_id" type="bigint"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="company_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="branch_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="income_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="document_no" type="varchar(255)"/>
+            <column name="document_date" type="varchar(255)"/>
+            <column name="description" type="varchar(255)"/>
+            <column name="total_cost_price" type="numeric(25, 4)"/>
+            <column name="total_sales_price" type="numeric(25, 4)"/>
+            <column name="profit" type="numeric(25, 4)"/>
+            <column name="profit_percentage" type="numeric(25, 4)"/>
+        </createTable>
+        <createTable tableName="fashion_income_of_product_detail">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="income_of_product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="branch_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unit_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="qty" type="numeric(25, 4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cost_price" type="numeric(25, 4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sales_price" type="numeric(25, 4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_cost_price" type="numeric(25, 4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_sales_price" type="numeric(25, 4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="profit" type="numeric(25, 4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="profit_percentage" type="numeric(25, 4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_item_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

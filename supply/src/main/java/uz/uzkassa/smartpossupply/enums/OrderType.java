@@ -1,0 +1,60 @@
+package uz.uzkassa.smartpossupply.enums;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import uz.uzkassa.smartpossupply.utils.SecurityUtils;
+
+import java.io.Serializable;
+import java.util.Map;
+
+/**
+ * Powered by: Shuxratjon Rayimjonov
+ * Date: 03.02.223 19:06
+ */
+@Getter
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+@Schema(enumAsRef = true)
+public enum OrderType implements Serializable {
+    INCOMING {
+        @Override
+        public String getName(LanguageEnum language) {
+            return switch (language) {
+                case uz -> "Kiruvchi";
+                case cyrillic -> "Кирувчи";
+                default -> "Входящий";
+            };
+        }
+    },
+    OUTGOING {
+        @Override
+        public String getName(LanguageEnum language) {
+            return switch (language) {
+                case uz -> "Chiquvchi";
+                case cyrillic -> "Чиқувчи";
+                default -> "Исходящий";
+            };
+        }
+    };
+
+    private final String name;
+    private final String code;
+
+    OrderType() {
+        this.code = this.name();
+        this.name = this.getName();
+    }
+
+    public abstract String getName(LanguageEnum language);
+
+    public String getName() {
+        return getName(SecurityUtils.getCurrentRequestLanguageEnum());
+    }
+
+    @JsonCreator
+    @SuppressWarnings("unused")
+    public static OrderType forValue(Map<String, String> value) {
+        return OrderType.valueOf(value.get("code"));
+    }
+}

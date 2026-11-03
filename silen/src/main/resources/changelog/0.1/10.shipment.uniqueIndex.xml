@@ -1,0 +1,13 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+    <changeSet author="xayrullayev" id="shipment_unique_index" failOnError="true">
+        <sql splitStatements="true">
+            drop index if exists ukc0ikyldhuc70lfn285l45327f;
+
+            create unique index if not exists ukc0ikyldhuc70lfn285l45327f
+                on shipment (organization_id, number, customer_id, deleted);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

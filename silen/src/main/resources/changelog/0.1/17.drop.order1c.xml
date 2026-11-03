@@ -1,0 +1,13 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+    <changeSet author="xayrullayev" id="drop_order_1c" failOnError="true">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+            <tableExists tableName="order_1c"/>
+            <tableExists tableName="order_1c_products"/>
+        </preConditions>
+        <dropTable tableName="order_1c" cascadeConstraints="true" schemaName="public"/>
+        <dropTable tableName="order_1c_products" cascadeConstraints="true" schemaName="public"/>
+    </changeSet>
+</databaseChangeLog>

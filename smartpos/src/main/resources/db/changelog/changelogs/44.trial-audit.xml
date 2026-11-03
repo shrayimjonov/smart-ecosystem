@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="create trial " author="Shohdiyor">
+      <createTable tableName="trial_date_audit">
+          <column name="id" type="bigint" autoIncrement="true">
+              <constraints primaryKey="true" nullable="false"/>
+          </column>
+          <column name="company_id" type="bigint"/>
+          <column name="company_name" type="varchar"/>
+          <column name="created_by" type="varchar" />
+          <column name="created_date" type="timestamp" defaultValue="now()"/>
+          <column name="created_user_id" type="bigint"/>
+          <column name="trial_date" type="timestamp"/>
+          <column name="last_modified_by" type="varchar"/>
+          <column name="last_modified_date" type="timestamp"/>
+      </createTable>
+    </changeSet>
+    <changeSet id="add inn trial date audit" author="Blessed1">
+        <addColumn tableName="trial_date_audit">
+            <column name="inn" type="varchar"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="add trial date audit status" author="Blessed1">
+        <addColumn tableName="trial_date_audit">
+            <column name="status" type="varchar"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

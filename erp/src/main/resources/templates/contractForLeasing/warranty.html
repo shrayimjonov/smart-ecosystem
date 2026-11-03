@@ -1,0 +1,61 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+     <style>
+          body {
+               font-family: arial;
+               box-sizing: border-box;
+               padding: 50px;
+               margin: 0 auto;
+          }
+     </style>
+     <body>
+          <div style="text-align: end; margin-bottom: 50px">
+               ДИРЕКТОРУ<br />
+               ООО «SPECIAL TEXNO SOFT»<br />
+               УСМОНОВУ Д
+          </div>
+          <div style="text-align: center; font-weight: 600; margin-bottom: 50px">
+               ГАРАНТИЙНОЕ ПИСЬМО -ОБЯЗАТЕЛЬСТВО
+               <br />во исполнение Договора № <span th:text="${contract.number}"></span> купли-продажи товара с рассрочкой платежа <br />от <label th:text="${#temporals.format(contract.createdDate, 'dd.MM.yyyy')}"></label> года.
+          </div>
+          <p>
+               <span style="margin-left: 50px"></span>Настоящим <span style="font-weight: 600">ГАРАНТИЙНЫМ ПИСЬМОМ-ОБЯЗАТЕЛЬСТВОМ</span> <span th:text="${contract.customer.businessType.getName() + ' ' + contract.customer.companyName}"></span> гарантирует своевременную оплату за товар,
+              поставленный Вами «_____»___________2023 года во исполнение Договора № <label th:text="${contract.number}"></label>
+               купли-продажи товара с рассрочкой платежа от <label th:text="${#temporals.format(contract.createdDate, 'dd.MM.yyyy')}"></label> года в размере <span th:text="${#numbers.formatDecimal(contract.totalPriceWithVat, 3, 'POINT', 2, 'COMMA')}"></span> (<span
+              th:text="${contract.decimalToWord(contract.totalPriceWithVat)}"></span>) сум
+               согласно графика платежей, предусмотренных пунктом 2.4 Договора.
+          </p>
+          <p>
+               <span style="margin-left: 50px"></span>В случае несоблюдения гарантийных обязательств по оплате указанной суммы в установленные
+               Договором сроки <label th:text="${contract.customer.businessType.getName() + ' ' + contract.customer.companyName}"></label> гарантирует:
+          </p>
+          <ul>
+               <li>
+                    выплату пени из расчета 0,4 процента от суммы просроченного платежа за каждый день просрочки, в соответствии с пунктом 6.5.
+                    Договора;
+               </li>
+               <li>выплату штрафа в размере 50% от общей суммы договора, в соответствии с пунктом 6.6. Договора;</li>
+          </ul>
+          <p>
+               <span style="margin-left: 50px"></span><label th:text="${contract.customer.businessType.getName() + ' ' + contract.customer.companyName}"></label> полностью признает условия пункта 6.7 Договора, согласно которого в
+               случае, если очередной платеж не будет произведет в установленным Договором срок, Продавец истребует товар, и при этом, все ранее
+               оплаченные денежные средств за Товар возврату не подлежат.
+          </p>
+          <p style="font-weight: 600; margin-bottom: 100px">
+               <span style="margin-left: 50px"></span>Руководство <span th:text="${contract.customer.businessType.getName() + ' ' + contract.customer.companyName}"></span> дает свое безоговорочное и безотзывное СОГЛАСИЕ на блокировку
+               работы Онлайн ККМ, приобретенной по Договору № <span th:text="${contract.number}"></span> купли-продажи товара с рассрочкой платежа от <span th:text="${#temporals.format(contract.createdDate, 'dd.MM.yyyy')}"></span> года, в случае
+               несвоевременной оплаты, просрочки каждого (любого) платежа, предусмотренного пунктом 2.4 Договора.
+          </p>
+          <div style="display: flex; justify-content: space-between; align-items: center">
+               <div>
+                    Директор<br />
+                   <label th:text="${contract.customer.businessType.getName() + ' ' + contract.customer.companyName}"></label><br />
+                    Печать
+               </div>
+               <div>
+                    <br />
+                    «___________________»<br />
+                    Подпись
+               </div>
+          </div>
+     </body>
+</html>

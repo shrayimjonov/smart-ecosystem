@@ -1,0 +1,41 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+    <changeSet author="xayrullayev" id="customer_add_columns" failOnError="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyTableName="customer" foreignKeyName="customer_district_id_fk"/>
+            </not>
+            <not>
+                <foreignKeyConstraintExists foreignKeyTableName="customer" foreignKeyName="customer_bank_id_fk"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseTableName="customer" baseColumnNames="district_id"
+                                 constraintName="customer_district_id_fk"
+                                 referencedTableName="district"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="customer" baseColumnNames="bank_id" constraintName="customer_bank_id_fk"
+                                 referencedTableName="bank"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet author="xayrullayev" id="update_rows" failOnError="true">
+        <sql splitStatements="true">
+            update customer c
+            set account=o.account,
+                accountant=o.accountant,
+                oked=o.oked,
+                mobile=o.mobile,
+                work_phone=o.work_phone,
+                district_id=o.district_id,
+                address=o.address,
+                director=o.director,
+                bank_id=o.bank_id
+                from
+                 organization o
+                where o.tin=c.tin
+            and c.deleted is not true;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

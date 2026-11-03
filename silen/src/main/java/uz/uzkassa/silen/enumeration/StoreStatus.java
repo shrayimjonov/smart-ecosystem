@@ -1,0 +1,30 @@
+package uz.uzkassa.silen.enumeration;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import uz.uzkassa.silen.dto.SelectItem;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@AllArgsConstructor
+public enum StoreStatus implements Serializable {
+    ACTIVE("Активный"),
+    INACTIVE("Неактивный");
+
+    private final String nameRu;
+
+    public static List<SelectItem> getAll() {
+        List<SelectItem> items = new ArrayList<>(StoreStatus.values().length);
+        for (StoreStatus item : StoreStatus.values()) {
+            items.add(item.toSelectItem());
+        }
+        return items;
+    }
+
+    public SelectItem toSelectItem() {
+        return new SelectItem(this.name(), this.getNameRu());
+    }
+}

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+
+      * {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+      }
+
+      .tg {
+          width: 100%;
+          border-collapse: collapse;
+          border-spacing: 0;
+      }
+
+      .tg td {
+          border-color: black;
+          border-style: solid;
+          border-width: 1px;
+          font-family: Arial, sans-serif;
+          font-size: 14px;
+          overflow: hidden;
+          padding: 10px 5px;
+          word-break: normal;
+      }
+
+      .tg th {
+          border-color: black;
+          border-style: solid;
+          border-width: 1px;
+          font-family: Arial, sans-serif;
+          font-size: 14px;
+          font-weight: normal;
+          overflow: hidden;
+          padding: 10px 5px;
+          word-break: normal;
+      }
+
+      .tg .tg-amwm {
+          font-weight: bold;
+          text-align: center;
+          vertical-align: top
+      }
+
+      .tg .tg-0lax {
+          text-align: left;
+          vertical-align: top
+      }
+
+      .tg .tg-6t3r {
+          font-style: italic;
+          font-weight: bold;
+          text-align: left;
+          vertical-align: top
+      }
+  </style>
+</head>
+<body>
+<table class="tg">
+  <thead>
+  <tr>
+    <th class="tg-amwm" colspan="3"><span style="font-weight:bold">UZKASSA</span></th>
+    <th class="tg-amwm" colspan="2">Приемный акт не гарантийный</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td class="tg-0lax" colspan="5">Настоящий акт составлен в том, что <span th:text="${#temporals.format(repairTicket.createdDate, 'dd-MM-yyyy')}"></span>г. Произведена оценка
+      технического состояния товара:
+    </td>
+  </tr>
+  <tr>
+    <td class="tg-0lax" colspan="5"><span style="font-weight:bold">Товар:</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Модель: <span th:text="${repairTicket.device.model.name}"></span></td>
+    <td class="tg-0lax">Серийный номер / imei <span th:text="${repairTicket.device.serialNumber}"></span></td>
+    <td class="tg-0lax">№ гарантийного сертификата:</td>
+    <td class="tg-0lax">Дата&nbsp;&nbsp;продажи:</td>
+    <td class="tg-0lax">Дата обращения владельца:</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax" colspan="5"><span style="font-weight:bold">Потребитель:</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax" colspan="2">ФИО: <span th:text="${repairTicket.customer.name}"></span></td>
+    <td class="tg-0lax">Адрес: <span th:text="${repairTicket.customer.address.getAddress()}"></span></td>
+    <td class="tg-0lax">Телефон: <span th:text="${repairTicket.customer.phone}"></span></td>
+    <td class="tg-0lax">Город: <span th:text="${repairTicket.customer.address.region.getName()}"></span></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax" colspan="5"><span style="font-weight:bold">Продавец изделия:</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax" colspan="2">Название организации : <span th:text="${repairTicket.company.name}"></span></td>
+    <td class="tg-0lax">Адрес: <span th:text="${companyAddress?.getFullAddressAddress()}"></span></td>
+    <td class="tg-0lax">Телефон: <span th:text="${repairTicket.company.phone}"></span></td>
+    <td class="tg-0lax">Город: <span th:text="${companyAddress?.region.getName()}"></span></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax" colspan="5"><span
+      style="font-weight:bold">Претензии потребителя (заявленный дефект товара):</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax" colspan="5"><span style="font-weight:bold">В результате оценки технического состояния изделия было обнаружено:</span>
+    </td>
+  </tr>
+  <tr>
+    <td class="tg-0lax" colspan="5"><span style="font-weight:bold">Примечания:</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax" colspan="5"><span style="font-weight:bold">Подпись потребителя:</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax" colspan="3">ФИО: <span th:text="${repairTicket.customer.name}"></span></td>
+    <td class="tg-0lax" colspan="2">Подпись:</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax" colspan="5">Подпись менеджера приемного пункта:</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax" colspan="3">ФИО: <span th:text="${repairTicket.creator.getFullName()}"></span></td>
+    <td class="tg-0lax" colspan="2">Подпись:</td>
+  </tr>
+  <tr>
+    <td class="tg-6t3r" colspan="3">Замечания:</td>
+    <td class="tg-0lax" colspan="2">Место для печати сервисного центра</td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

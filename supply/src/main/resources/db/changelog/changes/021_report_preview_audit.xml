@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2026_10_19_create_report_preview_audit" author="ned.umarov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="report_preview_audit"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="report_preview_audit">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="execution_id" type="uuid">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="user_id" type="bigint"/>
+            <column name="company_id" type="bigint"/>
+            <column name="dataset_type" type="varchar(32)"/>
+            <column name="specification_hash" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="duration_ms" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="row_count" type="bigint"/>
+            <column name="error_code" type="varchar(64)"/>
+            <column name="created_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex tableName="report_preview_audit" indexName="report_preview_audit_company_created_idx">
+            <column name="company_id"/>
+            <column name="created_date"/>
+        </createIndex>
+        <createIndex tableName="report_preview_audit" indexName="report_preview_audit_user_created_idx">
+            <column name="user_id"/>
+            <column name="created_date"/>
+        </createIndex>
+
+        <rollback>
+            <dropTable tableName="report_preview_audit"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

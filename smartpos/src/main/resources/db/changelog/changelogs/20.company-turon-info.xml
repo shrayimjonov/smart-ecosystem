@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="company turon info" author="Sunnatillo Sharipov">
+        <createTable tableName="company_turon_info">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="token" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="received_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expiration_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <sql>
+            insert into company_turon_info (id, token, received_date, expiration_date)
+            select id, true_token, token_date, token_date
+            from company
+            where true_token is not null;
+            alter table company drop column true_token;
+            alter table company drop column token_date;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

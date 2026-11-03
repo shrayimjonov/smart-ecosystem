@@ -1,0 +1,323 @@
+<!DOCTYPE>
+<html>
+<head>
+  <style>
+      table, td, th {
+          border: 1px solid;
+      }
+
+      table {
+          width: 100%;
+          border-collapse: collapse;
+      }
+
+      .row {
+          display: flex;
+          justify-content: space-around;
+          border: 1px solid black;
+          border-top: none;
+      }
+
+      .flex-sp {
+          display: flex;
+          justify-content: space-around;
+      }
+
+      .flex-center {
+          display: flex;
+          justify-content: center
+      }
+
+      .col {
+          width: 100%;
+          align-items: center;
+
+      }
+
+      .borderLeft {
+          border-left: 1px solid black;
+      }
+
+      .borderBottom {
+          border-bottom: 1px solid black;
+      }
+
+      .borderTop {
+          border-top: 1px solid black;
+      }
+
+      .bold {
+          font-weight: bold;
+      }
+      .alignCenter {
+          height: 100%;
+          align-items: center;
+      }
+  </style>
+</head>
+
+<body>
+<div style="display: flex;align-items: center;justify-content: center">
+
+  <h4 style="margin: 0">
+    YAKKA TARTIBDAGI TADBIRKOR UCHUN BANKDA HISOB RAQAM OCHISHGA ARIZA
+  </h4>
+</div>
+<div>
+  <div class="row borderTop">
+    <span class="col">Yakka tartibdagi tadbirkor familiyasi, ismi va sharifi</span>
+    <span class="col borderLeft" th:text="${openAccountIP?.director}"></span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yakka tartibdagi tadbirkor PINFL</span>
+    <span class="col borderLeft" th:text="${openAccountIP?.tin}"></span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yakka tartibdagi tadbirkor pasport maʼlumotlari</span>
+    <span class="col borderLeft"></span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yakka tartibdagi tadbirkor tug'ilgan sanasi</span>
+    <span class="col borderLeft"></span>
+  </div>
+<div class="row">
+    <span class="col">Yakka tartibdagi tadbirkor ro'yxatdan o'tgan manzili</span>
+    <span class="col borderLeft" th:text="${openAccountIP?.address}"></span>
+  </div>
+  <div class="row">
+    <span class="col">Yakka tartibdagi tadbirkor uy manzili</span>
+    <span class="col borderLeft"></span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yakka tartibdagi tadbirkor telefon raqamlari</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col">Ishchi telefon raqam:</span>
+    <span class="col borderLeft">
+
+    </span>
+  </div>
+      <div class="flex-sp">
+    <span class="col">Mobil raqam:</span>
+    <span class="col borderLeft" th:text="${openAccountIP?.phone}">
+    </span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yakka tartibdagi tadbirkor elektron pochtasi  (e-mail)</span>
+    <span class="col borderLeft"></span>
+  </div>
+  <div class="row">
+    <span class="col">Yakka tartibdagi tadbirkor VEB-sayti(web-site)</span>
+    <span class="col borderLeft"></span>
+  </div>
+
+  <div class="row">
+    <span class="col">Ochilishi lozim bo'lgan  hisob raqam turi</span>
+    <span class="col borderLeft">
+      <div class="flex-sp">
+    <span class="col">TQO</span>
+    <span class="col borderLeft">Muddatli</span>
+    <span class="col borderLeft">Jamg'arma	</span>
+    <span class="col borderLeft">Maxsus</span>
+    <span class="col borderLeft">Boshqa (turini yozing):</span>
+    <span class="col borderLeft">Tranzit - 235ХХ</span>
+  </div>
+    </span>
+  </div>
+  <div class="row">
+    <span class="col">Ochilishi lozim bo'lgan  hisob raqam valyutasi</span>
+    <span class="col borderLeft">
+      <div class="flex-sp">
+    <span class="col">So'm</span>
+    <span class="col borderLeft">AQSH dollari</span>
+    <span class="col borderLeft">YEVRO</span>
+    <span class="col borderLeft">Rubl</span>
+    <span class="col borderLeft">Boshqa (turini yozing):	</span>
+    <span class="col borderLeft"></span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Ochilishi lozim bo'lgan Hisob raqam shakli	</span>
+    <span class="col borderLeft">
+      <div class="flex-sp">
+    <span class="col">Asosiy</span>
+    <span class="col borderLeft">Ikkilamchi</span>
+    <span class="col borderLeft">Boshqa (turini yozing):	</span>
+    <span class="col borderLeft">Транзит</span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yakka tartibdagi tadbirkorning yuqori mansabdor shaxslar toifasiga yoki ularning oilasiga mansubligi, yuqori mansabdor shaxsning yaqin shaxsi ekanligi (yuqori mansabdor shaxs - davlatning qonun chiqaruvchi, ijro etuvchi, maʼmuriy yoki sud organida, shu jumladan harbiy tuzilmalarida, yoxud xalqaro tashkilotda doimiy, vaqtincha yoki maxsus vakolat boʻyicha tayinlanadigan yoki saylanadigan, tashkiliy-boshqaruv vazifalarini bajaruvchi va yuridik ahamiyatga ega boʻlgan harakatlarni sodir etishga vakolatli shaxslar, shuningdek chet davlat korxonalarining yuqori martabali rahbarlari, chet davlatning taniqli siyosatchilari va siyosiy partiyalarining taniqli aʼzolari (shu jumladan sobiq))</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col bold ">Fuqaroligi	</span>
+    <span class="col bold borderLeft">Mansabi, qarindoshligi, aloqasi</span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">1.</span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">2.</span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">3.</span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">4.</span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp">
+    Yuqori mansabdor shaxslarga aloqadorligi mavjud emas
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yakka tartibdagi tadbirkorning AQSH rezidentligiga egaligi (AQSH rezidentlari - AQSHda ro'yhatdan o'tgan yuridik va jismoniy shaxslar, AQSH hududida yashovchi shaxslar, jumladan, Green card dasturi AQSH hududida yashash huquqiga ega bo'lgan shaxslar)</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col bold flex-sp">Rezidentlik shakli	</span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col ">&nbsp;</span>
+  </div>
+      <div class="flex-sp">
+    AQSH rezidentligiga aloqadorlik mavjud emas
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Hisob raqam orqali bajarilishi rejalashtirilayotgan bir oylik taxminiy aylanma summasi</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col">So'm</span>
+    <span class="col borderLeft">AQSH dollari</span>
+    <span class="col borderLeft">YEVRO</span>
+    <span class="col borderLeft">Rubl</span>
+    <span class="col borderLeft">Boshqa 	</span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp ">
+    <span class="col ">&nbsp;</span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Hisob raqamga kelib tushadigan asosiy mablag'lar turi</span>
+    <span class="col borderLeft"></span>
+  </div>
+
+  <div class="row">
+    <span class="col">Hisob raqamdan to'lanadigan mablag'larning asosiy turi (maqsadi)</span>
+    <span class="col borderLeft"></span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yuqoridagi maʼlumotlarga asosan bank hisob raqami ochib berishingizni so'raymiz		</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col">Imzo:	</span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col ">FIO:</span>
+  </div>
+      <div class="flex-sp">
+    <span class="col ">Muhr:</span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Hisob raqam ochish bo'yicha hujjatlarni tekshirdim, qabul qildim va hisob raqam ochish uchun taqdim qildim		</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col">Menejer(FIO):	</span>
+  </div>
+      <div class="flex-sp">
+    <span class="col ">Imzo:</span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Hisob raqam ochish bo'yicha hujjatlarni tekshirdim  va hisob raqam ochish rad etildi.		</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col">Menejer:	</span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col ">Imzo:</span>
+  </div>
+      <div class="flex-sp">
+    <span class="col ">Rad etish sabablari:</span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <h4>
+      BANKNING BELGISI
+    </h4>
+  </div>
+
+  <div class="row">
+    <span class="col">Hisob raqam ochishga ruxsat beraman			</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col">Boshqaruvchi:	</span>
+  </div>
+      <div class="flex-sp">
+    <span class="col ">Imzo:</span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Hisob raqam ochish bo'yicha hujjatlarni qabul qildim va Hisob raqam ochildi				</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col">Bosh buxgalter:	</span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col ">Imzo:</span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col ">Hisob raqam:</span>
+  </div>
+      <div class="flex-sp">
+    <span class="col ">Sana:</span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row" style="height: 60px">
+    <span class="col">Boshqa belgilar	</span>
+    <span class="col borderLeft"></span>
+  </div>
+
+  <div class="row">
+    <span class="col">Hisob raqamimizga masofaviy xizmat ko'rsatishda bank xodimlari sizni aniqlashlari mumkin bo'lgan kirish kodini ko'rsating: <br>
+    *Lotin yozuvida bosh harflarda 10 ta harfdan oshmasligi kerak. Raqamlar va belgilardan foydalanishga yo'l qo'yilmaydi.
+    </span>
+    <span class="col borderLeft flex-center" th:text="${openAccountIP?.secretKey}"></span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="image column added to Product branch" author="Nayimov Og'abek">
+        <addColumn tableName="product_branch">
+            <column name="image" type="jsonb"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="product branch child product fk" author="Sunnatillo Sharipov">
+        <sql splitStatements="false">
+            do
+$$
+    begin
+        if not exists(select 1 from pg_constraint where conname = 'product_branch_child_fk') then
+            alter table product_branch
+                add constraint product_branch_child_fk
+                    foreign key (child_product_id, city_id, branch_id) references product_branch (product_id, city_id, branch_id);
+        end if;
+    end;
+$$
+        </sql>
+        <rollback>
+            <sql>
+                alter table product_branch drop constraint product_branch_child_fk;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

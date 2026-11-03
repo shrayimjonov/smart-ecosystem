@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>5. - Смена номера телефона</title>
+</head>
+<body style="padding: 5rem;">
+<div>
+  <div style=" display: flex; justify-content: end">
+    <p style="max-width: 30%">
+      OOO “Special Texno Soft”
+      Директору Усмонов Д. Ф.
+      от <label th:text="${dto.director}"></label>
+
+    </p>
+  </div>
+  <div style="margin-top: 5rem;text-align: center">
+    <p>
+      Заявление
+    </p>
+  </div>
+  <div style="margin-top: 5rem">
+    <p>
+      <label th:text="${dto.businessType}"></label> <label th:text="${dto.companyName}"></label> ИНН <label th:text="${dto.tin}"></label>
+        Просим вас изменить телефон номер в ЦТО и в SMARTPOS с <label th:text="${dto.phoneNumber}"></label> на <label th:text="${dto.newPhoneNumber}"></label>.
+    </p>
+  </div>
+  <div style="margin-top: 5rem;display: flex;justify-content: space-between">
+    <div>
+      <p>
+        Директор <label th:text="${dto.director}"></label>
+      </p>
+      <p>
+        Дата <label th:text="${#temporals.format(dto.date, 'dd.MM.yyyy')}"></label>
+      </p>
+    </div>
+    <div>
+      <p>
+        Подпись:_____________
+      </p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

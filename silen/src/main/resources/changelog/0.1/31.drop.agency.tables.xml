@@ -1,0 +1,27 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+    <changeSet author="ahaqberdiev" id="drop_agency_tables" failOnError="true">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+            <tableExists tableName="daily_report_item"/>
+            <tableExists tableName="daily_report"/>
+            <tableExists tableName="device"/>
+            <tableExists tableName="equipment"/>
+            <tableExists tableName="line_report"/>
+            <tableExists tableName="line_product"/>
+            <tableExists tableName="line"/>
+            <tableExists tableName="mode_history"/>
+            <tableExists tableName="organization_equipments"/>
+        </preConditions>
+        <dropTable tableName="daily_report_item" cascadeConstraints="true" schemaName="public"/>
+        <dropTable tableName="daily_report" cascadeConstraints="true" schemaName="public"/>
+        <dropTable tableName="device" cascadeConstraints="true" schemaName="public"/>
+        <dropTable tableName="equipment" cascadeConstraints="true" schemaName="public"/>
+        <dropTable tableName="line_report" cascadeConstraints="true" schemaName="public"/>
+        <dropTable tableName="line_product" cascadeConstraints="true" schemaName="public"/>
+        <dropTable tableName="line" cascadeConstraints="true" schemaName="public"/>
+        <dropTable tableName="mode_history" cascadeConstraints="true" schemaName="public"/>
+        <dropTable tableName="organization_equipments" cascadeConstraints="true" schemaName="public"/>
+    </changeSet>
+</databaseChangeLog>

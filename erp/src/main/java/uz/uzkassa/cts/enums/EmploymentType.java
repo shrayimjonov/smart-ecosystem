@@ -1,0 +1,83 @@
+package uz.uzkassa.cts.enums;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.JsonNode;
+import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
+import uz.uzkassa.cts.security.SecurityUtils;
+
+import java.io.Serializable;
+import java.util.Arrays;
+
+@Getter
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+public enum EmploymentType implements Serializable {
+
+    FULL_TIME {
+        @Override
+        public String getName(Language language) {
+            return switch (language) {
+                case uz_latin -> "To'liq ish grafigi";
+                case uz_cyrillic -> "Тўлиқ иш графиги";
+                default -> "Полная занятость";
+            };
+        }
+    },
+    PART_TIME {
+        @Override
+        public String getName(Language language) {
+            return switch (language) {
+                case uz_latin -> "Yarim ish grafigi";
+                case uz_cyrillic -> "Ярим иш графиги";
+                default -> "Частичная занятость";
+            };
+        }
+    },
+    FLEXIBLE {
+        @Override
+        public String getName(Language language) {
+            return switch (language) {
+                case uz_latin -> "Moslashuvchan";
+                case uz_cyrillic -> "Мослашувчан";
+                default -> "Гибкий";
+            };
+        }
+    };
+
+
+    private final String name;
+    private final String code;
+
+    EmploymentType() {
+        this.code = this.name();
+        this.name = this.getName();
+    }
+
+    public abstract String getName(Language language);
+
+    public String getName() {
+        return getName(SecurityUtils.getCurrentRequestLanguageEnum());
+    }
+
+    public static EmploymentType get(String code) {
+        if (StringUtils.isEmpty(code)) {
+            return null;
+        }
+        return Arrays.stream(values())
+                .filter(status -> status.getCode().equalsIgnoreCase(code))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Unknown EmploymentTypeEnum enum value: " + code));
+    }
+
+    @JsonCreator
+    public static EmploymentType fromJson(JsonNode jsonNode) {
+        if (jsonNode.isObject()) {
+            String code = jsonNode.get("code").asText();
+            return get(code);
+        } else if (jsonNode.isTextual()) {
+            return get(jsonNode.asText());
+        }
+        throw new IllegalArgumentException("Invalid JSON value for EmploymentTypeEnum");
+    }
+}

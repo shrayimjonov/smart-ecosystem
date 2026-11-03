@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="${company.name}">Company Name</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <p th:text="${company.tin}">
+            Dear
+        </p>
+        <p th:text="${customer.name}">
+            Your JHipster account has been created, please click on the URL below to activate it:
+        </p>
+
+        <p>
+            <span th:text="${customer.name}">Regards, </span>
+            <br/>
+            <em th:text="${customer.name}">JHipster.</em>
+        </p>
+    </body>
+</html>

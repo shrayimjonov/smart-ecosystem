@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+
+    <changeSet id="06042026_lgota_prefix_data" author="Dilshod Madrahimov">
+        <sql>
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('cooperation.uz', 'CPR-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('xt-xarid.uz', 'XT-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Shaffof qurilish', 'SHAFFOF-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Ягона харидлар, Дўкон', 'YX-D-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Ягона харидлар, Аукцион', 'YX-A-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Ягона харидлар, тендер', 'YX-T-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Ягона харидлар, тўғридан-тўғри', 'YX-P-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Давлат харидлар, Тўғридан-тўғри', 'DX-P-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Давлат харидлар, Тендер', 'DX-T-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Давлат харидлар, Танлов', 'DX-K-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Давлат харидлар, Аукцион', 'DX-A-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Давлат харидлар, Энг яхши таклиф', 'DX-O-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Корпоратив харидлар, Аукцион', 'EX-A-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Корпоратив харидлар, Танлов', 'EX-K-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Корпоратив харидлар, Тендер', 'EX-T-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Корпоратив харидлар, Тўғридан-тўғри', 'EX-P-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Корпоратив харидлар, Энг яхши таклиф', 'EX-O-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Давлат харидлар, Дўкон', 'DX-D-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Давлат харидлар, Миллий дўкон', 'DX-M-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Корпоратив харидлар, Дўкон', 'EX-D-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Корпоратив харидлар, Миллий дўкон', 'EX-M-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Давлат харидлар, Эл тендер', 'ET-T-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Давлат харидлар, Эл танлов/ тендер', 'ET-K-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Ягона харидлар, Фарма', 'FARM-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('E-Birja', 'E-BIRJA-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Ягона харидлар, Таклиф сўрови', 'TS-T-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Ягона харидлар, Ekotizim', 'YX-E-');
+            INSERT INTO lgota_prefix (name, prefix) VALUES ('Ягона харидлар, UzEx Agro', 'YX-U-');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

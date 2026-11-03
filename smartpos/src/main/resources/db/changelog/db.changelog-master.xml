@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <include file="db/changelog/changelogs/schema.xml"/>
+    <include file="db/changelog/changelogs/00.id-generator.xml"/>
+    <include file="db/changelog/changelogs/01.referral.xml"/>
+    <include file="db/changelog/changelogs/02.eps-services.xml"/>
+    <include file="db/changelog/changelogs/03.company.xml"/>
+    <include file="db/changelog/changelogs/04.requisition.xml"/>
+    <include file="db/changelog/changelogs/05.notification.xml"/>
+    <include file="db/changelog/changelogs/06.category.xml"/>
+    <include file="db/changelog/changelogs/07.file-upload.xml"/>
+    <include file="db/changelog/changelogs/08.act.xml"/>
+    <include file="db/changelog/changelogs/09.company-type.xml"/>
+    <include file="db/changelog/changelogs/10.payment.xml"/>
+    <include file="db/changelog/changelogs/11.attributes.xml"/>
+    <include file="db/changelog/changelogs/12.category-recreate.xml"/>
+    <include file="db/changelog/changelogs/13.income-of-product.xml"/>
+    <include file="db/changelog/changelogs/14.bonus-date.xml"/>
+    <include file="db/changelog/changelogs/15.product-item-image.xml"/>
+    <include file="db/changelog/changelogs/16.fashion-income.xml"/>
+    <include file="db/changelog/changelogs/17.fashion-register.xml"/>
+    <include file="db/changelog/changelogs/18.mxik.xml"/>
+    <include file="db/changelog/changelogs/19.product-item.xml"/>
+    <include file="db/changelog/changelogs/20.company-turon-info.xml"/>
+    <include file="db/changelog/changelogs/21.product-reservation.xml"/>
+    <include file="db/changelog/changelogs/22.product-branch.xml"/>
+    <include file="db/changelog/changelogs/23.product-color-group.xml"/>
+    <include file="db/changelog/changelogs/24.product-item.xml"/>
+    <include file="db/changelog/changelogs/25.color-group-image.xml"/>
+    <include file="db/changelog/changelogs/26.transfer.xml"/>
+    <include file="db/changelog/changelogs/27.unit-types.xml"/>
+    <include file="db/changelog/changelogs/28.fashion-stock-adjustment.xml"/>
+    <include file="db/changelog/changelogs/29.drop-tables.xml"/>
+    <include file="db/changelog/changelogs/30.bank-tariff-history.xml"/>
+    <include file="db/changelog/changelogs/31.fashion-balance-history.xml"/>
+    <include file="/db/changelog/changelogs/32.receipt-limit.xml"/>
+    <include file="/db/changelog/changelogs/33.marking-warehouse.xml"/>
+    <include file="/db/changelog/changelogs/34.operator-report.xml"/>
+    <include file="/db/changelog/changelogs/35.data-entry.xml"/>
+    <include file="/db/changelog/changelogs/36.transaction.xml"/>
+    <include file="/db/changelog/changelogs/37.authority.xml"/>
+    <include file="/db/changelog/changelogs/38.instructor.xml"/>
+    <include file="/db/changelog/changelogs/39.users.xml"/>
+    <include file="/db/changelog/changelogs/40.reference.xml"/>
+    <include file="/db/changelog/changelogs/41.CompanyExtraInfo.xml"/>
+    <include file="/db/changelog/changelogs/42.ActivityType.xml"/>
+    <include file="/db/changelog/changelogs/43.sales.xml"/>
+    <include file="/db/changelog/changelogs/44.trial-audit.xml"/>
+    <include file="/db/changelog/changelogs/45.device.xml"/>
+    <include file="/db/changelog/changelogs/46.branch-group.xml"/>
+    <include file="/db/changelog/changelogs/47.advertisement.xml"/>
+    <include file="/db/changelog/changelogs/48.billing-permission.xml"/>
+    <include file="/db/changelog/changelogs/49.clear-schema.xml" context="local, test"/>
+    <include file="/db/changelog/changelogs/50.groups.xml"/>
+    <include file="/db/changelog/changelogs/51.excise.xml"/>
+</databaseChangeLog>

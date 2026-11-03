@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="bank-tariff-history table added" author="Nayimov Og'abek">
+        <createTable tableName="bank_tariff_history">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="bank_type" type="varchar"/>
+            <column name="company_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="humo_percentage" type="numeric(15,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="visa_percentage" type="numeric(15,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="visa_domestic_percentage" type="numeric(15,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uzcard_percentage" type="numeric(15,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="xizmat_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="xizmat_name" type="varchar"/>
+            <column name="created_date" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="remove bank tariff not null constraints" author="Sunnatillo Sharipov">
+        <dropNotNullConstraint tableName="bank_tariff_history" columnName="humo_percentage"/>
+        <dropNotNullConstraint tableName="bank_tariff_history" columnName="visa_percentage"/>
+        <dropNotNullConstraint tableName="bank_tariff_history" columnName="visa_domestic_percentage"/>
+        <dropNotNullConstraint tableName="bank_tariff_history" columnName="uzcard_percentage"/>
+    </changeSet>
+</databaseChangeLog>

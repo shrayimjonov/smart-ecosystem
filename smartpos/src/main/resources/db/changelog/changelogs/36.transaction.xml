@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="create transaction table" author="Sunnatillo Sharipov">
+        <createSequence sequenceName="transaction_id_seq" incrementBy="10"/>
+        <createTable tableName="terminal_transaction">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="uid" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="branch_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint"/>
+            <column name="payment_type" type="varchar(50)"/>
+            <column name="amount" type="numeric(25, 4)"/>
+            <column name="currency" type="varchar(50)"/>
+            <column name="operation" type="varchar(50)"/>
+            <column name="status" type="varchar(50)"/>
+            <column name="date_time" type="timestamp"/>
+            <column name="info" type="jsonb"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="add terminal sn to terminal transactions" author="Sunnatillo Sharipov">
+        <addColumn tableName="terminal_transaction">
+            <column name="terminal_sn" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="transaction add source" author="Sunnatillo Sharipov">
+        <addColumn tableName="terminal_transaction">
+            <column name="source" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="add origin uid for reversal operations" author="Sunnatillo Sharipov">
+        <addColumn tableName="terminal_transaction">
+            <column name="origin_uid" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

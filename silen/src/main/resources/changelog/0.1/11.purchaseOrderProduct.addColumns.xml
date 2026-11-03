@@ -1,0 +1,25 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+    <changeSet author="xayrullayev" id="purchase_order_product" failOnError="true">
+        <sql splitStatements="true">
+        alter table purchase_order_product drop column if exists product_name;
+          alter table purchase_order_product
+          add column if not exists vat_rate_id bigint,
+          add column if not exists vat_sum numeric(25,2),
+          add column if not exists base_summa numeric(25,2),
+          add column if not exists base_summa numeric(25,2),
+          add column if not exists summa numeric(25,2),
+          add column if not exists profit_rate numeric(25,2),
+          add column if not exists without_vat numeric(25,2);
+        </sql>
+    </changeSet>
+    <changeSet author="xayrullayev" id="purchase_order_product_fk" failOnError="true">
+        <sql splitStatements="true">
+            alter table purchase_order_product
+                add constraint purchase_order_product_vat_rate_id_fk
+                    foreign key (vat_rate_id) references vat_rate;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,141 @@
+spring:
+  threads:
+    virtual:
+      enabled: true
+  profiles:
+    active: dev
+  application:
+    name: horeca
+  jmx:
+    enabled: false
+  jackson:
+    serialization:
+      indent-output: true
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+  jpa:
+    database: POSTGRESQL
+    open-in-view: false
+    properties:
+      hibernate.jdbc.time_zone: Asia/Tashkent
+      hibernate.type.preferred_instant_jdbc_type: TIMESTAMP
+      hibernate.id.new_generator_mappings: true
+      hibernate.connection.provider_disables_autocommit: true
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+      hibernate.hbm2ddl.auto: update
+      hibernate.jdbc.batch_size: 25
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+      hibernate.query.fail_on_pagination_over_collection_fetch: true
+      hibernate.query.in_clause_parameter_padding: true
+      hibernate.enable_lazy_load_no_trans: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+  messages:
+    basename: i18n/messages
+    cache-duration: PT1S # 1 second, see the ISO 8601 standard
+  thymeleaf:
+    cache: false
+    mode: HTML
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    problemdetails:
+      enabled: true
+  task:
+    execution:
+      thread-name-prefix: horeca-task-
+      pool:
+        core-size: 2
+        max-size: 50
+        queue-capacity: 10000
+    scheduling:
+      thread-name-prefix: horeca-scheduling-
+      pool:
+        size: 2
+  output:
+    ansi:
+      enabled: always
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+server:
+  port: 8288
+  compression:
+    enabled: true
+    mime-types: text/html, text/xml, text/plain,text/css, application/javascript, application/json
+    min-response-size: 1024
+  error:
+    include-stacktrace: never
+  servlet:
+    session:
+      cookie:
+        http-only: true
+
+clickhouse:
+  url: ${CLICKHOUSE_URL}
+  username: ${USERNAME}
+  password: ${CLICKHOUSE_PASSWORD}
+
+security:
+  authentication:
+    jwt:
+      secret-key: ${SECURITY_AUTHENTICATION_JWT_SECRET_KEY}
+      token-validity-in-seconds: 86400
+      token-validity-in-seconds-for-remember-me: 2592000
+
+application:
+  webSocketUrl: ${APPLICATION_WEBSOCKETURL}
+  tasnif-config:
+    host: ${APPLICATION_TASNIF_CONFIG_HOST}
+    basketProductsPath: /cl-api/integration-mxik/company/get/basket-products
+    mxikHistoryPath: /cl-api/integration-mxik/get/history
+  sms-config:
+    host: ${APPLICATION_SMS_CONFIG_HOST}
+    cgpn: Apay
+    username: ${USERNAME}
+    password: 123
+  soliq-config:
+    host: ${APPLICATION_SOLIQ_CONFIG_HOST}
+    companyDetailPath: /services/np1/bytin/factura-all
+    username: ${USERNAME}
+    password: ${APPLICATION_SOLIQ_CONFIG_PASSWORD}
+  amazon-config:
+    publicBucketName: ${PUBLICBUCKETNAME}
+    privateBucketName: ${PRIVATEBUCKETNAME}
+    accessKey: ${APPLICATION_AMAZON_CONFIG_ACCESSKEY}
+    secretKey: ${APPLICATION_AMAZON_CONFIG_SECRETKEY}
+  eimzo-config:
+    host: ${APPLICATION_EIMZO_CONFIG_HOST}
+    frontendTimestampPath: /frontend/timestamp/pkcs7
+    backendVerifyPath: /backend/pkcs7/verify/attached
+    xRealIP: 127.0.0.1
+    internalHost: ${APPLICATION_EIMZO_CONFIG_INTERNALHOST}
+  factura-config:
+    host: ${APPLICATION_FACTURA_CONFIG_HOST}
+    username: ${USERNAME}
+    password: ${APPLICATION_FACTURA_CONFIG_PASSWORD}
+  billing:
+    host: ${APPLICATION_BILLING_HOST}
+    username: ${USERNAME}
+    password: ${APPLICATION_BILLING_PASSWORD}
+  apay-config:
+    host: ${APPLICATION_APAY_CONFIG_HOST}
+    username: ${USERNAME}
+    password: ${APPLICATION_APAY_CONFIG_PASSWORD}
+    deviceId: 0194d4da-b693-770e-8356-1847fd0154a1
+    authPath: /api/admin/v1/account/login
+    epsServicesPath: /api/admin/v1/eps-services
+    callBackUrl: /api/admin/v1/bills/statuses

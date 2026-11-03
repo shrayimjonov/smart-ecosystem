@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", Arial, sans-serif;
+        }
+
+        h1 {
+            font-size: 30px;
+            line-height: 35px;
+            margin-bottom: 8px;
+        }
+
+        .date {
+            margin-bottom: 30px;
+            font-weight: 600;
+            font-size: 19px;
+        }
+
+        .companies {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .companies__item {
+            width: 50%;
+            font-size: 16px;
+            color: #5E6470;
+        }
+
+        .buyer {
+            padding-left: 30px;
+        }
+
+        .companies__item h2 {
+            font-size: 22px;
+            margin: 0 0 20px;
+            font-weight: 600;
+        }
+
+        .companies__item strong {
+            color: #1A1C21;
+            margin-right: 10px;
+        }
+
+        .companies__item__name {
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #1A1C21;
+        }
+
+        .companies__item__address {
+            margin-bottom: 15px;
+        }
+
+        .companies__item__value {
+            margin-bottom: 15px;
+        }
+
+        .attention-message {
+            color: #5E6470;
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+
+        .container {
+            padding: 30px 0;
+            max-width: 1000px;
+            width: 90%;
+            margin: auto;
+        }
+
+        /* table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        th {
+            text-align: left;
+            text-transform: uppercase;
+            color: #5E6470;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 0 0 20px;
+        }
+
+        td {
+            font-size: 16px;
+            border-bottom: 1px solid #d7dae0;
+            padding: 6px 0 6px;
+            color: #1A1C21;
+        }
+
+        .table-bottom {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1A1C21;
+            margin-bottom: 40px;
+        }
+
+        .table-bottom__in {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .table-bottom__in .s1 {
+            flex-grow: 1;
+            border-bottom: 1px solid #d7dae0;
+            margin-left: 5px;
+        }
+
+        .workers {
+            display: flex;
+            align-items: center;
+        }
+
+        .workers-info-block {
+            display: flex;
+            margin-right: 60px;
+        }
+
+        .worker-title {
+            color: #5E6470;
+        }
+
+        .worker-name {
+            position: relative;
+            bottom: -2px;
+            border-bottom: 1px solid #1A1C21;
+            margin-left: 10px;
+            padding: 0 5px 5px;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+
+    <h1>Счет на оплату №<span th:text="${paymentQuote.id}"></span></h1>
+    <div class="date" th:text="${#temporals.format(paymentQuote.createdDate, 'dd.MM.yyyy')}"></div>
+
+    <section class="companies">
+        <div class="companies__item">
+            <div class="seller">
+                <h2>Поставщик</h2>
+                <div class="companies__item__name">OOO "PRIME ONLINE TECHNOLOGY"</div>
+                <div class="companies__item__address">
+                    г.Ташкент, Бектемирский р-н, <br />
+                    ул. Олтинтопган, 29
+                </div>
+                <div class="companies__item__value">
+                    <span>ИНН</span>
+                    <strong>306866358</strong>
+                </div>
+                <div class="companies__item__value">
+                    <span>Банк</span>
+                    <strong>АКБ «KAPITAL BANK»</strong>
+                    <span>МФО</span>
+                    <strong>01088</strong>
+                </div>
+                <div class="companies__item__value">
+                    <span>Сч. №</span>
+                    <strong>2020 8000 4051 4368 5001</strong>
+                </div>
+            </div>
+        </div>
+        <div class="companies__item">
+            <div class="buyer">
+                <h2>Покупатель</h2>
+
+                <div class="companies__item__name" th:text="${paymentQuote?.customerName}"></div>
+                <div class="companies__item__address" th:text="${paymentQuote?.address.fullAddressAddress}"></div>
+                <div class="companies__item__value">
+                    <span>ИНН</span>
+                    <strong th:text="${paymentQuote?.tin}"></strong>
+                </div>
+                <div class="companies__item__value">
+                    <span>Номер телефона</span>
+                    <strong th:text="${paymentQuote?.phone}"></strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="attention-message">
+        Внимание! Оплата данного счета означает согласие с условиями поставки товара. <br />
+        Уведомление об оплате обязательно, в противном случае не гарантируется наличие <br />
+        товара на складе. Товар отпускается по факту прихода денег на р/с Поставщика, самовывозом, при наличии доверенности и паспорта.
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>№ платежа</th>
+            <th>Платеж (сум)</th>
+            <th>Остаток (сум)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <strong>Первоначальный взнос</strong>
+            </td>
+            <td>599 000</td>
+            <td>2 100 000</td>
+        </tr>
+        <tr>
+            <td>
+                <strong>1 месяц</strong>
+            </td>
+            <td>
+                350 000
+            </td>
+            <td>1 750 000</td>
+        </tr>
+        <tr>
+            <td>
+                <strong>2 месяц</strong>
+            </td>
+            <td>
+                350 000
+            </td>
+            <td>1 400 000</td>
+        </tr>
+        <tr>
+            <td>
+                <strong>3 месяц</strong>
+            </td>
+            <td>
+                350 000
+            </td>
+            <td>1 050 000</td>
+        </tr>
+        <tr>
+            <td>
+                <strong>4 месяц</strong>
+            </td>
+            <td>
+                350 000
+            </td>
+            <td>700 000</td>
+        </tr>
+        <tr>
+            <td>
+                <strong>5 месяц</strong>
+            </td>
+            <td>
+                350 000
+            </td>
+            <td>350 000</td>
+        </tr>
+        <tr>
+            <td>
+                <strong>6 месяц</strong>
+            </td>
+            <td>
+                350 000
+            </td>
+            <td>0,00</td>
+        </tr>
+        </td>
+        <td>
+            <strong>ИТОГО</strong>
+        </td>
+        <td>
+            2 699 000
+        </td>
+        <td></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="table-bottom">
+        <div class="table-bottom__in">
+            <span>Окончательный срок оплаты товара:</span> <span class="s1"></span>
+        </div>
+
+        <div>
+            Товар является предметом залога по Договору до момента выплаты полной стоимости Товара.
+        </div>
+    </div>
+
+    <section class="workers">
+        <div class="workers-info-block">
+            <h3 class="worker-title">Руководитель</h3>
+            <span class="worker-name">SAYDALIYEV S. X.</span>
+        </div>
+        <div class="workers-info-block">
+            <h3 class="worker-title">Бухгалтер</h3>
+            <span class="worker-name">SAYDALIYEV S. X.</span>
+        </div>
+    </section>
+</div>
+</body>
+</html>

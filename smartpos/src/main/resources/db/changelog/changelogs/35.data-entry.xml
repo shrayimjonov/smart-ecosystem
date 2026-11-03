@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="remove data entry related fields" author="Sunnatillo Sharipov">
+        <dropColumn tableName="product_branch">
+            <column name="data_entry_item_id"/>
+            <column name="data_entry_status"/>
+        </dropColumn>
+        <dropColumn tableName="telegram_account">
+            <column name="data_entry_item_id"/>
+            <column name="data_entry_status"/>
+        </dropColumn>
+        <dropColumn tableName="users">
+            <column name="data_entry_item_id"/>
+            <column name="data_entry_status"/>
+        </dropColumn>
+        <dropColumn tableName="income_of_product">
+            <column name="data_entry_item_id"/>
+            <column name="data_entry_status"/>
+        </dropColumn>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style type="text/css">
+        body {
+            font-family: Times, Arial;
+            font-size: 14px;
+            line-height: 17px;
+            margin: 0;
+        }
+
+        .wrapper {
+            box-sizing: border-box;
+            margin: 0 auto;
+            padding: 20px 40px;
+        }
+
+        .cut-line {
+            text-align: center;
+            font-size: 11px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+            margin: 0 0 60px;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .blank-line {
+            border-bottom: 1px solid #000;
+        }
+
+        .blank-line.empty {
+            min-height: 17px;
+        }
+
+        .blank-line-text {
+            font-size: 15px;
+        }
+
+        .blank-row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .blank-title {
+            max-width: 200px;
+            text-align: right;
+            flex-grow: 1;
+        }
+
+        .blank-row span {
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .organization {
+            margin: 0 0 20px;
+        }
+
+        .organization .blank-row {
+            justify-content: center;
+        }
+
+        .organization .blank-title {
+            width: auto;
+        }
+
+        .organization .blank-line {
+            width: 340px;
+            margin: 0 0 0 10px;
+        }
+
+        .doc-title {
+            margin: 0 0 15px;
+        }
+
+        .doc-title .blank-row {
+            justify-content: center;
+        }
+
+        .doc-title .blank-title {
+            font-weight: bold;
+        }
+
+        .doc-title .blank-line {
+            width: 215px;
+            margin: 0 0 0 10px;
+        }
+
+        .doc-date {
+            margin: 0 0 20px;
+        }
+
+        .doc-date .blank-line {
+            width: 100px;
+            margin: 0 10px;
+        }
+
+        .doc-date .blank-row {
+            margin: 0 0 10px;
+        }
+
+        .address-row {
+            text-align: center;
+            margin: 0 0 20px;
+        }
+
+        .address-row span {
+            font-size: 12px;
+        }
+
+        .blank-right {
+            flex-grow: 1;
+            padding: 0 0 0 10px;
+            display: flex;
+            flex-wrap: wrap;
+            font-weight: bold;
+        }
+
+        .blank-right .blank-line.first {
+            width: 180px;
+            margin: 0 10px;
+        }
+
+        .blank-right .blank-line.second {
+            width: 130px;
+            margin: 0 10px;
+        }
+
+        .blank-right .blank-line.third {
+            width: 78px;
+            margin: 0 10px;
+        }
+
+        .blank-right .blank-line.fourth {
+            width: 130px;
+            margin: 0 10px 0 0;
+        }
+
+        .blank-right .blank-line.fifth {
+            width: 260px;
+            margin: 0 10px;
+        }
+
+        .blank-right span {
+            display: block;
+            font-weight: normal;
+            font-size: 12px;
+        }
+
+        .blank-right .blank-line.empty {
+            width: 100%;
+        }
+
+        .blank .blank-row {
+            margin: 0 0 15px;
+        }
+
+        .blank-right-row.first {
+            max-width: 200px;
+            margin-right: 10px;
+            flex-grow: 1;
+        }
+
+        .blank-right-row.second {
+            max-width: 300px;
+            flex-grow: 1;
+        }
+
+        .empty-block {
+            height: 20px;
+        }
+
+        .table-wrap {
+            margin: 0 0 30px;
+        }
+
+        .table-title {
+            text-align: center;
+            font-weight: bold;
+            margin: 0 0 10px;
+        }
+
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .table td {
+            border: 2px solid #000;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .table td.td-title {
+            text-align: left;
+        }
+
+        .user-sign {
+            display: flex;
+            margin: 0 0 40px;
+        }
+
+        .user-sign .blank-line {
+            margin: 0 10px 0 20px;
+            width: 200px;
+        }
+
+        .sign-block {
+            display: flex;
+            margin: 0 0 20px;
+            font-weight: bold;
+        }
+
+        .sign-title {
+            width: 150px;
+        }
+
+        .sign-block .sign-row {
+            width: 100px;
+            text-align: center;
+            margin: 0 20px 0 0;
+        }
+
+        .sign-block .sign-row span {
+            font-size: 12px;
+        }
+
+        .sign-block .sign-row.second {
+            width: 200px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="table-wrap">
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>Номер доверенности</td>
+                <td>Дата выдачи</td>
+                <td>Срок действия</td>
+                <td>Должность и фамилия лица, которому выдана доверенность</td>
+                <td>Расписка в получении доверенности</td>
+            </tr>
+            <tr>
+                <td><span th:text="${powerOfAttorney.powerOfAttorneyNumber}"></span></td>
+                <td><span th:text="${#temporals.format(powerOfAttorney.startDate, 'dd.MM.yyyy')}"></span> г.</td>
+                <td><span th:text="${#temporals.format(powerOfAttorney.expiryDate, 'dd.MM.yyyy')}"></span> г.</td>
+                <td>
+                    <span th:text="${powerOfAttorney.responsiblePerson.position}"></span>,
+                    <span th:text="${powerOfAttorney.responsiblePerson.fullName}"></span>
+                </td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-wrap">
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>Поставщик</td>
+                <td>Номер и дата договора</td>
+                <td>Номер и дата документа, подтверждающего выполнение поручения</td>
+            </tr>
+            <tr>
+                <td><span th:text="${powerOfAttorney.purchaseOrder.supplier.name}"></span></td>
+                <td><span th:text="${contract.contractNumber}"></span>,
+                    <span th:text="${contract.startDate}"> г.</span>
+                  </td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="cut-line">Линия отреза</div>
+
+    <div class="blank organization">
+        <div class="blank-row"><div class="blank-title">Организация</div> <div class="blank-line"><span th:text="${powerOfAttorney.purchaseOrder.customer.name}"></span>
+        </div> <span>наименование организации</span></div>
+    </div>
+    <div class="blank doc-title">
+        <div class="blank-row"><div class="blank-title">ДОВЕРЕННОСТЬ №</div>
+            <div class="blank-line"><span th:text="${powerOfAttorney.powerOfAttorneyNumber}"></span></div>
+        </div>
+    </div>
+    <div class="blank doc-date">
+        <div class="blank-row"><div class="blank-title">Дата выдачи:</div> <div class="blank-line" th:text="${#temporals.format(powerOfAttorney.startDate, 'dd.MM.yyyy')}"></div> г.
+        </div>
+        <div class="blank-row"><div class="blank-title">Доверенность действительна по:</div> <div class="blank-line" th:text="${#temporals.format(powerOfAttorney.expiryDate, 'dd.MM.yyyy')}"></div> г.
+        </div>
+    </div>
+    <div class="address-row">
+        <div class="blank-line empty" th:text="${powerOfAttorney.purchaseOrder.customer.name}">
+          <div th:text="${powerOfAttorney.purchaseOrder.customer.address}"></div>
+        </div>
+        <span>наименование потребителя и его адрес</span>
+    </div>
+    <div class="blank">
+        <div class="blank-row">
+            <div class="blank-title">Счет №</div>  <div class="blank-right">р/с <div class="blank-line first" th:text="${powerOfAttorney.purchaseOrder.customer.companyBank.accountNumber}"> </div>  МФО <div class="blank-line third" th:text="${powerOfAttorney.purchaseOrder.customer.companyBank.bank.code}"></div></div>
+        </div>
+        <div class="blank-row">
+            <div class="blank-title"></div> <div class="blank-right"><div class="blank-line empty" th:text="${powerOfAttorney.purchaseOrder.customer.companyBank.bank.name}"></div> <span>наименование банка</span> </div>
+        </div>
+
+        <div class="blank-row">
+            <div class="blank-title">Доверенность выдана</div>
+            <div class="blank-right">
+                <div class="blank-right-row first"><div class="blank-line empty">
+                    <span th:text="${powerOfAttorney.responsiblePerson.position}"></span>
+                </div><span>должность</span></div>
+                <div class="blank-right-row second"><div class="blank-line empty">
+                    <span th:text="${powerOfAttorney.responsiblePerson.fullName}"></span>
+                </div><span>фамилия, имя, отчество</span> </div>
+            </div>
+        </div>
+        <div class="blank-row">
+            <div class="blank-title">Паспорт: серия</div>
+            <div class="blank-right">
+                <div class="blank-line fourth">
+                    <span th:text="${powerOfAttorney.responsiblePerson.getPassportSerialNumber()}"></span>
+                </div> № <div class="blank-line fifth"><span th:text="${powerOfAttorney.responsiblePerson.getPassportNumber()}"></span></div>
+            </div>
+        </div>
+        <div class="blank-row">
+            <div class="blank-title">Кем выдан</div>
+            <div class="blank-right">
+                <div class="blank-line empty"><span th:text="${powerOfAttorney.responsiblePerson.issueBy}"></span></div>
+            </div>
+        </div>
+        <div class="blank-row">
+            <div class="blank-title">Дата выдачи</div>
+            <div class="blank-right">
+                <div class="blank-line fourth"><span th:text="${powerOfAttorney.responsiblePerson.issueDate}"></span></div>
+            </div>
+        </div>
+        <div class="empty-block"></div>
+        <div class="blank-row">
+            <div class="blank-title">На получение от</div>
+            <div class="blank-right">
+                <div class="blank-line empty"><div class="blank-line-text"><span th:text="${powerOfAttorney.purchaseOrder.supplier.name}"></span></div></div>
+                <span>наименование поставщика</span>
+            </div>
+        </div>
+        <div class="blank-row">
+            <div class="blank-title">материальных ценностей по</div>
+            <div class="blank-right">
+                <div class="blank-line empty"><div class="blank-line-text">№</div></div>
+                <span>наименование, номер и дата документа</span>
+            </div>
+        </div>
+        <div class="address-row">
+            <div class="blank-line empty"></div>
+        </div>
+    </div>
+    <div class="table-wrap">
+        <div class="table-title">Перечень товарно-материальных ценностей, подлежащих получению</div>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>Номер по порядку</td>
+                    <td>Материальные ценности</td>
+                    <td>Единица измерения</td>
+                    <td>Количество</td>
+                </tr>
+                <th:block th:each="order,itrStat : ${powerOfAttorney.purchaseOrder.orders}">
+                <tr>
+                    <td th:text="${itrStat.index +1}">1</td>
+                    <td class="td-title" th:text="${order.name}"></td>
+                    <td th:text="${order.unit.name}">шт</td>
+                    <td th:text="${order.qty}"></td>
+                </tr>
+                </th:block>
+            </tbody>
+        </table>
+    </div>
+    <div class="user-sign">
+        Подпись лица, получившего доверенность <div class="blank-line"></div>удостоверяем
+    </div>
+    <div class="sign-block manager-sign">
+        <div class="sign-title">Руководитель</div>
+        <div class="sign-row">
+            <div class="blank-line empty"></div>
+            <span>подпись</span>
+        </div>
+        <div class="sign-row second">
+            <div class="blank-line empty"></div>
+            <span>расшифровка подписи</span>
+        </div>
+    </div>
+    <div class="sign-block accountant-sign">
+        <div class="sign-title">Главный бухгалтер</div>
+        <div class="sign-row">
+            <div class="blank-line empty"></div>
+            <span>подпись</span>
+        </div>
+        <div class="sign-row second">
+            <div class="blank-line empty"></div>
+            <span>расшифровка подписи</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

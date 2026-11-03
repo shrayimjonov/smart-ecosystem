@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>9.  - Изменение директора</title>
+</head>
+<body style="padding: 5rem;">
+<div>
+    <div style=" display: flex; justify-content: end">
+        <p style="max-width: 30%">
+            OOO “Special Texno Soft”
+            Директору Усмонов Д. Ф.
+            <label th:text="${dto.companyName}"></label>
+            от <label th:text="${dto.newDirector}"></label>
+
+        </p>
+    </div>
+    <div style="margin-top: 5rem;text-align: center">
+        <p>
+            Заявление
+        </p>
+    </div>
+    <div style="margin-top: 5rem">
+        <p>
+            <label th:text="${dto.businessType}"></label> <label th:text="${dto.companyName}"></label> ИНН <label th:text="${dto.tin}"></label>
+            Просим вас изменить ФИО директора с <label th:text="${dto.director}"></label> на <label th:text="${dto.newDirector}"></label>.
+        </p>
+        <p>
+            Прилагается приказ о назначении и копия паспорта.
+        </p>
+    </div>
+    <div style="margin-top: 5rem;display: flex;justify-content: space-between">
+        <div>
+            <p>
+                Директор <label th:text="${dto.newDirector}"></label>
+            </p>
+            <p>
+                Дата <label th:text="${#temporals.format(dto.date, 'dd.MM.yyyy')}"></label>
+            </p>
+        </div>
+        <div>
+            <p>
+                Подпись:_____________
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .parent {
+            width: 100%;
+            position: relative;
+            flex: 1 1 auto;
+            text-align: center;
+        }
+
+        .label {
+            border-bottom: 1px solid black;
+            margin-bottom: 0
+        }
+
+        .subLabel {
+            font-size: 0.75em;
+            font-style: italic;
+            position: absolute;
+            bottom: -18px;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body style="padding: 5rem;font-weight: bold">
+<div>
+    <div style=" display: flex; justify-content: space-between">
+        <div>
+            <p>Исх. №</p>
+            <p>От <span th:text="${#temporals.format(connectionDTO.date, 'dd.MM.yyyy')}"></span></p>
+        </div>
+        <div>
+            <p>Управляющему филиала «Дархан»</p>
+            <p style="text-align: right">ЧАБ «Трастбанк»</p>
+        </div>
+
+    </div>
+    <div style="margin-top: 5rem;text-align: center">
+        <p>
+            ЗАЯВЛЕНИЕ
+        </p>
+    </div>
+    <div style="margin-top: 5rem">
+        <div class="parent">
+            <p class="label">
+                <span th:text="${connectionDTO.companyName}"></span>
+            </p>
+            <span class="subLabel">
+        (наименование организации)
+      </span>
+        </div>
+        <p>
+            ИНН <span th:text="${connectionDTO.tin}">________________</span> прошу вас подключить эквайринг
+            (терминал) HUMO для онлайн ККМ серийный номер <span th:text="${connectionDTO.deviceSerialNumber}"></span>
+        </p>
+    </div>
+    <div style="margin-top: 5rem;display: flex;gap: 1rem;align-items: flex-end;">
+        Директор:
+        <div class="parent" style="width: 50%">
+            <p class="label">
+
+            </p>
+            <span class="subLabel">
+        (подпись)
+      </span>
+        </div>
+        <div class="parent">
+            <p class="label" th:text="${connectionDTO.director}">
+            </p>
+            <span class="subLabel">
+        (Ф.И.О)
+      </span>
+        </div>
+    </div>
+    <div style="margin-top: 2rem;">
+        М.П.
+    </div>
+    <div style="margin-top: 5rem;display: flex;gap: 1rem;align-items: flex-end;">
+        <div>Контактный номер:</div>
+        <div class="parent" style="max-width: 50%">
+            <p class="label" th:text="${connectionDTO.phone}">
+            </p>
+            <span class="subLabel">
+
+      </span>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

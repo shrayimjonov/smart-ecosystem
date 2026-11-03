@@ -1,0 +1,10 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+    <changeSet author="ahaqberdiev" id="order_product_error_message_column" failOnError="true">
+        <sql splitStatements="true">
+            ALTER TABLE order_product ADD COLUMN IF NOT EXISTS error_message varchar(255);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

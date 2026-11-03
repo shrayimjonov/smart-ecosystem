@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="create_role_permissions" author="xayrullayev">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+            <not>
+                <tableExists tableName="role_permissions"/>
+            </not>
+        </preConditions>
+        <createTable tableName="role_permissions">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="role" type="varchar(30)"/>
+            <column name="permission_code" type="varchar(30)"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="role_permissions" baseColumnNames="permission_code"
+                                 constraintName="fk_role_permission_permission_code"
+                                 referencedTableName="permissions"
+                                 referencedColumnNames="code"/>
+    </changeSet>
+    <changeSet id="create_default_roles" author="xayrullayev">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+                <tableExists tableName="role_permissions"/>
+        </preConditions>
+        <sql>
+            INSERT INTO public.role_permissions (role, permission_code) VALUES ('ADMIN', 'ROLE_ADMIN');
+            INSERT INTO public.role_permissions (role, permission_code) VALUES ('ADMIN', 'ROLE_USER');
+            INSERT INTO public.role_permissions (role, permission_code) VALUES ('AGENCY_ADMIN', 'ROLE_USER');
+            INSERT INTO public.role_permissions (role, permission_code) VALUES ('ACCOUNTANT', 'ROLE_USER');
+            INSERT INTO public.role_permissions (role, permission_code) VALUES ('WORKER_WAREHOUSE', 'ROLE_USER');
+            INSERT INTO public.role_permissions (role, permission_code) VALUES ('WORKER_WITHOUT_VALIDATE', 'ROLE_USER');
+            INSERT INTO public.role_permissions (role, permission_code) VALUES ('MANAGER_WAREHOUSE', 'ROLE_USER');
+            INSERT INTO public.role_permissions (role, permission_code) VALUES ('MANAGER', 'ROLE_USER');
+            INSERT INTO public.role_permissions (role, permission_code) VALUES ('OPERATOR', 'ROLE_USER');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

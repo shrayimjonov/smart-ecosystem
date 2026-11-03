@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+
+    <changeSet id="18062026_price_list_customer_group" author="Dilshod Madrahimov">
+        <sql>
+            create table if not exists price_list_customer_groups
+            (
+                price_list_id bigint not null
+                references price_list,
+                customer_group_id   bigint not null
+                references customer_group,
+                primary key (price_list_id, customer_group_id)
+                );
+
+        </sql>
+    </changeSet>
+</databaseChangeLog>

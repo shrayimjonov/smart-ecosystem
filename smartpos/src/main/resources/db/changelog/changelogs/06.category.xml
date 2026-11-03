@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="category_id_sequence, name, parent_id columns added to category_branch" author="sharipov sunnatillo">
+        <sql>
+            create sequence if not exists category_id_sequence;
+            select setVal('category_id_sequence', (select max(id) from category));
+            alter table category_branch
+                add column if not exists name text;
+            alter table category_branch
+                add column if not exists parent_id bigint;
+            alter table category_branch
+                add foreign key (parent_id, branch_id) references category_branch (category_id, branch_id);
+            update category_branch cb
+            set name = c.name from category c
+            where cb.name is null and cb.category_id = c.id;
+            update category_branch cb
+            set parent_id = (select c.parent_id
+                             from category c
+                                      inner join category_branch cb2
+                                                 on c.parent_id = cb2.category_id and cb2.branch_id = cb.branch_id
+                             where c.id = cb.category_id)
+            where cb.parent_id is null;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

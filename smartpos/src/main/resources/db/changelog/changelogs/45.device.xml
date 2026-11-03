@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="create device" author="Sunnatillo Sharipov">
+        <createTable tableName="device">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="deleted" type="boolean" defaultValue="false"/>
+            <column name="serial_number" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="type" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="branch_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="drop device serial number and replace it with type unique constraint" author="Sunnatillo Sharipov">
+        <dropUniqueConstraint tableName="device" uniqueColumns="serial_number" constraintName="device_serial_number_key"/>
+        <addUniqueConstraint tableName="device" columnNames="serial_number, type" constraintName="device_uk"/>
+    </changeSet>
+    <changeSet id="device add audit columns" author="Sunnatillo Sharipov">
+        <addColumn tableName="device">
+            <column name="created_by" type="varchar(50)"/>
+            <column name="created_date" type="timestamp" defaultValue="now()"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp" defaultValue="now()"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="migrate terminals to device table" author="Sunnatillo Sharipov">
+        <sql>
+            insert into device(id, created_by, created_date, last_modified_by, last_modified_date, deleted,
+                               serial_number, type, branch_id, company_id)
+            select t.id,
+                   t.created_by,
+                   t.created_date,
+                   t.last_modified_by,
+                   t.last_modified_date,
+                   false,
+                   t.serial_number,
+                   'TERMINAL_FISCAL',
+                   b.id,
+                   b.company_id
+            from terminal t inner join branch b on b.id = t.branch_id;
+            select setval('device_id_seq', (select max(id) + 1 from device));
+        </sql>
+    </changeSet>
+    <changeSet id="change device type TERMINAL_FISCAL to FISCAL" author="Sunnatillo Sharipov">
+        <sql>
+            UPDATE device
+            SET type = 'FISCAL'
+            where type = 'TERMINAL_FISCAL';
+        </sql>
+    </changeSet>
+</databaseChangeLog>

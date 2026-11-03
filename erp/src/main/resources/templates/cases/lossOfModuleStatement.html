@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>4.1 Утеря модуля заявление</title>
+</head>
+<body style="padding: 5rem;">
+<div>
+  <div style=" display: flex; justify-content: end">
+    <h2>
+      OOO “SPECIAL TEXNO SOFT”
+    </h2>
+  </div>
+  <div style="margin-top: 5rem">
+    <h4 style="line-height: 2rem">
+        <label th:text="${dto.companyName}"></label> ИНН <label th:text="${dto.tin}"></label> просит вас выдать новый фискальный модуль в
+      замен утерянного фискального модуля <label th:text="${dto.fiscalNumber}"></label>, от Онлайн -ККМ серийный номер UZKASSA
+        <label th:text="${dto.deviceNumber}"></label>
+    </h4>
+  </div>
+  <div style="margin-top: 5rem;">
+    <h4>
+      Дата <label th:text="${#temporals.format(dto.date, 'dd.MM.yyyy')}"></label>
+    </h4>
+    <h4>
+      Директор <label th:text="${dto.director}"></label>
+    </h4>
+    <h4>
+      Подпись:_____________
+    </h4>
+
+  </div>
+  <div style="margin-top: 5rem;">
+    <p style="color: gray">
+      Место для печати:
+    </p>
+  </div>
+</div>
+</body>
+</html>

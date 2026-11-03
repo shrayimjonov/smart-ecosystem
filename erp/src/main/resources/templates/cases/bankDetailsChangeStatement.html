@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>8.- Изменение реквизитов</title>
+</head>
+<body style="padding: 5rem;">
+<div>
+  <div style=" display: flex; justify-content: end">
+    <p style="max-width: 30%">
+      OOO “Special Texno Soft”
+      Директору Усмонов Д. Ф.
+        <label th:text="${bankDetailDTO.companyName}"></label>
+      от <label th:text="${bankDetailDTO.director}"></label>
+
+    </p>
+  </div>
+  <div style="margin-top: 5rem;text-align: center">
+    <p>
+      Заявление
+    </p>
+  </div>
+  <div style="margin-top: 5rem">
+    <p>
+        <label th:text="${bankDetailDTO.businessType}"></label> <label th:text="${bankDetailDTO.companyName}"></label> ИНН <label th:text="${bankDetailDTO.tin}"></label> Просим вас изменить реквизты банка нашей фирмы
+    </p>
+    <p>Новые реквизиты</p>
+    <p>Банк:<label th:text="${bankDetailDTO.bankName}"></label></p>
+    <p>Р/с <label th:text="${bankDetailDTO.accountNumber}"></label></p>
+    <p>МФО <label th:text="${bankDetailDTO.mfo}"></label></p>
+    <p>ОКЭД <label th:text="${bankDetailDTO.oked}"></label></p>
+  </div>
+  <div style="margin-top: 5rem;display: flex;justify-content: space-between">
+    <div>
+      <p>
+        Директор <label th:text="${bankDetailDTO.director}"></label>
+      </p>
+      <p>
+        Дата <label th:text="${#temporals.format(bankDetailDTO.date, 'dd.MM.yyyy')}"></label>
+      </p>
+    </div>
+    <div>
+      <p>
+        Подпись:_____________
+      </p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+logging:
+  level:
+    org.springframework.amqp: ERROR
+    org.hibernate.persister.entity: ERROR
+    org.hibernate.tool.schema.internal: ERROR
+    org.apache.kafka.clients: ERROR
+
+spring:
+  threads:
+    virtual:
+      enabled: true
+  application:
+    name: silen
+  profiles:
+    active: dev
+  jmx:
+    enabled: false
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+    mongodb:
+      uri: ${SPRING_DATA_MONGODB_URI}
+      database: silen
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+  master:
+    datasource:
+      maximumPoolSize: 195
+      minimumIdle: 100
+    jpa:
+      show_sql: false
+      properties:
+        hibernate.id.new_generator_mappings: true
+        hibernate.cache.use_second_level_cache: true
+        hibernate.hbm2ddl.auto: update
+        hibernate.jdbc.batch_size: 50
+  slave:
+    datasource:
+      maximumPoolSize: 195
+      minimumIdle: 100
+    jpa:
+      show_sql: false
+      properties:
+        hibernate.id.new_generator_mappings: true
+        hibernate.cache.use_second_level_cache: true
+        hibernate.hbm2ddl.auto: none
+        hibernate.jdbc.batch_size: 50
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    user: ${spring.master.datasource.username}
+    password: ${spring.master.datasource.password}
+    url: ${spring.master.datasource.jdbcUrl}
+    enabled: false
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  rabbitmq:
+    host: localhost
+    port: 5672
+    dynamic: true
+    password: ${SPRING_RABBITMQ_PASSWORD}
+    username: ${USERNAME}
+    cache:
+      connection:
+        size: 1
+        mode: channel
+      channel:
+        checkout-timeout: 0
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+    use-code-as-default-message: true
+  main:
+    allow-bean-definition-overriding: true
+  thymeleaf:
+    mode: HTML
+  jackson:
+    serialization:
+      indent-output: true
+  output:
+    ansi:
+      enabled: always
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: myGroupId
+      enable-auto-commit: false
+      listener:
+        missing-topics-fatal: false
+
+server:
+  servlet:
+    session:
+      cookie:
+        http-only: true
+
+application:
+  pushUrl: ${APPLICATION_PUSHURL}
+  serverUrl: ${APPLICATION_SERVERURL}
+  jwt-secret-key: ${APPLICATION_JWT_SECRET_KEY}
+  token-validity-in-seconds: 82800 # 23 hour
+  line-token-validity-in-seconds: 31540000 # 365 days, 1 hours, 6 minutes and 40 seconds
+  logBotUrl: ${APPLICATION_LOGBOTURL}
+  logBotToken: ${APPLICATION_LOGBOTTOKEN}
+  logChannelId: -1002211009811 #-1001440088031
+  providerTin: 306344019
+  clientSecret: ${APPLICATION_CLIENTSECRET}
+  swagger:
+    url: ${APPLICATION_SWAGGER_URL}
+    protocols: https
+  eimzo:
+    url: ${APPLICATION_EIMZO_URL}
+  soliq:
+    url: /mysoliq/services/
+    username: ${USERNAME}
+    password: ${APPLICATION_SOLIQ_PASSWORD}
+  factura:
+    url: /provider/api/ # Don't remove url facturaClient used it like default host when active host is not found
+    username: ${USERNAME}
+    password: ${APPLICATION_FACTURA_PASSWORD}
+  xFile:
+    url: ${APPLICATION_XFILE_URL}
+    username: ${USERNAME}
+    password: ${APPLICATION_XFILE_PASSWORD}
+  trueApiUrl: ${APPLICATION_TRUEAPIURL}
+  turonApiUrl: ${APPLICATION_TURONAPIURL}
+  tasnifApiUrl: ${APPLICATION_TASNIFAPIURL}
+  #  tasnifApiUrl: /tasnif/cl-api
+  trueApiReport: https://icom.aslbelgisi.uz/facade/reports/
+  billing:
+    url: ${APPLICATION_BILLING_URL}
+    username: ${USERNAME}
+    password: ${APPLICATION_BILLING_PASSWORD}
+  supplier:
+    url: ${APPLICATION_SUPPLIER_URL}
+    username: ${USERNAME}
+    password: ${APPLICATION_SUPPLIER_PASSWORD}
+  minio:
+    url: ${APPLICATION_MINIO_URL}
+    username: ${USERNAME}
+    password: ${APPLICATION_MINIO_PASSWORD}
+    bucket: ${BUCKET}

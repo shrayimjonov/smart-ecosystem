@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="add color group fields to image" author="Sunnatillo Sharipov">
+        <addColumn tableName="color_group_image">
+            <column name="product_id" type="bigint"/>
+            <column name="branch_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="drop column product id from color group image" author="Sunnatillo Sharipov">
+        <dropColumn tableName="color_group_image" columnName="product_id"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="category" author="azazello">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="category"/>
+            </not>
+        </preConditions>
+        <createTable tableName="category">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_by" type="varchar(50)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent_id" type="bigint"/>
+            <column name="company_type" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="home service category" author="sharipov sunnatillo">
+        <sql>
+            insert into category (id, created_by, created_date, last_modified_by, last_modified_date, name,
+                                  company_type)
+            values ((select nextval('category_id_sequence')), 'system', now(), 'system', now(), 'КОММУНАЛ ХИЗМАТЛАР', 'HOME_SERVICE')
+        </sql>
+    </changeSet>
+    <changeSet id="category_mxik_code" author="azazello">
+        <addColumn tableName="category">
+            <column name="mxik_code" type="varchar(25)"/>
+        </addColumn>
+        <addColumn tableName="category_branch">
+            <column name="mxik_code" type="varchar(25)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="category_name_uz" author="azazello">
+        <addColumn tableName="category">
+            <column name="name_uz" type="varchar(255)"/>
+        </addColumn>
+        <addColumn tableName="category_branch">
+            <column name="name_uz" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

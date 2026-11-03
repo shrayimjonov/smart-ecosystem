@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="create marking warehouse table" author="Sunnatillo Sharipov">
+        <createSequence sequenceName="marking_warehouse_id_seq" incrementBy="20"/>
+        <createTable tableName="marking_warehouse">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="marking" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="branch_id" type="bigint">
+            </column>
+            <column name="city_id" type="bigint">
+            </column>
+            <column name="product_id" type="bigint"/>
+            <column name="created_at" type="timestamp"/>
+            <column name="received_at" type="timestamp"/>
+            <column name="status" type="varchar(255)"/>
+            <column name="sold_at" type="timestamp"/>
+            <column name="operation_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addUniqueConstraint tableName="marking_warehouse" columnNames="marking, operation_date"
+                             constraintName="marking_warehouse_marking_operation_date_unique"/>
+    </changeSet>
+    <changeSet id="drop marking warehouse related tables" author="sunnatillo sharipov">
+        <dropTable tableName="marking_warehouse"/>
+        <dropSequence sequenceName="marking_warehouse_id_seq"/>
+    </changeSet>
+    <changeSet id="create marking income tables" author="Sunnatillo Sharipov">
+        <createTable tableName="marking_income">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="company_id" type="bigint"/>
+            <column name="branch_id" type="bigint"/>
+            <column name="operation_date" type="date"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="created_by_id" type="bigint"/>
+        </createTable>
+        <createTable tableName="marking_income_detail">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="operation_date" type="date"/>
+            <column name="received_at" type="timestamp"/>
+            <column name="branch_id" type="bigint"/>
+            <column name="city_id" type="bigint"/>
+            <column name="product_id" type="bigint"/>
+            <column name="marking" type="varchar(255)"/>
+            <column name="print_code" type="varchar(255)"/>
+            <column name="status" type="varchar(255)"/>
+            <column name="adjustment_reason" type="varchar(255)"/>
+            <column name="marking_income_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="add from branch id column to marking warehouse" author="Sunnatillo Sharipov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="marking_income" columnName="from_branch_id"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="marking_income">
+            <column name="from_branch_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="add parent and children to marking income detail" author="Sunnatillo Sharipov">
+        <addColumn tableName="marking_income_detail">
+            <column name="parent" type="varchar(512)"/>
+            <column name="children" type="jsonb"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

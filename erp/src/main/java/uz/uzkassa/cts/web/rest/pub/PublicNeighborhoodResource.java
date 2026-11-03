@@ -1,0 +1,31 @@
+package uz.uzkassa.cts.web.rest.pub;
+
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import uz.uzkassa.cts.constants.ApiConstants;
+import uz.uzkassa.cts.dto.base.CommonCodeDTO;
+import uz.uzkassa.cts.filter.BaseFilter;
+import uz.uzkassa.cts.service.NeighborhoodService;
+
+import java.util.List;
+
+import static lombok.AccessLevel.PRIVATE;
+
+@RestController
+@RequestMapping(ApiConstants.publicNeighborhoodRootApi)
+@FieldDefaults(level = PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
+public class PublicNeighborhoodResource {
+
+    NeighborhoodService neighborhoodService;
+
+    @GetMapping(ApiConstants.lookUp)
+    public ResponseEntity<List<CommonCodeDTO>> lookUp(@ParameterObject BaseFilter filter) {
+        return ResponseEntity.ok(neighborhoodService.lookUp(filter));
+    }
+}

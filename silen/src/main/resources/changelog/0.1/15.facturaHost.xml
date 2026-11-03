@@ -1,0 +1,58 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+    <changeSet author="xayrullayev" id="create_table_factura_host" failOnError="true">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+            <not>
+                <tableExists tableName="factura_host"/>
+            </not>
+        </preConditions>
+        <createTable tableName="factura_host">
+            <column name="id" autoIncrement="true" type="bigint"/>
+            <column name="host" type="varchar(50)"/>
+            <column name="active" defaultValue="false" type="boolean"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="xayrullayev" id="factura_host_pk" failOnError="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="factura_host" primaryKeyName="id"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey tableName="factura_host" columnNames="id"/>
+    </changeSet>
+    <changeSet author="xayrullayev" id="addUniqueConstraint">
+        <addUniqueConstraint
+            columnNames="host, active"
+            constraintName="factura_host_unique_host_active"
+            tableName="factura_host"/>
+    </changeSet>
+    <changeSet author="xayrullayev" id="insert_hosts" failOnError="true">
+        <insert tableName="factura_host">
+            <column name="id" value="1"/>
+            <column name="host" value="https://factura.yt.uz/provider/api/"/>
+            <column name="active" value="false"/>
+        </insert>
+        <insert tableName="factura_host">
+            <column name="id" value="2"/>
+            <column name="host" value="https://s0.rouming.uz/provider/api/"/>
+            <column name="active" value="false"/>
+        </insert>
+        <insert tableName="factura_host">
+            <column name="id" value="3"/>
+            <column name="host" value="https://s1.rouming.uz/provider/api/"/>
+            <column name="active" value="false"/>
+        </insert>
+        <insert tableName="factura_host">
+            <column name="id" value="4"/>
+            <column name="host" value="https://s2.rouming.uz/provider/api/"/>
+            <column name="active" value="false"/>
+        </insert>
+        <insert tableName="factura_host">
+            <column name="id" value="5"/>
+            <column name="host" value="https://s3.rouming.uz/provider/api/"/>
+            <column name="active" value="true"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="remove management related data" author="sharipov sunnatillo">
+        <sql>
+            drop table if exists bill;
+            drop table if exists employee_bonus;
+            drop table if exists bonus;
+            drop table if exists company_agreement;
+            drop table if exists company_bill;
+            drop table if exists usage_plan;
+            drop table if exists fiscal_module;
+            drop table if exists ofd_application;
+            drop table if exists pricing;
+            drop table if exists inventory;
+            drop table if exists inventory_item;
+            drop table if exists pricing;
+            drop table if exists terminal_transfer;
+            alter table terminal drop column if exists model;
+            alter table terminal drop column if exists fiscal_module_id;
+            alter table terminal drop column if exists status;
+            alter table terminal drop column if exists transfer_id;
+            alter table terminal drop column if exists bill_id;
+            alter table terminal drop column if exists hash;
+            alter table terminal drop column if exists agreement_id;
+            alter table terminal drop column if exists admin_branch_id;
+            alter table terminal drop column if exists synced;
+            alter table terminal drop column if exists customer_tin;
+            alter table terminal drop column if exists customer_name;
+        </sql>
+    </changeSet>
+    <changeSet id="drop table terminal" author="Sunnatillo Sharipov" context="local, test">
+        <dropTable tableName="terminal"/>
+    </changeSet>
+</databaseChangeLog>

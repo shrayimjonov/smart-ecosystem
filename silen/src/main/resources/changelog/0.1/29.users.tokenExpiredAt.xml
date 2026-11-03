@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="users_token_expired_at" author="xayrullayev">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+            <not>
+                <columnExists tableName="users" columnName="token_expired_at"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="users">
+            <column name="token_expired_at" type="timestamp"/>
+            <column name="phone" type="varchar(255)"/>
+            <column name="bonus_percent" type="integer"/>
+            <column name="supervisor_id" type="varchar(255)">
+                <constraints foreignKeyName="fk_supervisor_id_users" references="users(id)"/>
+            </column>
+        </addColumn>
+        <rollback changeSetId="organization_manager" changeSetAuthor="xayrullayev">
+            <dropColumn tableName="users" columnName="token_expired_at"/>
+            <dropColumn tableName="users" columnName="phone"/>
+            <dropColumn tableName="users" columnName="bonus_percent"/>
+            <dropColumn tableName="users" columnName="supervisor_id"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="organization_manager" author="xayrullayev">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+            <not>
+                <columnExists tableName="organization" columnName="manager_assigned_at"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="organization">
+            <column name="manager_assigned_at" type="timestamp"/>
+        </addColumn>
+        <rollback changeSetId="organization_manager" changeSetAuthor="xayrullayev">
+            <dropColumn tableName="organization" columnName="manager_assigned_at"/>
+        </rollback>
+    </changeSet>
+
+
+</databaseChangeLog>

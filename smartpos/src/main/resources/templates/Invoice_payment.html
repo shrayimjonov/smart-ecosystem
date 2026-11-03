@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 13px;
+            line-height: 16px;
+            margin: 0;
+        }
+
+        .wrapper {
+            box-sizing: border-box;
+            margin: 0 auto;
+            padding: 20px 40px;
+        }
+
+        .t-a-c {
+            text-align: center;
+        }
+
+        .t-a-r {
+            text-align: right;
+        }
+
+        .h1	{
+            font-size: 19px;
+            margin: 0 0 10px;
+            padding: 0 0 15px;
+            border-bottom: 2px solid #000;
+        }
+
+        .b-b {
+            border-bottom: 1px solid #000;
+        }
+
+        .v-a-t {
+            vertical-align: top;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .top-warning {
+            text-align: center;
+            margin: 0 0 20px;
+            font-size: 12px;
+        }
+
+        .table1 {
+            width: 100%;
+            border: 1px solid #000;
+            border-collapse: collapse;
+            margin: 0 0 30px;
+            padding: 0;
+            font-size: 12px;
+        }
+
+        .table1 td {
+            padding: 0;
+        }
+
+        .table1 .cell {
+            padding: 3px;
+        }
+
+        .table1-comp-name {
+            margin: 0 0 5px;
+        }
+
+        .table1-mfo-td {
+            vertical-align: top;
+        }
+
+
+        .table1-mfo {
+            border-bottom: 1px solid #000
+        }
+
+        .table1-inn {
+            display: inline-block;
+            margin: 0 20px 0 0;
+        }
+
+        .table2 {
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .table2 td {
+            padding: 7px 0;
+        }
+
+        .table2-name {
+            padding: 0 15px 0 0;
+        }
+
+        .table3 {
+            width: 100%;
+            border: 1px solid #000;
+            border-collapse: collapse;
+            margin: 10px 0 10px;
+            padding: 0;
+        }
+
+        .table3 th, .table3 td {
+            padding: 3px;
+        }
+
+        .table3 th {
+            text-align: center;
+        }
+
+        .table3-price {
+            width: 100px;
+        }
+
+
+        .total-sum {
+            float: right;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .total-sum-value {
+            min-width: 100px;
+        }
+
+        .result {
+            padding: 0 0 10px;
+            border-bottom: 1px solid #000;
+        }
+
+        .signatures {
+            margin: 40px 0 0;
+            padding: 0 0 110px;
+        }
+
+        .signatures-left {
+            float: left;
+            width: 60%;
+            display: flex;
+        }
+
+        .signatures-right {
+            float: right;
+            width: 35%;
+            display: flex;
+        }
+
+        .signatures-prof {
+            font-weight: bold;
+            margin: 0 10px 0 0;
+            padding: 2px 0 0;
+        }
+
+        .signatures-line {
+            flex-grow: 1;
+            border-bottom: 1px solid #000;
+            text-align: right;
+        }
+
+        .director-line {
+            position: relative;
+            text-align: left;
+            padding: 0 0 0 90px;
+        }
+
+        .seal {
+            position: absolute;
+            left: 124px;
+            top: -29px;
+            width: 150px;
+            font-size: 0;
+        }
+
+        .director-line img {
+            max-width: 100%;
+        }
+
+        .sign {
+            position: absolute;
+            left: 197px;
+            top: -63px;
+            width: 87px;
+            font-size: 0;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="top-warning">
+        Внимание! Оплата данного счета означает согласие с условиями оказания услуг.
+        Услуга отпускается по факту<br>прихода денег на р/с Поставщика.
+    </div>
+
+    <table class="table1" border="1">
+        <tr>
+            <td colspan="2">
+                <div class="cell table1-comp-name">
+                    <span th:text="${purchaseOrder.supplier.companyBank.bank.name}"></span>
+                </div>
+                <div class="cell">
+                    Банк получателя
+                </div>
+            </td>
+            <td class="table1-mfo-td">
+                <div class="table1-mfo cell">МФО</div>
+                <div class="cell">Сч. №</div>
+            </td>
+            <td class="table1-mfo-td-value v-a-t">
+                <div class="cell"><span th:text="${purchaseOrder.supplier.companyBank.bank.code}"></span></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="cell">
+                    <div class="table1-inn">ИНН</div>
+                    <span th:text="${purchaseOrder.supplier.inn}"></span>
+                </div>
+            </td>
+            <td>
+                <div class="cell">
+                    <div class="table1-inn">ОКЭД</div>
+                    <span th:text="${purchaseOrder.supplier.companyBank.oked}"></span>
+                </div>
+            </td>
+            <td rowspan="2" class=" v-a-t">
+                <div class="cell">Сч. №</div>
+            </td>
+            <td rowspan="2" class=" v-a-t">
+                <div class="cell"><span th:text="${purchaseOrder.supplier.companyBank.accountNumber}"></span></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="cell table1-comp-name">
+                    <span th:text="${purchaseOrder.supplier.businessType.nameRu}"></span>  <span th:text="${purchaseOrder.supplier.name}"></span>
+                </div>
+                <div class="cell">
+                    Получатель
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <h1 class="h1">Счет на оплату № <span th:text="${invoicePayment.invoicePaymentNumber}"></span> от
+        <span th:text="${#temporals.format(invoicePayment.createdDate, 'dd.MM.yyyy')}"></span> г.</h1>
+
+    <table class="table2">
+        <tr>
+            <td>
+                <div class="table2-name">Поставщик:</div>
+            </td>
+            <td>
+                <div><strong>ИНН <span th:text="${purchaseOrder.supplier.inn}"></span>,
+                    ОКЭД <span th:text="${purchaseOrder.supplier.companyBank.bank.code}"></span>,
+                    <span th:text="${purchaseOrder.supplier.name}"></span>, <span
+                            th:text="${purchaseOrder.toBranch.address}"></span>,
+                    тел.: <span th:text="${purchaseOrder.toBranch.phone}"></span></strong></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="table2-name">Покупатель:</div>
+            </td>
+            <td>
+                <div><strong>ИНН <span th:text="${purchaseOrder.customer.inn}"></span>,
+                    ОКЭД <span th:text="${purchaseOrder.customer.companyBank.bank.code}"></span>,
+                    <span th:text="${purchaseOrder.customer.name}"></span></strong></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="table2-name">Договор:</div>
+            </td>
+            <td><strong><span th:text="${contract.contractNumber}"></span> от
+                <span th:text="${#temporals.format(contract.startDate, 'dd.MM.yyyy')}"></span> г.
+            </strong>
+            </td>
+        </tr>
+    </table>
+
+    <table class="table3" border="1">
+        <tr>
+            <th>№</th>
+            <th>Товар</th>
+            <th>Кол-во</th>
+            <th>Ед.</th>
+            <th class="table3-price">Цена</th>
+            <th class="table3-price">Сумма</th>
+        </tr>
+        <th:block th:each="order,itrStat : ${purchaseOrder.orders}">
+            <tr>
+                <td th:text="${itrStat.index +1}" class="t-a-c">1</td>
+                <td th:text="${order.name}">...</td>
+                <td class="t-a-c" th:text="${order.qty}">...</td>
+                <td class="t-a-c" th:text="${order.unit.name}">...</td>
+                <td class="table3-price t-a-r" th:text="${#numbers.formatDecimal(order.price, 1, 'COMMA', 2, 'POINT')}">...</td>
+                <td class="table3-price t-a-r" th:text="${#numbers.formatDecimal(order.costPrice, 1, 'COMMA', 2, 'POINT')}">...</td>
+            </tr>
+        </th:block>
+    </table>
+
+    <table class="total-sum">
+        <tr>
+            <td>Итого:</td>
+            <td>
+                <div class="total-sum-value"><span th:text="${#numbers.formatDecimal(purchaseOrder.total, 1, 'COMMA', 2, 'POINT')}"></span></div>
+            </td>
+        </tr>
+        <tr>
+            <td>Сумма НДС</td>
+            <td>
+                <div class="total-sum-value"><span
+                    th:text="${#numbers.formatDecimal(purchaseOrder.getTotalVat(), 1, 'COMMA', 2, 'POINT')}"></span></div>
+            </td>
+        </tr>
+    </table>
+
+
+    <div class="clear"></div>
+
+    <div class="result">
+        Всего наименований <span th:text="${purchaseOrder.orders.size()}"></span>, на сумму
+        <span th:text="${#numbers.formatDecimal(purchaseOrder.total, 1, 'COMMA', 2, 'POINT')}"></span> сум
+        <div>
+            <strong><span th:text="${purchaseOrder.getTotalInWord()}"></span></strong>
+        </div>
+    </div>
+    <div class="signatures">
+        <div class="signatures-left">
+            <div class="signatures-prof">Поставщик</div>
+            <div class="signatures-line director-line">
+                <div><span th:text="${purchaseOrder.supplier.owner.name}"></span></div>
+                <div class="seal"></div>
+                <div class="sign"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="signatures-right">
+            <div class="signatures-prof">Покупатель</div>
+            <div class="signatures-line"><span th:text="${purchaseOrder.customer.owner.name}"></span></div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

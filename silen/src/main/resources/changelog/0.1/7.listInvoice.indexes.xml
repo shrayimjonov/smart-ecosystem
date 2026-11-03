@@ -1,0 +1,15 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+    <changeSet author="ahaqberdiev" id="list_invoice_indexes" failOnError="true">
+        <sql splitStatements="true">
+            create index list_invoice_seller_status_index
+                on list_invoice (seller_tin, status);
+            create index list_invoice_buyer_status_index
+                on list_invoice (buyer_tin, status);
+            create index list_invoice_seller_buyer_status_index
+                on list_invoice (seller_tin, buyer_tin, status);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

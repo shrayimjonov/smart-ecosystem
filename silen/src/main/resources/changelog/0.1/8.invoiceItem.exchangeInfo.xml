@@ -1,0 +1,12 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+    <changeSet author="ahaqberdiev" id="invoice_item_exchange_info" failOnError="true">
+        <sql splitStatements="true">
+            ALTER TABLE invoice_item ADD COLUMN product_code VARCHAR(18);
+            ALTER TABLE invoice_item ADD COLUMN product_properties VARCHAR(300);
+            ALTER TABLE invoice_item ADD COLUMN plan_position_id INT;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

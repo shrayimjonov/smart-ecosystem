@@ -1,0 +1,107 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+     <style>
+          body {
+               font-family: arial;
+               box-sizing: border-box;
+               padding: 50px;
+               margin: 0 auto;
+          }
+
+          .flex-center {
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               flex-direction: column;
+          }
+
+          span,
+          .font-bold {
+               font-weight: 600;
+          }
+
+          .mb20 {
+               margin-bottom: 20px;
+          }
+     </style>
+     <body>
+          <div style="text-align: end" class="mb20">
+               <span>
+                    ПРИЛОЖЕНИЕ № 1<br />
+                    к Договору №<label th:text="${act.contract.number}"></label> <br />
+                    купли-продажи товара с рассрочкой платежа<br />
+                    От <label th:text="${#temporals.format(act.contract.createdDate, 'dd.MM.yyyy')}"></label>года
+               </span>
+          </div>
+          <div style="text-align: center" class="flex-center font-bold mb20">
+               ГРАФИК ПЛАТЕЖЕЙ<br />
+               по договору купли-продажи товара с рассрочкой платежа.
+          </div>
+          <div class="mb20">
+               <tbody>
+                    <table border="1" bordercolor="#000" width="100%" style="border-collapse: collapse; text-align: center" cellpadding="5px">
+                         <tr class="font-bold">
+                             <td>№</td>
+                             <td>Дата платежа</td>
+                             <td>Платеж</td>
+                             <td>Остаток</td>
+                         </tr>
+                        <th:block th:each="schedule,itrStat : ${act.actPaymentSchedules}">
+                            <tr>
+                                <td th:text="${itrStat.index +1}">1</td>
+                                <td th:text="${'до'  + ' ' + #temporals.format(schedule.paymentDate, 'dd.MM.yyyy')}">...</td>
+                                <td th:text="${#numbers.formatDecimal(schedule.amount, 3, 'POINT', 2, 'COMMA')}">...</td>
+                                <td th:text="${#numbers.formatDecimal(schedule.balance, 3, 'POINT', 2, 'COMMA')}">...</td>
+                            </tr>
+                        </th:block>
+                         <tr  class="font-bold">
+                              <td></td>
+                              <td>ИТОГО</td>
+                              <td th:text="${#numbers.formatDecimal(act.totalPriceWithVat, 3, 'POINT', 2, 'COMMA')}"></td>
+                              <td></td>
+                         </tr>
+                    </table>
+               </tbody>
+          </div>
+          <div class="mb20">Общая сумма по Договору <label th:text="${#numbers.formatDecimal(act.totalPriceWithVat, 3, 'POINT', 2, 'COMMA')}"></label> (<label
+              th:text="${act.contract.decimalToWord(act.totalPriceWithVat)}"></label>) сум,
+              в том числе НДС 15% <label th:text="${#numbers.formatDecimal(act.totalVatPrice, 3, 'POINT', 2, 'COMMA')}"></label> сум.</div>
+          <div class="mb20">Окончательный срок оплаты за Товар: <label th:text="${#temporals.format(act.getLastSchedule().getPaymentDate(), 'dd.MM.yyyy')}"></label> года.</div>
+          <div class="mb20 flex-center font-bold">ЮРИДИЧЕСКИЕ И БАНКОВСКИЕ РЕКВИЗИТЫ СТОРОН:</div>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr)">
+               <div style="border: 1px solid #000; padding: 10px 20px">
+                    <div class="font-bold flex-center mb20" style="font-style: italic">ПРОДАВЕЦ:</div>
+                    <span>ООО «PRIME ONLINE TECHNOLOGY»</span><br />
+                    Юридический адрес: Джизакская область,<br />
+                    Фориш район, Богдон МФУ,ул. Шарофа Рашидова, дом 3<br />
+                    Фактический адрес: 100090, Республика Узбекистан,<br />
+                    г.Ташкент, Яккасарайский район, ул.А.Каххара, 1а<br />
+                    ИНН: 306 866 358<br />
+                    р/с: 2020 8000 4051 4368 5001<br />
+                    ОПЕРУ ЧАББ «ТРАСТБАНК» г.Ташкент<br />
+                    МФО: 00491<br />
+                    ОКЭД: 46900<br />
+                    <p class="mb20">
+                         Директор<br />
+                         Сайдалиев С.Х __________________
+                    </p>
+               </div>
+               <div style="border: 1px solid #000; border-left: none; padding: 10px 20px">
+                   <div class="font-bold flex-center mb20" style="font-style: italic">ПОКУПАТЕЛЬ:</div>
+                   <span th:text="${act.contract.customer.businessType.getName() + ' ' + act.contract.customer.companyName}"></span><br />
+                   <label th:text="${act.contract.customer.address.region.nameRu}"></label>
+                   <label th:text="${act.contract.customer.address.district.nameRu}"></label>
+                   <label th:text="${act.contract.customer.address.getAddress()}"></label><br />
+                   ИНН: <label th:text="${act.contract.customer.tin}"></label><br />
+                   р/с: <label th:text="${act.contract.customer.customerBank.accountNumber}"></label><br />
+                   <label th:text="${act.contract.customer.customerBank.bank.getNameNotNullable()}"></label><br />
+                   МФО: <label th:text="${act.contract.customer.customerBank.bank.code}"></label><br/>
+                   ОКЭД: <label th:text="${act.contract.customer.oked}"></label><br />
+                   тел: <label th:text="${act.contract.customer.phone}"></label><br />
+                   <p class="mb10">
+                       Директор<br />
+                       __________________ __________________
+                   </p>
+               </div>
+          </div>
+     </body>
+</html>

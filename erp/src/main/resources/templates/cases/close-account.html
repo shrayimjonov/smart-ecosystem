@@ -1,0 +1,73 @@
+<!DOCTYPE>
+<html>
+<head>
+  <style>
+      table, td, th {
+          border: 1px solid;
+      }
+
+      table {
+          width: 100%;
+          border-collapse: collapse;
+      }
+  </style>
+</head>
+
+<body style="padding: 2rem">
+<div>
+  <div style="display: flex;justify-content: end">
+    <p style="width: 400px; text-align: right">
+      MChJ "Special Texno Soft" Direktori D.F.Usmanovga
+      <br><span th:text="${dto?.director}"></span>dan
+    </p>
+  </div>
+  <div style="display: flex;justify-content: center">
+    <h4>
+      A R I Z A
+    </h4>
+  </div>
+  <div>
+    <p>
+      Sizdan <span th:text="${dto?.companyName}"></span>  <span th:text="${dto?.tin}"></span> nomiga ochilgan onlayn NKM terminal(lar)iga
+      bogʻlangan quyidagi hisob raqam(lar)ni yopishda amaliy yordam berishingizni soʻrayman.
+    </p>
+  </div>
+  <table>
+    <thead>
+    <tr>
+      <th>№	</th>
+      <th>Modeli</th>
+      <th>Seriya raqami	</th>
+      <th>MFO	</th>
+      <th>Hisob raqam      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="detail : ${dto.devices}">
+      <tr>
+        <td>1	</td>
+        <td><span th:text="${detail?.deviceModelName}"></span></td>
+        <td><span th:text="${detail?.deviceSerialNumber}"></span></td>
+        <td><span th:text="${dto?.mfo}"></span></td>
+        <td><span th:text="${dto?.accountNumber}"></span></td>
+      </tr>
+    </th:block>
+    </tbody>
+  </table>
+  <div>
+    <p>
+      <span  th:text="${#temporals.format(dto.date, 'dd.MM.yyyy')}"></span>-y. (toʻldirilgan sana)
+    </p>
+    <p>
+      ________ (imzo)
+    </p>
+    <p>
+      <span th:text="${dto?.director}"></span> (rahbar FISH)
+    </p>
+    M.Oʻ.
+  </div>
+
+</div>
+
+</body>
+</html>

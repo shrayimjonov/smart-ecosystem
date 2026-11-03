@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <springProperty scope="context" name="LOG_PATH" source="logging.file.path" defaultValue="./logs"/>
+    <springProperty scope="context" name="APPLICATION_NAME" source="spring.application.name" defaultValue="smartpossupply"/>
+    <springProperty scope="context" name="SERVICE_ENVIRONMENT" source="spring.profiles.active" defaultValue="default"/>
+    <springProperty scope="context" name="SERVICE_NODE_NAME" source="HOSTNAME" defaultValue="unknown"/>
+    <springProperty scope="context" name="ROOT_LOG_LEVEL" source="logging.level.root" defaultValue="INFO"/>
+
+    <property name="LOCAL_FILE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [${APPLICATION_NAME}] [%thread] [traceId=%X{trace.id:-}] %logger{40} - %msg%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+    <property name="LOCAL_CONSOLE_LOG_PATTERN"
+              value="%clr(%d{HH:mm:ss.SSS}){faint} %clr(%-5level) %clr([${APPLICATION_NAME}]){blue} %clr([%thread]){faint} %clr([traceId=%X{trace.id:-}]){magenta} %clr(%logger{40}){cyan} - %msg%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+    <springProfile name="local">
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <charset>${CONSOLE_LOG_CHARSET}</charset>
+                <pattern>${LOCAL_CONSOLE_LOG_PATTERN}</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_PATH}/smartpossupply.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}/smartpossupply.%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+                <maxFileSize>1gb</maxFileSize>
+                <maxHistory>30</maxHistory>
+                <totalSizeCap>10GB</totalSizeCap>
+            </rollingPolicy>
+            <encoder>
+                <charset>${FILE_LOG_CHARSET}</charset>
+                <pattern>${LOCAL_FILE_LOG_PATTERN}</pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <springProfile name="!local">
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="co.elastic.logging.logback.EcsEncoder">
+                <serviceName>${APPLICATION_NAME}</serviceName>
+                <serviceEnvironment>${SERVICE_ENVIRONMENT}</serviceEnvironment>
+                <serviceNodeName>${SERVICE_NODE_NAME}</serviceNodeName>
+                <stackTraceAsArray>false</stackTraceAsArray>
+            </encoder>
+        </appender>
+
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_PATH}/smartpossupply.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}/smartpossupply.%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+                <maxFileSize>1gb</maxFileSize>
+                <maxHistory>30</maxHistory>
+                <totalSizeCap>10GB</totalSizeCap>
+            </rollingPolicy>
+            <encoder class="co.elastic.logging.logback.EcsEncoder">
+                <serviceName>${APPLICATION_NAME}</serviceName>
+                <serviceEnvironment>${SERVICE_ENVIRONMENT}</serviceEnvironment>
+                <serviceNodeName>${SERVICE_NODE_NAME}</serviceNodeName>
+                <stackTraceAsArray>false</stackTraceAsArray>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>512</queueSize>
+        <appender-ref ref="FILE"/>
+    </appender>
+
+    <root level="${ROOT_LOG_LEVEL}">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ASYNC"/>
+    </root>
+
+    <logger name="javax.activation" level="ERROR"/>
+    <logger name="javax.mail" level="ERROR"/>
+    <logger name="javax.management.remote" level="ERROR"/>
+    <logger name="javax.xml.bind" level="ERROR"/>
+    <logger name="ch.qos.logback" level="ERROR"/>
+    <logger name="com.ryantenney" level="ERROR"/>
+    <logger name="com.sun" level="ERROR"/>
+    <logger name="com.zaxxer" level="ERROR"/>
+    <logger name="io.undertow" level="ERROR"/>
+    <logger name="io.undertow.websockets.jsr" level="ERROR"/>
+    <logger name="org.apache" level="ERROR"/>
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
+    <logger name="org.bson" level="ERROR"/>
+    <logger name="org.hibernate.validator" level="ERROR"/>
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="org.hibernate.ejb.HibernatePersistence" level="OFF"/>
+    <logger name="org.postgresql" level="ERROR"/>
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="org.springframework.web" level="ERROR"/>
+    <logger name="org.springframework.security" level="ERROR"/>
+    <logger name="org.springframework.cache" level="ERROR"/>
+    <logger name="org.thymeleaf" level="ERROR"/>
+    <logger name="org.xnio" level="ERROR"/>
+    <logger name="springfox" level="ERROR"/>
+    <logger name="sun.rmi" level="ERROR"/>
+    <logger name="springfox.documentation.schema.property" level="ERROR"/>
+    <logger name="sun.rmi.transport" level="ERROR"/>
+    <logger name="Validator" level="INFO"/>
+    <logger name="_org.springframework.web.servlet.HandlerMapping.Mappings" level="INFO"/>
+    <logger name="org.redisson.connection.DNSMonitor" level="OFF"/>
+    <logger name="org.redisson.command.RedisExecutor" level="OFF"/>
+    <logger name="o.redisson.eviction.JCacheEvictionTask" level="ERROR"/>
+    <logger name="jdk.event.security" level="OFF"/>
+    <logger name="io.netty" level="OFF"/>
+    <logger name="o.r.connection.ClientConnectionsEntry" level="OFF"/>
+    <logger name="org.ehcache.jsr107.Eh107CacheManager" level="OFF"/>
+    <logger name="org.ehcache.core.EhcacheManager" level="OFF"/>
+    <logger name="org.hibernate.SQL_SLOW" level="INFO"/>
+    <shutdownHook class="ch.qos.logback.core.hook.DefaultShutdownHook"/>
+    <logger name="liquibase" level="INFO"/>
+    <logger name="LiquibaseSchemaResolver" level="INFO"/>
+    <logger name="global" level="OFF"/>
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+</configuration>

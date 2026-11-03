@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2026_08_07_create_factura_validation" author="Behzod Jaloliddinov">
+
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="factura_validation"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="factura_validation">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="factura_id" type="bigint"/>
+            <column name="is_valid" type="boolean"/>
+            <column name="error" type="text"/>
+            <column name="warning" type="text"/>
+            <column name="validation_issues" type="text"/>
+            <column name="context_data" type="text"/>
+            <column name="raw_response" type="text"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="deleted" type="boolean" defaultValueBoolean="false"/>
+        </createTable>
+
+        <createIndex indexName="idx_factura_validation_factura_id"
+                     tableName="factura_validation">
+            <column name="factura_id"/>
+        </createIndex>
+
+        <addForeignKeyConstraint
+                constraintName="fk_factura_validation_factura"
+                baseTableName="factura_validation"
+                baseColumnNames="factura_id"
+                referencedTableName="factura"
+                referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

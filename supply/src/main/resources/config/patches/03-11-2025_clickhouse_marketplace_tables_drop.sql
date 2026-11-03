@@ -1,0 +1,15 @@
+drop table if exists filter;
+drop table if exists filter_count;
+drop table if exists filter_product;
+drop table if exists invoice;
+drop table if exists invoice_detail;
+drop table if exists invoice_item;
+drop table if exists invoice_item_aggregation;
+drop table if exists marketplace_category;
+drop table if exists marketplace_category_field;
+drop table if exists marketplace_field;
+drop table if exists marketplace_photo;
+drop table if exists product_comment;
+drop table if exists reference;
+drop table if exists single_catalog;
+drop table if exists single_catalog_company;

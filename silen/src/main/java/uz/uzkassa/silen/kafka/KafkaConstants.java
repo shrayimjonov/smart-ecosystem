@@ -1,0 +1,10 @@
+package uz.uzkassa.silen.kafka;
+
+public interface KafkaConstants {
+
+    String GROUP_ID = "SMARTPOS-TELEGRAM-ID";
+
+    String WAREHOUSE_TOPIC = "WAREHOUSE_TOPIC";
+    String WAREHOUSE_QUEUE = "WAREHOUSE_QUEUE";
+    String WAREHOUSE_AGGREGATION_HISTORY_QUEUE = "WAREHOUSE_AGGREGATION_HISTORY_QUEUE";
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="payment" author="azazello">
+        <createTable tableName="payment">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_by" type="varchar(50)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="account_code" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ext_trs_id" type="varchar(50)"/>
+            <column name="description" type="varchar(255)"/>
+            <column name="receipt_uid" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="numeric(10, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(50)"/>
+            <column name="company_id" type="bigint">
+                <constraints referencedTableName="company"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

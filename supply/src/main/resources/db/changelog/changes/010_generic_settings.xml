@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="adding a new settings (EXPIRATION_DATE_CONTROL) to generic_settings" author="Bahodir Hasanov">
+        <sql>
+            INSERT INTO generic_settings(enabled,
+                                         settings_type,
+                                         settings_fields,
+                                         read_only,
+                                         description,
+                                         deleted,
+                                         for_cabinet,
+                                         allowed_product_groups)
+            VALUES (false,
+                    'EXPIRATION_DATE_CONTROL',
+                    '[{
+                        "format": null,
+                        "maxSize": 0,
+                        "options": null,
+                        "fieldType": "ENABLE_DISABLE",
+                        "valueType": "BOOLEAN",
+                        "widgetType": "CHECK_BOX",
+                        "placeholder": null,
+                        "defaultValue": ""
+                      }]',
+                    false,
+                    '{"descriptionRu": "", "descriptionUz": "", "descriptionCyrillic": null}',
+                    false,
+                    true,
+                    '[]'
+                   );
+        </sql>
+    </changeSet>
+
+    <changeSet id="20260616_generic_settings_order_number" author="Bahodir Hasanov">
+        <sql>
+            ALTER TABLE generic_settings ADD COLUMN IF NOT EXISTS order_number integer;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

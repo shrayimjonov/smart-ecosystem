@@ -1,0 +1,10 @@
+${AnsiColor.RED}         .8.         ${AnsiColor.BLUE}   d888888o.  ${AnsiColor.RED}         .8.         ${AnsiColor.BLUE} 8 888888888o
+${AnsiColor.RED}        .888.        ${AnsiColor.BLUE} .`8888:' `88.${AnsiColor.RED}        .888.        ${AnsiColor.BLUE} 8 8888    `88.
+${AnsiColor.RED}       :88888.       ${AnsiColor.BLUE} 8.`8888.   Y8${AnsiColor.RED}       :88888.       ${AnsiColor.BLUE} 8 8888     `88
+${AnsiColor.RED}      . `88888.      ${AnsiColor.BLUE} `8.`8888.    ${AnsiColor.RED}      . `88888.      ${AnsiColor.BLUE} 8 8888     ,88
+${AnsiColor.RED}     .8. `88888.     ${AnsiColor.BLUE}  `8.`8888.   ${AnsiColor.RED}     .8. `88888.     ${AnsiColor.BLUE} 8 8888.   ,88'
+${AnsiColor.RED}    .8`8. `88888.    ${AnsiColor.BLUE}   `8.`8888.  ${AnsiColor.RED}    .8`8. `88888.    ${AnsiColor.BLUE} 8 888888888P'
+${AnsiColor.RED}   .8' `8. `88888.   ${AnsiColor.BLUE}    `8.`8888. ${AnsiColor.RED}   .8' `8. `88888.   ${AnsiColor.BLUE} 8 8888
+${AnsiColor.RED}  .8'   `8. `88888.  ${AnsiColor.BLUE}8b   `8.`8888.${AnsiColor.RED}  .8'   `8. `88888.  ${AnsiColor.BLUE} 8 8888
+${AnsiColor.RED} .888888888. `88888. ${AnsiColor.BLUE}`8b.  ;8.`8888${AnsiColor.RED} .888888888. `88888. ${AnsiColor.BLUE} 8 8888
+${AnsiColor.RED}.8'       `8. `88888.${AnsiColor.BLUE} `Y8888P ,88P'${AnsiColor.RED}.8'       `8. `88888.${AnsiColor.BLUE} 8 8888

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="unit_types" author="azazello">
+        <createTable tableName="unit_types">
+            <column name="unit_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <sql>
+            insert into unit_types (unit_id, type) values
+                ((select id from unit where code ='100001'), 'FASHION'),
+                ((select id from unit where code ='100004'), 'FASHION'),
+                ((select id from unit where code ='100006'), 'FASHION'),
+                ((select id from unit where code ='100022'), 'FASHION'),
+                ((select id from unit where code ='100031'), 'FASHION'),
+                ((select id from unit where code ='100033'), 'FASHION');
+        </sql>
+    </changeSet>
+    <changeSet id="add kg to fashion" author="Sunnatillo Sharipov">
+        <sql>
+            insert into unit_types (unit_id, type) values
+                ((select id from unit where code = '100002'), 'FASHION');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

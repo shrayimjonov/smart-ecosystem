@@ -1,0 +1,360 @@
+<!DOCTYPE>
+<html>
+<head>
+  <style>
+      table, td, th {
+          border: 1px solid;
+      }
+
+      table {
+          width: 100%;
+          border-collapse: collapse;
+      }
+
+      .row {
+          display: flex;
+          justify-content: space-around;
+          border: 1px solid black;
+          border-top: none;
+      }
+
+      .flex-sp {
+          display: flex;
+          justify-content: space-around;
+      }
+
+      .flex-center {
+          display: flex;
+          justify-content: center
+      }
+
+      .col {
+          width: 100%;
+          align-items: center;
+      }
+
+      .borderLeft {
+          border-left: 1px solid black;
+      }
+
+      .borderBottom {
+          border-bottom: 1px solid black;
+      }
+
+      .borderTop {
+          border-top: 1px solid black;
+      }
+
+      .bold {
+          font-weight: bold;
+      }
+  </style>
+</head>
+
+<body>
+<div style="display: flex;align-items: center;justify-content: center">
+
+  <h4 style="margin: 0">
+    YURIDIK SHAXSLAR UCHUN BANKDA HISOB RAQAM OCHISHGA ARIZA
+  </h4>
+</div>
+<div>
+  <div class="row borderTop">
+    <span class="col">Yuridik shaxs nomi</span>
+    <span class="col borderLeft"><span th:text="${dto?.companyName}"></span></span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yuridik shaxs STIRi</span>
+    <span class="col borderLeft"><span th:text="${dto?.tin}"></span></span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yuridik shaxs ro'yhatdan o'tgan manzili</span>
+    <span class="col borderLeft"><span th:text="${dto?.address}"></span></span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yuridik shaxs faoliyat ko'rsatish manzili</span>
+    <span class="col borderLeft"><span th:text="${dto?.customerBranchAddress}"></span></span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yuridik shaxs telefon raqamlari</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col">Ishchi telefon raqam:</span>
+    <span class="col borderLeft">
+
+    </span>
+  </div>
+      <div class="flex-sp">
+    <span class="col">Mobil raqam:</span>
+    <span class="col borderLeft">
+<span th:text="${dto?.phone}"></span>
+    </span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yuridik shaxs elektron pochtasi (e-mail)</span>
+    <span class="col borderLeft"></span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yuridik shaxs telefon raqamlari</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col">TQO</span>
+    <span class="col borderLeft">Muddatli</span>
+    <span class="col borderLeft">Jamg'arma	</span>
+    <span class="col borderLeft">Maxsus</span>
+    <span class="col borderLeft">Boshqa (turini yozing):</span>
+    <span class="col borderLeft">Tranzit - 235ХХ</span>
+  </div>
+      <div class="flex-sp">
+    <span class="col" style="text-decoration: underline overline black 1px">So'm</span>
+    <span class="col borderLeft">AQSH dollari</span>
+    <span class="col borderLeft">YEVRO</span>
+    <span class="col borderLeft">Rubl</span>
+    <span class="col borderLeft">Boshqa (turini yozing):	</span>
+    <span class="col borderLeft"></span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Ochilishi lozim bo'lgan Hisob raqam shakli	</span>
+    <span class="col borderLeft">
+      <div class="flex-sp">
+    <span class="col">Asosiy</span>
+    <span class="col borderLeft">Ikkilamchi</span>
+    <span class="col borderLeft">Boshqa (turini yozing):	</span>
+    <span class="col borderLeft">Транзит</span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Benefitsiar mulkdorlar haqida ma'lumotlar (Benefitsiar mulkdor - yakuniy holatda 10 % dan yuqori mulk huquqiga egalik qiluvchi yoki mijozni haqiqatda nazorat qiluvchi jismoniy shaxs)	</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col bold">FIO</span>
+    <span class="col bold borderLeft">Tug'ilgan sanasi</span>
+    <span class="col bold borderLeft">Fuqaroligi	</span>
+    <span class="col bold borderLeft">Pasport seriyasi va raqami</span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">1.</span>
+    <span class="col borderLeft"></span>
+    <span class="col borderLeft"></span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">2.</span>
+    <span class="col borderLeft"></span>
+    <span class="col borderLeft"></span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">3.</span>
+    <span class="col borderLeft"></span>
+    <span class="col borderLeft"></span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp">
+    <span class="col">4.</span>
+    <span class="col borderLeft"></span>
+    <span class="col borderLeft"></span>
+    <span class="col borderLeft"></span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Benefitsiar mulkdorlarning yuqori mansabdor shaxslar toifasiga yoki ularning oilasiga mansubligi, yuqori mansabdor shaxsning yaqin shaxsi ekanligi (yuqori mansabdor shaxs - davlatning qonun chiqaruvchi, ijro etuvchi, ma'muriy yoki sud organida, shu jumladan harbiy tuzilmalarida, yoxud xalqaro tashkilotda doimiy, vaqtincha yoki maxsus vakolat bo'yicha tayinlanadigan yoki saylanadigan, tashkiliy-boshqaruv vazifalarini bajaruvchi va yuridik ahamiyatga ega bo'lgan harakatlarni sodir etishga vakolatli shaxslar, shuningdek chet davlat korxonalarining yuqori martabali rahbarlari, chet davlatning taniqli siyosatchilari va siyosiy partiyalarining taniqli a'zolari (shu jumladan sobiq))	</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col bold">FIO</span>
+    <span class="col bold borderLeft">Fuqaroligi	</span>
+    <span class="col bold borderLeft">Mansabi, qarindoshligi, aloqasi</span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">1.</span>
+    <span class="col borderLeft"></span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">2.</span>
+    <span class="col borderLeft"></span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">3.</span>
+    <span class="col borderLeft"></span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">4.</span>
+    <span class="col borderLeft"></span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp">
+    Yuqori mansabdor shaxslarga aloqadorligi mavjud emas
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yuridik shaxsning, uning ta'sischilari va benifitsiar mulkdorlarining AQSH rezidentligiga egaligi (AQSH rezidentlari - AQSHda ro'yxatdan o'tgan yuridik va jismoniy shaxslar, AQSH hududida yashovchi shaxslar, jumladan, Green card dasturi AQSH hududida yashash huquqiga ega bo'lgan shaxslar)	</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col bold">AQSH rezidenti nomi	</span>
+    <span class="col bold borderLeft">Rezidentlik shakli</span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">1.</span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">2.</span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">3.</span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">4.</span>
+    <span class="col borderLeft"></span>
+  </div>
+      <div class="flex-sp">
+    AQSH rezidentligiga aloqadorlik mavjud emas
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Hisob raqam orqali bajarilishi rejalashtirilayotgan bir oylik taxminiy aylanma summasi	</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col">So'm</span>
+    <span class="col borderLeft">AQSH dollari	</span>
+    <span class="col borderLeft">YEVRO	</span>
+    <span class="col borderLeft">Rubl</span>
+    <span class="col borderLeft">Boshqa </span>
+  </div>
+      <div class="flex-sp">
+    <span class="col"></span>
+    <span class="col borderLeft"></span>
+    <span class="col borderLeft"></span>
+    <span class="col borderLeft"></span>
+    <span class="col borderLeft"></span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Hisob raqamdan to'lanadigan mablag'larning asosiy turi (maqsadi)	</span>
+    <span class="col borderLeft"></span>
+  </div>
+
+  <div class="row">
+    <span class="col">Yuqoridagi ma'lumotlarga asosan bank hisob raqami ochib berishingizni so'raymiz	</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col">Birinchi imzo:	</span>
+    <span class="col borderLeft">FIO:</span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col">Ikkinchi imzo:	</span>
+    <span class="col borderLeft">FIO:</span>
+  </div>
+      <div class="flex-sp" style="justify-content: start">
+    Muhr:
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Hisob raqam ochish bo'yicha hujjatlarni tekshirdim, qabul qildim va hisob raqam ochish uchun taqdim qildim	</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col">Menejer:	</span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col ">Imzo:</span>
+  </div>
+      <div class="flex-sp">
+    <span class="col ">FIO:</span>
+  </div>
+
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Hisob raqam ochish bo'yicha hujjatlarni tekshirdim va hisob raqam ochish rad etildi.		</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col">Menejer:	</span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col ">Imzo:</span>
+  </div>
+      <div class="flex-sp">
+    <span class="col ">Rad etish sabablari:</span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <h4>
+      BANKNING BELGISI
+    </h4>
+  </div>
+
+  <div class="row">
+    <span class="col">Hisob raqam ochishga ruxsat beraman			</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col">Boshqaruvchi:	</span>
+  </div>
+      <div class="flex-sp">
+    <span class="col ">Imzo:</span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="col">Hisob raqam ochish bo'yicha hujjatlarni qabul qildim va Hisob raqam ochildi				</span>
+    <span class="col borderLeft">
+      <div class="flex-sp borderBottom">
+    <span class="col">Bosh buxgalter:	</span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col ">Imzo:</span>
+  </div>
+      <div class="flex-sp borderBottom">
+    <span class="col ">Hisob raqam:</span>
+  </div>
+      <div class="flex-sp">
+    <span class="col ">Sana:</span>
+  </div>
+    </span>
+  </div>
+
+  <div class="row" style="height: 60px">
+    <span class="col">Boshqa belgilar	</span>
+    <span class="col borderLeft"></span>
+  </div>
+
+  <div class="row">
+    <span class="col">Hisob raqamimizga masofaviy xizmat ko'rsatishda bank xodimlari sizni aniqlashlari mumkin bo'lgan kirish kodini ko'rsating: <br>
+    *Lotin yozuvida bosh harflarda 10 ta harfdan oshmasligi kerak. Raqamlar va belgilardan foydalanishga yo'l qo'yilmaydi.
+    </span>
+    <span class="col borderLeft flex-center" th:text="${dto?.secretKey}"></span>
+  </div>
+</div>
+</body>
+</html>

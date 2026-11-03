@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <property name="uuid_function" value="gen_random_uuid()" dbms="postgresql"/>
+    <changeSet id="create_store_In" author="apulatjonov">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+            <not>
+                <tableExists tableName="store_in"/>
+            </not>
+        </preConditions>
+        <createTable tableName="store_in">
+            <column name="id" type="varchar" valueComputed="${uuid_function}"/>
+            <column name="number" type="bigint"/>
+            <column name="transfer_type" type="varchar"/>
+            <column name="status" type="varchar"/>
+            <column name="shipment_id" type="varchar"/>
+            <column name="transfer_date" type="datetime"/>
+            <column name="invoice_id" type="bigint"/>
+            <column name="deleted" type="bool"/>
+            <column name="store_id" type="bigint"/>
+            <column name="user_id" type="varchar"/>
+            <column name="customer_id" type="bigint"/>
+            <column name="agent_fio" type="varchar"/>
+            <column name="organization_id" type="varchar"/>
+            <column name="created_date" type="datetime"/>
+            <column name="created_by" type="varchar"/>
+            <column name="last_modified_date" type="datetime"/>
+            <column name="last_modified_by" type="varchar"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="store_in_fk" author="apulatjonov">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+            <not>
+                <primaryKeyExists tableName="store_in" primaryKeyName="id"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey tableName="store_in" columnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

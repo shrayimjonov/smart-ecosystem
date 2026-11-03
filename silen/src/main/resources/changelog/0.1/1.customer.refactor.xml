@@ -1,0 +1,122 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+    <changeSet author="ahaqberdiev" id="update_act_customer_id_type" failOnError="true">
+        <sql splitStatements="true">
+            ALTER TABLE acceptance_transfer_act RENAME COLUMN customer_id to customer_id_old;
+            ALTER TABLE acceptance_transfer_act ADD COLUMN IF NOT EXISTS customer_id BIGINT;
+            Update acceptance_transfer_act set customer_id=(select customer.id from customer where customer.customer_id=acceptance_transfer_act.customer_id_old limit 1);
+            ALTER TABLE acceptance_transfer_act ADD FOREIGN KEY (customer_id) REFERENCES customer;
+
+            ALTER TABLE shipment ADD COLUMN IF NOT EXISTS customer_id BIGINT;
+            update shipment SET customer_id=(SELECT customer.id FROM customer WHERE customer.customer_id=shipment.to_organization_id AND customer.organization_id=shipment.organization_id limit 1);
+            ALTER TABLE shipment ADD FOREIGN KEY (customer_id) REFERENCES customer;
+        </sql>
+    </changeSet>
+    <changeSet author="ahaqberdiev" id="customer_refactor" failOnError="true">
+        <sql splitStatements="true">
+
+            ALTER TABLE customer ADD COLUMN IF NOT EXISTS tin varchar(14);
+            ALTER TABLE customer ADD COLUMN IF NOT EXISTS name varchar(255);
+
+            UPDATE customer c set tin = (select tin from organization where id = c.customer_id);
+            UPDATE customer c set name = (select name from organization where id = c.customer_id);
+
+            ALTER TABLE customer DROP COLUMN IF EXISTS customer_id;
+        </sql>
+    </changeSet>
+    <changeSet author="ahaqberdiev" id="invoice_refactor" failOnError="true">
+        <sql splitStatements="true">
+            ALTER TABLE list_invoice ADD COLUMN IF NOT EXISTS seller_tin varchar(14);
+            ALTER TABLE list_invoice ADD COLUMN IF NOT EXISTS seller_name varchar(255);
+            ALTER TABLE list_invoice ADD COLUMN IF NOT EXISTS buyer_tin varchar(14);
+            ALTER TABLE list_invoice ADD COLUMN IF NOT EXISTS buyer_name varchar(255);
+
+--             UPDATE list_invoice i set seller_tin = (select tin from organization where id = i.seller_id);
+--             UPDATE list_invoice i set seller_name = (select name from organization where id = i.seller_id);
+--             UPDATE list_invoice i set buyer_tin = (select tin from organization where id = i.buyer_id);
+--             UPDATE list_invoice i set buyer_name = (select name from organization where id = i.buyer_id);
+
+--             ALTER TABLE list_invoice DROP COLUMN IF EXISTS seller_id,
+--                                      DROP COLUMN IF EXISTS buyer_id;
+        </sql>
+    </changeSet>
+    <changeSet author="ahaqberdiev" id="remove_customer_data" failOnError="true">
+        <sql splitStatements="true">
+            UPDATE organization set deleted = true where deleted is not true and tin not in (
+                    '306351564',
+                    '202954024',
+                    '202273366',
+                    '200408363',
+                    '200136308',
+                    '202282989',
+                    '203303818',
+                    '301088055',
+                    '202567735',
+                    '308802744',
+                    '301520586',
+                    '202645582',
+                    '301955170',
+                    '200903659',
+                    '306601949',
+                    '305145528',
+                    '207335165',
+                    '207229028',
+                    '207338304',
+                    '900021114',
+                    '207201166',
+                    '200803632',
+                    '900035548',
+                    '900052109',
+                    '207250763',
+                    '900034249',
+                    '204058100',
+                    '900043221',
+                    '206985269',
+                    '206966290',
+                    '300069238',
+                    '203714417',
+                    '203293429',
+                    '207262273',
+                    '900040614',
+                    '301672224',
+                    '204711530',
+                    '300504946',
+                    '301803004',
+                    '900008722',
+                    '900056158',
+                    '304244824',
+                    '305747244',
+                    '201188772',
+                    '202647209',
+                    '900007637',
+                    '900005609',
+                    '303340414',
+                    '300825998',
+                    '305706080',
+                    '305768962',
+                    '305513909',
+                    '206994660',
+                    '301636963',
+                    '301607223',
+                    '306646100',
+                    '310059158',
+                    '309953477',
+                    '307710930',
+                    '308351293'
+                );
+            /*DELETE FROM list_invoice where seller_tin not in (select tin from organization)
+                                       and buyer_tin not in (select tin from organization);*/
+--             DELETE FROM invoice_item where invoice_id not in (select invoice_id from list_invoice);
+--             DELETE FROM invoice where id not in (select invoice_id from list_invoice);
+        </sql>
+    </changeSet>
+
+    <changeSet author="ahaqberdiev" id="update_contract_date_type" failOnError="true">
+        <sql splitStatements="true">
+            ALTER TABLE contract ALTER COLUMN date TYPE date;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

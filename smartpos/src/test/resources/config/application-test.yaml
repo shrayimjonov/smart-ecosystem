@@ -1,0 +1,9 @@
+logging:
+  level:
+    ROOT: INFO
+    uz.uzkassa.smartpos: DEBUG
+spring:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="add size attributes to product item" author="Sunnatillo Sharipov">
+        <dropColumn tableName="product_item" columnName="attributes"/>
+        <addColumn tableName="product_item">
+            <column name="size_key" type="varchar(50)"/>
+            <column name="size_code" type="varchar(50)"/>
+            <column name="size_value" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="product item sorder column" author="Sunnatillo Sharipov">
+        <addColumn tableName="product_item">
+            <column name="sorder" type="int"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

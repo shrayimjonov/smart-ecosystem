@@ -1,0 +1,3 @@
+
+insert into product(catalog_code, catalog_name, category_id, name, package_code, package_name, status,vat)
+VALUES ('10202002003000001','Прочие услуги сервисного обслуживания в заведении общественного питания',(select id from category where category_type='CATERING_SERVICE'),'Прочие услуги сервисного обслуживания в заведении общественного питания','1649645','комплект/набор=1 услуга (раз)','ACTIVE','VAT_12');

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2026_08_13_create_company_field_history" author="Behzod Jaloliddinov">
+
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="company_field_history"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="company_field_history">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="company_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint"/>
+            <column name="field_type" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="identifier" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="display_value" type="varchar(500)"/>
+            <column name="extra_data" type="jsonb"/>
+            <column name="creator_id" type="bigint"/>
+            <column name="updater_id" type="bigint"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="updated_date" type="timestamp"/>
+            <column name="deleted" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="company_field_history_company_id_field_type_idx"
+                     tableName="company_field_history">
+            <column name="company_id"/>
+            <column name="field_type"/>
+        </createIndex>
+
+
+        <addForeignKeyConstraint
+                constraintName="fk_company_field_history_company"
+                baseTableName="company_field_history"
+                baseColumnNames="company_id"
+                referencedTableName="company"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                constraintName="fk_company_field_history_user"
+                baseTableName="company_field_history"
+                baseColumnNames="user_id"
+                referencedTableName="users"
+                referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="2026_08_13_company_field_history_unique_idx" author="Behzod Jaloliddinov">
+
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="company_field_history_unique_idx"/>
+            </not>
+        </preConditions>
+
+        <comment>Уникальность (company_id, field_type, identifier) только среди неудалённых записей</comment>
+
+        <sql>
+            CREATE UNIQUE INDEX company_field_history_unique_idx
+            ON company_field_history (company_id, field_type, identifier)
+            WHERE deleted = false;
+        </sql>
+
+        <rollback>
+            DROP INDEX IF EXISTS company_field_history_unique_idx;
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

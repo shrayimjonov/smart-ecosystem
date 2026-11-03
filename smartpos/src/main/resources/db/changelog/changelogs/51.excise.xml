@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="update excise" author="Sunnatillo Sharipov">
+        <sql>
+            update excise set price=525 where mxik='02710001003000000';
+            update excise set price=470 where mxik='02710001004000000';
+            update excise set price=525 where mxik='02710003001000000';
+            update excise set price=525 where mxik='02711002001000000';
+            update excise set price=750 where mxik='02711001002000000';
+            update excise set price=750 where mxik='02711001005000000';
+        </sql>
+    </changeSet>
+</databaseChangeLog>

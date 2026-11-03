@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="create_permissions" author="xayrullayev">
+        <preConditions onFail="MARK_RAN" onSqlOutput="FAIL">
+            <not>
+                <tableExists tableName="permissions"/>
+            </not>
+        </preConditions>
+        <createTable tableName="permissions">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="permissions_pkey" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="code" type="varchar(50)">
+                <constraints unique="true" uniqueConstraintName="uk_permissions_code"/>
+            </column>
+            <column name="position" type="integer"/>
+            <column name="section" type="boolean" defaultValue="false"/>
+            <column name="parent_id" type="bigint"/>
+            <column name="created_by" type="varchar(50)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="deleted" type="boolean" defaultValue="false"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="permissions" baseColumnNames="parent_id"
+                                 constraintName="fk_permissions_parent_id"
+                                 referencedTableName="permissions"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="insert_default_permissions" author="xayrullayev">
+        <sql>
+            INSERT INTO public.permissions (name, code, position, section, parent_id, created_by, created_date)
+            VALUES ('Permission admin', 'ROLE_ADMIN', null, false, null, 'Silentest', '2023-10-04 16:09:00.682000'),
+            ('Permission user', 'ROLE_USER', null, false, null, 'Silentest', '2023-10-04 16:09:00.682000'),
+            ('Permission create', 'PERMISSION_CREATE', null, false, null, 'Silentest', '2023-10-04 16:09:00.682000'),
+            ('Permission update', 'PERMISSION_UPDATE', null, false, null, 'Silentest', '2023-10-04 16:09:00.682000'),
+            ('Permission delete', 'PERMISSION_DELETE', null, false, null, 'Silentest', '2023-10-04 16:09:00.682000'),
+            ('Permission read', 'PERMISSION_READ', null, false, null, 'Silentest', '2023-10-04 16:09:00.682000');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

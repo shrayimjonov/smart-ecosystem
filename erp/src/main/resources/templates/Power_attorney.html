@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="${attorney.number}">Company Name</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <p th:text="${attorney.givenToFullName}">
+            Dear
+        </p>
+        <p th:text="${attorney.dateOfIssue}">
+            Your JHipster account has been created, please click on the URL below to activate it:
+        </p>
+
+        <table>
+            <tr>
+                <th>
+                    Номер по порядку
+                </th>
+                <th>
+                    Материальные ценности
+                </th>
+                <th>
+                    Единица измерения
+                </th>
+                <th>
+                    Количество (прописью)
+                </th>
+
+            </tr>
+            <th:block th:each="item : ${attorney.order.orderItems}">
+                <tr>
+                    <td>1</td>
+                    <td th:text="${item.deviceModel.name}">...</td>
+                    <td>шт</td>
+                    <td th:text="${item.count}">...</td>
+                </tr>
+            </th:block>
+        </table>
+    </body>
+</html>
