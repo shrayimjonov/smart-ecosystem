@@ -140,7 +140,6 @@ public class BillingServiceResource extends BillingBaseResource {
 
     @GetMapping("/ledger-detail/tin/{companyTin}/transactions")
     public ResponseEntity<Object> getledgerDetailTransactions(@PathVariable String companyTin, BillingPageFilter filter) {
-        System.out.println("REST request Ledger transactions");
         return ResponseEntity.ok(billingServiceClient.getLedgerDetailTransactions(companyTin, filter));
     }
 
@@ -210,12 +209,6 @@ public class BillingServiceResource extends BillingBaseResource {
     public ResponseEntity<List<AgreementStatus>> getAgreementStatuses() {
         return ResponseEntity.ok().body(AgreementStatus.asList());
     }
-
-//    @GetMapping("/ledger-detail/grouped-transactions")
-//    public ResponseEntity<Object> getledgerDetailGruppedTransactions(@ParameterObject LedgerDetailAppTypeFilter filter) {
-//        System.out.println("REST request ledger-detail grouped-transactions");
-//        return companyService.getledgerDetailGruppedTransactions(filter);
-//    }
 
     @GetMapping("/billing-invoice-list")
     public ResponseEntity<Object> billingInvoiceList(@ParameterObject BillingInvoiceFilter filter) {

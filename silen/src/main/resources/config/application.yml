@@ -107,7 +107,7 @@ application:
   line-token-validity-in-seconds: 31540000 # 365 days, 1 hours, 6 minutes and 40 seconds
   logBotUrl: ${APPLICATION_LOGBOTURL}
   logBotToken: ${APPLICATION_LOGBOTTOKEN}
-  logChannelId: -1002211009811 #-1001440088031
+  logChannelId: ${APPLICATION_LOGCHANNELID}
   providerTin: 306344019
   clientSecret: ${APPLICATION_CLIENTSECRET}
   swagger:

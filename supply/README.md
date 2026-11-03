@@ -23,7 +23,7 @@ to manage inventory, logistics and sales-agent operations.
 ## Tech stack
 **Java 21 · Spring Boot 3.3 · PostgreSQL · ClickHouse · Redis · RabbitMQ · Kafka · MinIO · Liquibase ·
 MapStruct · OpenFeign · Resilience4j · Quartz · Apache POI / iText · JWT security · Micrometer/Prometheus ·
-Docker · Maven** (generated with JHipster 7.3 and heavily extended)
+Docker · Maven**
 
 ## Project layout
 ```
@@ -43,4 +43,4 @@ src/main/java/uz/uzkassa/smartpossupply
 ./mvnw spring-boot:run
 ```
 Requires PostgreSQL, Redis, RabbitMQ and ClickHouse. All connection settings and secrets are
-`${ENV_VAR}` placeholders (see `.env.example`).
+`${ENV_VAR}` placeholders (see the root [`.env.example`](../.env.example)).

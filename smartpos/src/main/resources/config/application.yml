@@ -92,9 +92,9 @@ server:
 application:
   serverUrl: ${APPLICATION_SERVERURL}
   trueApiUrl: ${APPLICATION_TRUEAPIURL}
-  logChannelId: -1001401478015
-  receiptChannelId: -4236875157
-  duplicateReceiptChannelId: -1002178980261
+  logChannelId: ${APPLICATION_LOGCHANNELID}
+  receiptChannelId: ${APPLICATION_RECEIPTCHANNELID}
+  duplicateReceiptChannelId: ${APPLICATION_DUPLICATERECEIPTCHANNELID}
   logBotToken: ${APPLICATION_LOGBOTTOKEN}
   clientBotToken: ${APPLICATION_CLIENTBOTTOKEN}
   adminName: ${ADMINNAME}
