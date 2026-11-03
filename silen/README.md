@@ -1,11 +1,13 @@
 # silen
 
-Product-marking (track & trace) integration with the national marking system.
+Product marking integration with the national marking system.
 
-Part of [smart-ecosystem](../README.md).
+Stack: Java 21, Spring Boot 3.2.5, PostgreSQL, MongoDB, Kafka, RabbitMQ, Redis, MinIO, Apache POI, WebSocket, MapStruct, Maven.
+
+Run:
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-Configuration comes from environment variables (`${ENV_VAR}` placeholders in `application.yml`).
+Settings come from environment variables.
